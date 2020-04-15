@@ -57,7 +57,7 @@
         "ns-uploader": "file:./ns_npm_repository/ns-uploader",
         "progress": "1.1.7",
         "q": "1.0.1",
-        "request": "2.39.0",
+        "request": "2.88.2",
         "run-sequence": "1.2.2",
         "sc5-styleguide": "file:./gulp/library/sc5-styleguide",
         "serve-index": "1.9.0",
