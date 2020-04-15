@@ -44,7 +44,7 @@
         "gulp-util": "3.0.1",
         "handlebars": "4.0.10",
         "inquirer": "0.5.1",
-        "is-my-json-valid": "2.13.1",
+        "is-my-json-valid": "2.20.0",
         "jshint-stylish": "1.0.0",
         "jsonlint": "1.6.2",
         "jsonpath-plus": "0.15.0",
