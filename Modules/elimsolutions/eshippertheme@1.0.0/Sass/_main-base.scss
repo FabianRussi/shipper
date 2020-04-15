@@ -1,0 +1,144 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+@import "base/mixins.scss";
+@import "base/reset.scss";
+@import "base/base.scss";
+@import "base/bootstrap-overrides.scss";
+@import "base/columns.scss";
+@import "base/lists.scss";
+@import "base/spacing.scss";
+@import "base/sticky-button.scss";
+
+/* Overrides */
+
+.overview-home-mysettings {
+  background-color: #e6e7e8;
+}
+
+#main .menu-tree-node-item-anchor {
+  color: #414042!important;
+}
+
+#main .menu-tree-node-item-anchor:hover {
+  color: #472f92!important;
+}
+
+#main .pill-button-active, #main .order-history-list-header-button-active, #main .order-history-list-header-button-open-active, #main .order-history-list-header-button-instore-active, #main .order-history-list-header-button-all-active, #main .invoice-open-list-header-button-open, #main .invoice-paid-list-header-button-paid {
+  background-color: #34368a!important;
+}
+
+#main .recordviews-actionable:hover {
+  background-color: #e9e7f2!important;
+}
+
+#main .recordviews-actionable-row {
+    border-bottom: 1px solid #d2d2d2!important;
+}
+
+#main .recordviews-row:hover, #main .customer-payment-details-accordion-body-container-recordviews-row:hover, #main .transaction-history-list-headers:hover {
+  background-color: #e9e7f2!important;
+}
+
+#main .login-register-forgot-password-body {
+  background-color: #e9e7f2 !important;
+}
+
+#main .box-column, #main .case-new, #main .profile-emailpreferences, #main .profile-information, #main .print-statement, #main .box-column-bordered, #main .address-edit, #main .address-list, #main .creditcard-list, #main .creditcard-edit, #main .overview-home-mysettings, #main .profile-change-email, #main .profile-update-password, #main .quote-review-module-shipping-details, #main .quote-review-paymentmethod-selector-module, #main .quote-review-showpayments-module-details, #main .payment-wizard-step-content-wrapper .order-wizard-address-module-show-addresses-container, #main .order-wizard-address-module-show-addresses-container, #main .order-wizard-showpayments-module-details, #main .quote-to-salesorder-wizard-detail-module-shipping-details, #main .quote-to-salesorder-wizard-detail-paymentmethod-selector-module, #main .quote-to-salesorder-wizard-detail-showpayments-module-details, #main .order-wizard-cartitems-pickup-in-store-details-container, #main .order-wizard-msr-shipmethod-package, #main .order-wizard-shipmethod-module, #main .order-wizard-showshipments-actionable-module-container, #main .order-wizard-showshipments-actionable-module-shipping-details, #main .order-wizard-showshipments-module-container, #main .order-wizard-showshipments-module-shipping-details, #main .balance-content {
+  background-color: #e9e7f2 !important;
+}
+
+#main .btn-primary {
+  color: white;
+  font-weight: 400;
+  background: #34368a!important;
+  display: inline-block;
+  border: 1px solid #34368a!important;
+  border-radius: 6px;
+}
+
+#main .btn-primary:hover {
+  background: #4d4fa4!important;
+}
+
+#main .button-secondary, #main .button-info-cards-new, #main .address-list-button-info-cards-new, #main .creditcard-list-button, #main .list-header-filter-facets, #main .list-header-button, #main .case-list-action-button, #main .case-list-header-button-new, #main .button-apply, #main .address-edit-form-button-cancel, #main .creditcard-edit-form-button-cancel, #main .cart-promocode-form-summary-button-apply-promocode, #main .cart-summary-button-estimate, #main .global-views-confirmation-cancel-button, #main .order-history-details-button-reorder, #main .order-history-details-button-download-pdf, #main .order-history-item-actions-reorder, #main .order-history-summary-button-reorder, #main .order-history-summary-button-download-pdf, #main .profile-emailpreferences-reset, #main .profile-information-button-cancel, #main .quote-details-button-download-pdf, #main .receipt-details-button-reorder, #main .receipt-details-button-download-pdf, #main .return-authorization-confirmation-module-continue, #main .return-authorization-detail-summary-pdf-download-button, #main .return-authorization-detail-summary-cancel-request-button, #main .print-statement-form-actions-email, #main .deposit-details-button-download-as-pdf, #main .payment-wizard-confirmation-module-download, #main .payment-wizard-confirmation-module-payment, #main .order-wizard-address-module-new-button, #main .order-wizard-msr-addresses-module-new-button, #main .order-wizard-paymentmethod-creditcard-module-add-new-credit-card-button, #main .customer-payment-details-information-col-button, #main .credit-memo-details-button-download-as-pdf, #main .balance-print-button, #main .wizard-step-button-back, #main .quote-review-step-button-back, #main .payment-wizard-step-button-back, #main .quote-to-salesorder-wizard-step-button-back, #main .invoice-details-button-download-as-pdf {
+  background: #34368a!important;
+  border: 1px solid #34368a!important;
+}
+
+#main .recordviews-row, #main .customer-payment-details-accordion-body-container-recordviews-row, #main .transaction-history-list-headers {
+  border-bottom: 1px solid #d2d2d2!important;
+}
+
+#main tr.current-inventory-list-content-table-header-row {
+  border-bottom: 2px solid #d2d2d2!important;
+}
+
+#main .pagination-links-number, #main .global-views-pagination-links-number {
+  background-color: #e9e7f2!important;
+}
+
+#main .modal-content, #main .global-views-modal-content {
+  background-color: #e9e7f2!important;
+}
+
+#main .pagination-prev, #main .global-views-pagination-prev, #main .pagination-next, #main .global-views-pagination-next {
+  background-color: #e9e7f2!important;
+}
+
+.datepicker {
+  width: 350px!important;
+}
+
+.datepicker-days table thead tr th {
+  color: #222426!important;
+}
+
+.datepicker .datepicker-switch {
+  color: #222426!important;
+}
+
+.datepicker .day {
+  color: #34368a!important;
+}
+
+.datepicker .day.today {
+  background-color: #34368a!important;
+  color: #fff!important;
+}
+
+#main .list-header-view-accordion-body-calendar-icon {
+  color: #222426!important;
+}
+
+.modal-dialog {
+  pointer-events: all;
+}
+div#modal.modal.fade.in {
+  opacity: 1;
+}
+
+.modal-backdrop.fade.in {
+  opacity: .4;
+}
+
+
+.modal-dialog.global-views-modal {
+  z-index: 999999;
+}
+
+
+.collapse.show{
+  height:0px;
+}
+.collapse.show.in{
+  height:auto;
+}
+
+table.invoice-details-products-table.lg2sm-first .transaction-line-views-cell-navigable-item-image {
+  display: none !important;
+}

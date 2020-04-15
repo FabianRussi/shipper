@@ -1,0 +1,18 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*.js"
+        ],
+        "sass": [
+            "Sass/*.scss"
+        ],
+        "templates": [
+            "Templates/*.tpl"
+        ]
+    },
+
+    "overrides": {
+        "suitecommerce/MenuTree@2.1.4/Sass/_menu-tree-node.scss": "Sass/_menu-tree-node.scss"
+    }
+}
+

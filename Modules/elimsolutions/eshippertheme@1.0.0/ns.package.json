@@ -1,0 +1,48 @@
+{
+  "gulp": {
+    "sass": [
+      "Sass/**/*.scss",
+      "!main.scss"
+    ]
+  },
+  "overrides": {
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_breadcrumb.scss": "Sass/atoms/_breadcrumb.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_buttons.scss": "Sass/atoms/_buttons.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_forms.scss": "Sass/atoms/_forms.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_icons.scss": "Sass/atoms/_icons.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_messages.scss": "Sass/atoms/_messages.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_purchase-controls.scss": "Sass/atoms/_purchase-controls.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_stepped-process.scss": "Sass/atoms/_stepped-process.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_thumbnails.scss": "Sass/atoms/_thumbnails.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/atoms/_typography.scss": "Sass/atoms/_typography.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_base.scss": "Sass/base/_base.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_bootstrap-overrides.scss": "Sass/base/_bootstrap-overrides.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_columns.scss": "Sass/base/_columns.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_lists.scss": "Sass/base/_lists.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_mixins.scss": "Sass/base/_mixins.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_reset.scss": "Sass/base/_reset.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_spacing.scss": "Sass/base/_spacing.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/base/_sticky-button.scss": "Sass/base/_sticky-button.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_accordions.scss": "Sass/molecules/_accordions.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_datepicker.scss": "Sass/molecules/_datepicker.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_flyout.scss": "Sass/molecules/_flyout.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_image-gallery.scss": "Sass/molecules/_image-gallery.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_information-box.scss": "Sass/molecules/_information-box.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_information_cards.scss": "Sass/molecules/_information_cards.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_item-cells.scss": "Sass/molecules/_item-cells.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_list-header.scss": "Sass/molecules/_list-header.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_pagination.scss": "Sass/molecules/_pagination.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_pusher.scss": "Sass/molecules/_pusher.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_search.scss": "Sass/molecules/_search.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_summary_box.scss": "Sass/molecules/_summary_box.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/molecules/_tabs.scss": "Sass/molecules/_tabs.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/variables/_colors.scss": "Sass/variables/_colors.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/variables/_spacing.scss": "Sass/variables/_spacing.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/variables/_typography.scss": "Sass/variables/_typography.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/variables/_variables.scss": "Sass/variables/_variables.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/_main-atoms.scss": "Sass/_main-atoms.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/_main-base.scss": "Sass/_main-base.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/_main-molecules.scss": "Sass/_main-molecules.scss",
+    "suitecommerce/BaseSassStyles@3.0.0/Sass/_main-variables.scss": "Sass/_main-variables.scss"
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "gulp": {
+        "javascript": [
+            "JavaScript/*"
+        ],
+        "sass": [
+            "Sass/**/*.scss"
+        ],
+        "templates": [
+            "Templates/*"
+        ]
+    },
+
+    "overrides": {
+        "suitecommerce/LoginRegister@2.4.0/Sass/_login-register.scss": "Sass/_login-register.scss"
+    }
+
+}
+

@@ -1,0 +1,16 @@
+{
+  "gulp": {
+    "javascript": [
+      "JavaScript/*.js"
+    ],
+    "ssp-libraries": [
+      "SuiteScript/*.Model.js"
+    ]
+  },
+  "overrides": {
+    "suitecommerce/Profile@3.0.1/JavaScript/Profile.Model.js" : "JavaScript/Profile.Model.js",
+    "suitecommerce/Profile@3.0.1/JavaScript/MyAccount.Profile.js" : "JavaScript/MyAccount.Profile.js"
+  }
+}
+
+

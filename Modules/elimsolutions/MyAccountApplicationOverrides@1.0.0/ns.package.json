@@ -1,0 +1,10 @@
+{
+  "gulp": {
+    "ssp-files": {
+      "SuiteScript/myaccount.environment.ssp": "myaccount.environment.ssp"
+    }
+  },
+  "overrides" : {
+    "suitecommerce/MyAccountApplication@3.2.0/SuiteScript/myaccount.environment.ssp" : "SuiteScript/myaccount.environment.ssp"
+  }
+}
