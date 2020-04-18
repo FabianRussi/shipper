@@ -11,6 +11,7 @@
         "deploy": "DeployDistribution"
     },
     "modules": {
+        "elimsolutions/OrderHistoryOverrides":"5.0.1",
         "elimsolutions/eshippertheme": "1.0.0",
         "elimsolutions/LoginRegisterOverrides": "2.4.0",
         "elimsolutions/MenuTreeOverrides": "2.1.4",
