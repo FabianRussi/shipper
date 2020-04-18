@@ -1,14 +1,12 @@
 define('CurrentInventory.Model', [
     'SC.Model',
     'Application'
-], function (SCModel, Application)
-{
+], function (SCModel, Application) {
     'use strict';
 
     return SCModel.extend({
         name: 'CurrentInventory'
-        ,   getCustomerId: function()
-        {
+        , getCustomerId: function () {
             // get id of logged in shopper and set as search criteria
             var customerFields = customer.getFieldValues(['internalid']);
             console.log('Customer Fields', JSON.stringify(customerFields));
@@ -16,10 +14,8 @@ define('CurrentInventory.Model', [
             return customerId;
         }
 
-        ,   listAll: function()
-        {
-
-            try{
+        , listAll: function () {
+            try {
                 var customerId = this.getCustomerId();
                 //var sb_url = "https://5445214-sb1.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=617&deploy=1&compid=5445214_SB1&h=64af2839ca4fe4463c4f&esID="+customerId;
                 var url =   "https://5445214.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=853&deploy=1&compid=5445214&h=f953005733f94638f9d5&esID="+customerId;
@@ -35,8 +31,5 @@ define('CurrentInventory.Model', [
         }
 
 
-
-
-
-});
+    });
 });
