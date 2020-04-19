@@ -91,6 +91,7 @@ define(
 				,	'tranid': new nlobjSearchColumn('tranid')
 				,	'status': new nlobjSearchColumn('status')
 				,	'amount': new nlobjSearchColumn(this.amountField)
+				,   'otherrefnum': new nlobjSearchColumn('otherrefnum')
 				};
 
 			if (this.isMultiCurrency)
@@ -243,6 +244,7 @@ define(
 				,	results_per_page : this.data.results_per_page
 				});
 			}
+		
 
 			var records = _.map((this.data.page === 'all' ? this.search_results : this.search_results.records) || [], function (record)
 			{
@@ -256,6 +258,7 @@ define(
 				,	tranid: record.getValue('tranid')
 					//@property {String} trandate
 				,	trandate: record.getValue('trandate')
+				,   otherrefnum: record.getValue('otherrefnum')
 					//@property {Transaction.Status} status
 				,	status: {
 						//@class Transaction.Status
@@ -279,7 +282,12 @@ define(
 					,	name: record.getText('currency')
 					} : null
 				};
-
+				try{
+					nlapiLogExecution("DEBUG","OTHER AFTTER======::::---",JSON.stringify(result));
+				}catch(e){
+					nlapiLogExecution("DEBUG","ERROR ERROR======::::---",e);
+				}
+				
 				return self.mapListResult(result, record);
 
 			});
@@ -401,6 +409,7 @@ define(
 			this.result.memo = this.record.getFieldValue('memo');
 			//@property {String} trandate
 			this.result.trandate = this.record.getFieldValue('trandate');
+			this.result.otherrefnum = this.record.getFieldValue('otherrefnum');
 
 			if (this.isMultiCurrency)
 			{
