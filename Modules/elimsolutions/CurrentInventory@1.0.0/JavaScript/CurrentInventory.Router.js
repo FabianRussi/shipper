@@ -77,7 +77,7 @@ define('CurrentInventory.Router'
                 debugger;
 
                 // var params_options = _.parseUrlOptions(options);
-                var model = new CurrentInventoryItemDetailModel().getInventoryItem(id);
+                var model = new CurrentInventoryItemDetailModel(); //.getInventoryItem(id)
 
                 var view = new CurrentInventoryItemDetailView({
                     application: this.application

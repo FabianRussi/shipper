@@ -390,7 +390,8 @@
                 "ExternalPayment.Model",
                 "SC.BaseComponent",
                 "Cart.Component",
-                "CurrentInventory.Model"
+                "CurrentInventory.Model",
+                "CurrentInventory.ItemDetail.ServiceController"
             ],
             "exportFile": "ssp_libraries.js",
             "amdConfig": {
