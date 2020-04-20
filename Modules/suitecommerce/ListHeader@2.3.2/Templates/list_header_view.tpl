@@ -46,7 +46,7 @@
 							</div>
 						</div>
 					{{/if}}
-					<input class="list-header-view-accordion-body-input" placeholder="search for an PO.." type="text" id="po" data-action="po-filter" style="height: 43px;">	
+					<input class="list-header-view-accordion-body-input" placeholder="search for an PO..." type="text" id="po" data-action="po-filter" style="height: 43px;">	
 					{{#if sorts}}
 						<span class="list-header-view-sorts">
 							<label class="list-header-view-filters">
