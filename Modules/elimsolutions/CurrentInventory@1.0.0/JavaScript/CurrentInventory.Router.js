@@ -1,66 +1,62 @@
 define('CurrentInventory.Router'
-    ,   [   'CurrentInventory.List.View'
-        ,   'Profile.Model'
-        ,   'CurrentInventory.Model'
-        ,   'Backbone'
-        ,   'Utils'
+    , ['CurrentInventory.List.View'
+        , 'CurrentInventory.ItemDetail.View'
+        , 'Profile.Model'
+        , 'CurrentInventory.Model'
+        , 'CurrentInventory.ItemDetail.Model'
+        , 'Backbone'
+        , 'Utils'
     ]
-    ,   function (
+    , function (
         CurrentInventoryListView
-        ,   ProfileModel
-        ,   CurrentInventoryModel
-        ,   Backbone
-        ,   Utils
-    )
-    {
+        , CurrentInventoryItemDetailView
+        , ProfileModel
+        , CurrentInventoryModel
+        , CurrentInventoryItemDetailModel
+        , Backbone
+        , Utils
+    ) {
         'use strict';
 
         return Backbone.Router.extend({
 
             routes: {
-                'current-inventory?:options' : 'GetFilteredResults'
+                'current-inventory?:options': 'GetFilteredResults',
+                'item-details/view/:id': 'itemDetails' //?options
             }
 
-            ,   initialize: function (application)
-            {
+            , initialize: function (application) {
                 this.application = application;
                 this.collection = ProfileModel.getInstance().get('currentinventory');
             }
 
-
-
-
-
-
-            , createFilteredResults: function(val)
-            {
+            , createFilteredResults: function (val) {
                 console.log("createFilteredResults");
                 var value = val;
                 var origonalArr = this.collection.models[0].attributes.records.slice();
                 var arrFiltered = [];
-                if(!value){
+                if (!value) {
                     console.log("createFilteredResults 1");
                     return origonalArr;
                 }
-                if(value){
-                    for (var i = 0; i < origonalArr.length; i++){
+                if (value) {
+                    for (var i = 0; i < origonalArr.length; i++) {
                         var line = origonalArr[i];
-                        if(!(line.Name == null || line.Name == undefined || line.Name == "") || !(line.Description == null || line.Description ==undefined || line.Description == "")){
-                            if( line.Name.toLowerCase().indexOf(value.toLowerCase()) > -1 || line.Description.toLowerCase().indexOf(value.toLowerCase()) > -1 ){
+                        if (!(line.Name == null || line.Name == undefined || line.Name == "") || !(line.Description == null || line.Description == undefined || line.Description == "")) {
+                            if (line.Name.toLowerCase().indexOf(value.toLowerCase()) > -1 || line.Description.toLowerCase().indexOf(value.toLowerCase()) > -1) {
                                 arrFiltered.push(line);
                             }
-                        }else{
+                        } else {
                             console.log("Line NAME at pos " + i + " was empty");
                         }
                     }
                     return arrFiltered;
                 }
             }
-            ,	GetFilteredResults: function (options)
-            {
+            , GetFilteredResults: function (options) {
                 console.log("made it to ROuter");
 
-                options = (options) ? Utils.parseUrlOptions(options) : {page: 1};
+                options = (options) ? Utils.parseUrlOptions(options) : { page: 1 };
                 console.log("Options Were : " + JSON.stringify(options));
                 options.page = options.page || 1;
                 options.srch = options.srch || '';

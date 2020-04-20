@@ -1,52 +1,50 @@
 define(
     'CurrentInventory.List.View'
-    ,   [   'current_inventory_list.tpl'
-        ,   'Backbone'
-        ,   'Backbone.CompositeView'
-        ,   'Backbone.CollectionView'
-        ,   'RecordViews.View'
-        ,   'ListHeader.View'
-        ,   'GlobalViews.Pagination.View'
-        ,	'GlobalViews.ShowingCurrent.View'
-        ,   'SC.Configuration'
-        ,   'jQuery'
-        ,   'underscore'
+    , ['current_inventory_list.tpl'
+        , 'Backbone'
+        , 'Backbone.CompositeView'
+        , 'Backbone.CollectionView'
+        , 'RecordViews.View'
+        , 'ListHeader.View'
+        , 'GlobalViews.Pagination.View'
+        , 'GlobalViews.ShowingCurrent.View'
+        , 'SC.Configuration'
+        , 'jQuery'
+        , 'underscore'
     ]
-    ,   function (
+    , function (
         current_inventory_list
-        ,   Backbone
-        ,   BackboneCompositeView
-        ,   BackboneCollectionView
-        ,   RecordViewsView
-        ,   ListHeaderView
-        ,   GlobalViewsPaginationView
-        ,   GlobalViewsShowingCurrentView
-        ,   Configuration
-        ,   jQuery
-        ,   _
+        , Backbone
+        , BackboneCompositeView
+        , BackboneCollectionView
+        , RecordViewsView
+        , ListHeaderView
+        , GlobalViewsPaginationView
+        , GlobalViewsShowingCurrentView
+        , Configuration
+        , jQuery
+        , _
 
 
-    )
-    {
+    ) {
         'use strict';
 
         return Backbone.View.extend({
 
             template: current_inventory_list
 
-            ,   attributes: { 'class': 'CurrentInventoryListView' }
+            , attributes: { 'class': 'CurrentInventoryListView' }
 
-            ,	title: _('Current Inventory Status').translate()
+            , title: _('Current Inventory Status').translate()
 
-            ,	page_header: _('Current Inventory Status').translate()
+            , page_header: _('Current Inventory Status').translate()
 
-            ,   searchFilterValue: ''
+            , searchFilterValue: ''
 
-            ,   filteredResults : []
+            , filteredResults: []
 
 
-            ,   initialize: function (options)
-            {
+            , initialize: function (options) {
 
                 this.options = options;
                 this.application = options.application;
@@ -75,18 +73,16 @@ define(
             }
 
 
-            ,	_getPageFromUrl: function (url_value)
-            {
+            , _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
                 return !isNaN(page_number) && page_number > 0 ? page_number : 1;
             }
-            ,	listenCollection: function ()
-            {
+            , listenCollection: function () {
                 this.setLoading(true);
 
                 this.collection.on({
                     request: _.bind(this.setLoading, this, true)
-                    ,	reset: _.bind(this.setLoading, this, false)
+                    , reset: _.bind(this.setLoading, this, false)
                 });
 
                 console.log(this.options);
@@ -95,168 +91,157 @@ define(
             }
 
 
-            ,	setupListHeader: function ()
-            {
+            , setupListHeader: function () {
                 // manges sorting and filtering of the collection
                 this.listHeader = new ListHeaderView({
                     view: this
-                    ,	application: this.application
-                    ,	collection: this.collection
+                    , application: this.application
+                    , collection: this.collection
                     // ,	filters: this.filterOptions
-                    ,	sorts: this.sortOptions
-                    ,   allowEmptyBoundaries: true
+                    , sorts: this.sortOptions
+                    , allowEmptyBoundaries: true
                 });
             }
 
-            ,	setLoading: function (is_loading)
-            {
+            , setLoading: function (is_loading) {
                 //@property {Boolean} isLoading
                 this.isLoading = is_loading;
             }
-         
+
             // @property {Object} events
-            ,	events: {
-                    'keyup [data-type="curr-inv-srch"]': 'searchFilter',
-                    'click [data-type="goSearch"]' : 'goSearch'
+            , events: {
+                'keyup [data-type="curr-inv-srch"]': 'searchFilter',
+                'click [data-type="goSearch"]': 'goSearch'
             }
 
 
-            ,   searchFilter: function(e)
-            {
+            , searchFilter: function (e) {
 
-                    var value = jQuery("#currInv").val();
-                    var url = window.location.href;
-                    var gurl = _.setUrlParameter(url, 'srch', value);
-                    var gurl2 = _.setUrlParameter(gurl, 'page', '0');
-                    console.log(gurl2);
-                    if(e.keyCode == 13 || value ===""){
-                        window.location.href = gurl2;
-                    }
-                    //this._render();
-            }
-
-            ,   goSearch: function(){
-
-                    var value = jQuery("#currInv").val();
-                    var url = window.location.href;
-                    var gurl = _.setUrlParameter(url, 'srch', value);
-                    var gurl2 = _.setUrlParameter(gurl, 'page', '0');
-                    console.log(gurl2);
+                var value = jQuery("#currInv").val();
+                var url = window.location.href;
+                var gurl = _.setUrlParameter(url, 'srch', value);
+                var gurl2 = _.setUrlParameter(gurl, 'page', '0');
+                console.log(gurl2);
+                if (e.keyCode == 13 || value === "") {
                     window.location.href = gurl2;
+                }
+                //this._render();
             }
 
-            , chunkArray : function (myArray, chunk_size){
+            , goSearch: function () {
+
+                var value = jQuery("#currInv").val();
+                var url = window.location.href;
+                var gurl = _.setUrlParameter(url, 'srch', value);
+                var gurl2 = _.setUrlParameter(gurl, 'page', '0');
+                console.log(gurl2);
+                window.location.href = gurl2;
+            }
+
+            , chunkArray: function (myArray, chunk_size) {
                 var index = 0;
                 var arrayLength = myArray.length;
                 var tempArray = [];
                 for (index = 0; index < arrayLength; index += chunk_size) {
-                    var myChunk = myArray.slice(index, index+chunk_size);
+                    var myChunk = myArray.slice(index, index + chunk_size);
                     // Do something if you want with the group
                     tempArray.push(myChunk);
                 }
                 return tempArray;
             }
-            ,   childViews : {
+            , childViews: {
                 'CurrentInventory.List.Items': function () {
-                        var recs = this.options.options;
-                        var arr = this.chunkArray(recs, this.collection.models[0].get('recordsPerPage'));
-                        recs = arr[this.page];
-                            var records_collection = new Backbone.Collection(recs.map(function (currentinventorymodel)
-                            {
-                                return new Backbone.Model({
-                                    title:  currentinventorymodel['Name'],
+                    var recs = this.options.options;
+                    var arr = this.chunkArray(recs, this.collection.models[0].get('recordsPerPage'));
+                    recs = arr[this.page];
+                    var records_collection = new Backbone.Collection(recs.map(function (currentinventorymodel) {
+                        return new Backbone.Model({
+                            title: currentinventorymodel['Name'],
 
-                                     internalid: currentinventorymodel.internalid
-                                    , showInModal: false
-                                    , generateRemoveButton: false
-                                    , columns: [
-                                        {
-                                            label: 'Description'
-                                            , type: 'description'
-                                            , name: 'description'
-                                            , value: currentinventorymodel['Description']
-                                        }
-                                        , {
-                                            label: 'Available Quantity'
-                                            , type: 'Available Quantity'
-                                            , name: 'Available Quantity'
-                                            , value: currentinventorymodel['Available']
-                                        }
+                            internalid: currentinventorymodel.internalid
+                            , showInModal: false
+                            , generateRemoveButton: false
+                            , columns: [
+                                {
+                                    label: 'Description'
+                                    , type: 'description'
+                                    , name: 'description'
+                                    , value: currentinventorymodel['Description']
+                                }
+                                , {
+                                    label: 'Available Quantity'
+                                    , type: 'Available Quantity'
+                                    , name: 'Available Quantity'
+                                    , value: currentinventorymodel['Available']
+                                }
 
+                                , {
+                                    label: 'On Hand Quantity'
+                                    , type: 'On Hand Quantity'
+                                    , name: 'On Hand Quantity'
+                                    , value: currentinventorymodel['On Hand']
+                                }
 
-                                        , {
-                                            label: 'Committed Quantity'
-                                            , type: 'Committed Quantity'
-                                            , name: 'Committed Quantity'
-                                            , value: currentinventorymodel['Committed']
-                                        }
+                                , {
+                                    label: 'Committed Quantity'
+                                    , type: 'Committed Quantity'
+                                    , name: 'Committed Quantity'
+                                    , value: currentinventorymodel['Committed']
+                                }
+                            ]
+                        });
+                    }));
 
-                                        , {
-                                            label: 'On Hand Quantity'
-                                            , type: 'On Hand Quantity'
-                                            , name: 'On Hand Quantity'
-                                            , value: currentinventorymodel['On Hand']
-                                        }
-                                    ]
-                                });
-                            }));
-
-                            return new BackboneCollectionView({
-                                childView: RecordViewsView
-                                ,	collection: records_collection
-                                ,	viewsPerRow: 1
-                            });
+                    return new BackboneCollectionView({
+                        childView: RecordViewsView
+                        , collection: records_collection
+                        , viewsPerRow: 1
+                    });
 
                 }
-                ,	'GlobalViews.Pagination': function()
-                {
+                , 'GlobalViews.Pagination': function () {
                     return new GlobalViewsPaginationView(_.extend({
                         totalPages: Math.ceil(this.options.options.length / this.collection.models[0].get('recordsPerPage'))
                     }, Configuration.defaultPaginationSettings));
                 }
-                ,	'GlobalViews.ShowCurrentPage': function()
-                {
+                , 'GlobalViews.ShowCurrentPage': function () {
                     return new GlobalViewsShowingCurrentView({
                         items_per_page: this.collection.models[0].get('recordsPerPage')
-                        ,	total_items: this.options.options.length
-                        ,	total_pages: Math.ceil(this.options.options.length / this.collection.models[0].get('recordsPerPage'))
+                        , total_items: this.options.options.length
+                        , total_pages: Math.ceil(this.options.options.length / this.collection.models[0].get('recordsPerPage'))
                     });
                 }
-                ,	'List.Header': function ()
-                {
+                , 'List.Header': function () {
                     return this.listHeader;
                 }
             }
-            ,   getSelectedMenu: function ()
-            {
+            , getSelectedMenu: function () {
                 return 'currentinventory';
             }
 
-            ,   getBreadcrumbPages: function ()
-            {
+            , getBreadcrumbPages: function () {
                 return {
                     text: 'Current Inventory'
                 };
             }
 
 
-            ,   getContext: function ()
-            {
+            , getContext: function () {
                 console.log("Testing ... : " + this.options.options);
 
                 return {
                     Title: 'Current Inventory Status'
-                ,   page_header : this.page_header
-                ,	collection: this.collection
-                ,   searchFilterValue : this.searchFilterValue
-                // @property {Boolean} collectionLength
-                ,	collectionLength: this.options.options.length
-                // @property {Boolean} isLoading
-                    ,	isLoading: this.isLoading
+                    , page_header: this.page_header
+                    , collection: this.collection
+                    , searchFilterValue: this.searchFilterValue
+                    // @property {Boolean} collectionLength
+                    , collectionLength: this.options.options.length
+                    // @property {Boolean} isLoading
+                    , isLoading: this.isLoading
                     // @property {Boolean} showPagination
-                    ,	showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
+                    , showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
                     // @property {Boolean} showCurrentPage
-                    ,	showCurrentPage: this.options.showCurrentPage
+                    , showCurrentPage: this.options.showCurrentPage
                 };
             }
         });
