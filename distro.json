@@ -162,8 +162,7 @@
             "lessSourcemap": false,
             "jsRequire": true
         },
-        "javascript": [
-            {
+        "javascript": [{
                 "entryPoint": "SC.MyAccount.Starter",
                 "exportFile": "myaccount.js",
                 "dependencies": [
@@ -491,13 +490,11 @@
                 "footer.tpl",
                 "footer_simplified.tpl"
             ],
-            "applications": [
-                {
+            "applications": [{
                     "name": "MyAccount",
                     "exportFile": "myaccount.css",
                     "prefixAllWith": "#main",
-                    "dependencies": [
-                        {
+                    "dependencies": [{
                             "module": "font-awesome",
                             "neverPrefix": true,
                             "include": [
@@ -627,8 +624,7 @@
                     "name": "Checkout",
                     "exportFile": "checkout.css",
                     "prefixAllWith": "#main",
-                    "dependencies": [
-                        {
+                    "dependencies": [{
                             "module": "font-awesome",
                             "neverPrefix": true,
                             "include": [
