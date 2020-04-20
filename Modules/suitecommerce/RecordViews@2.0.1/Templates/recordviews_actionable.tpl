@@ -9,7 +9,7 @@
 	<td class="recordviews-actionable-title">
 		<a href="#" data-touchpoint="{{touchpoint}}" data-hashtag="{{detailsURL}}">{{title}}</a>
 	</td>
-{{log this}}
+
 	{{#each columns}}
 		<td class="recordviews-actionable-{{type}}" data-name="{{name}}">
 			{{#if showLabel}}

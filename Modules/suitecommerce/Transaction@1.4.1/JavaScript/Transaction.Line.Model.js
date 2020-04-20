@@ -37,6 +37,7 @@ define('Transaction.Line.Model'
 			initialize: function initialize (attributes)
 			{
 				Backbone.Model.prototype.initialize.apply(this, arguments);
+
 				var self = this;
 				this.on('change:item', function (model, item)
 				{

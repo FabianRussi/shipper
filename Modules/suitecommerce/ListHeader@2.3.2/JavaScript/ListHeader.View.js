@@ -55,7 +55,6 @@ define('ListHeader.View'
 		,	'click [data-action="toggle-sort"]': 'toggleSortHandler'
 		,	'change [data-action="select-all"]': 'selectAll'
 		,	'change [data-action="unselect-all"]': 'unselectAll'
-		,   'keyup [data-action="po-filter"]':'sortpo'
 
 			/*
 			 * range-filter focus/blur work together to update the date range when:
@@ -594,17 +593,6 @@ define('ListHeader.View'
 			this.rangeFilterTimeout = setTimeout(_.bind(this.rangeFilterHandler, this), 1000);
 		}
 
-		,sortpo:function()
-		{
-             debugger;
-	     	var collection = this.collection.models;
-			var value = jQuery("#po").val();
-			_.filter(collection, function(item, index) {
-				return _.contains([value], item.get("otherrefnum"));
-			  })
-
-		}
-		
 		// @method clearRangeFilterTimeout
 	,	clearRangeFilterTimeout: function()
 		{
