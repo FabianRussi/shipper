@@ -3,17 +3,17 @@
         color: #000;
         font-weight: 100;
         cursor: default;
-        position: relative;
+        position:relative;
     }
 
 
-    tbody#curInv td.recordviews-title:before {
-        background: transparent;
+    tbody#curInv td.recordviews-title:before{
+        background:transparent;
         content: "";
-        width: 100%;
-        height: 50px;
-        position: absolute;
-        z-index: 555;
+        width:100%;
+        height:50px;
+        position:absolute;
+        z-index:555;
     }
 </style>
 <section class="current-inventory-list">
@@ -21,8 +21,7 @@
         <h2>{{Title}}</h2>
     </header>
 
-    <input type="text" placeholder="search for an item..." class="form-control curr-inv-srch" data-type="curr-inv-srch"
-        id="currInv" value="{{searchFilterValue}}" autofocus />
+    <input type="text" placeholder="search for an item..." class="form-control curr-inv-srch" data-type="curr-inv-srch" id="currInv" value="{{searchFilterValue}}" autofocus/>
     <button class="btn btn-lg btn-primary goSearch" data-type="goSearch">Search Items</button>
 
     <div data-view="List.Header"></div>
@@ -31,23 +30,24 @@
 
         <table class="current-inventory-list-current-inventorys-table">
             <thead class="current-inventory-list-content-table">
-                <tr class="current-inventory-list-content-table-header-row">
-                    <th class="current-inventory-list-content-table-header-row-title">
-                        <span>{{translate 'Name'}}</span>
-                    </th>
-                    <th class="current-inventory-list-content-table-header-row-request-date">
-                        <span>{{translate 'Description'}}</span>
-                    </th>
-                    <th class="current-inventory-list-content-table-header-row-expiration-date">
-                        <span>{{translate 'Available Quantity'}}</span>
-                    </th>
-                    <th class="current-inventory-list-content-table-header-row-currency">
-                        <span>{{translate 'On Hand Quantity'}}</span>
-                    </th>
-                    <th class="current-inventory-list-content-table-header-row-status">
-                        <span>{{translate 'Committed Quantity'}}</span>
-                    </th>
-                </tr>
+            <tr class="current-inventory-list-content-table-header-row">
+                <th class="current-inventory-list-content-table-header-row-title">
+                    <span>{{translate 'Name'}}</span>
+                </th>
+                <th class="current-inventory-list-content-table-header-row-request-date">
+                    <span>{{translate 'Description'}}</span>
+                </th>
+                <th class="current-inventory-list-content-table-header-row-expiration-date">
+                    <span>{{translate 'Available Quantity'}}</span>
+                </th>
+                <th class="current-inventory-list-content-table-header-row-status">
+                <span>{{translate 'Committed Quantity'}}</span>
+                 </th>
+                <th class="current-inventory-list-content-table-header-row-currency">
+                    <span>{{translate 'On Hand Quantity'}}</span>
+                </th>
+
+            </tr>
             </thead>
             <tbody id="curInv" data-view="CurrentInventory.List.Items"></tbody>
         </table>
