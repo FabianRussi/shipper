@@ -178,8 +178,6 @@ define('OrderHistory.List.View'
 			}
 		,	'Order.History.Results': function ()
 			{
-				debugger;
-
 				var self = this
 				,	records_collection = new Backbone.Collection(this.collection.map(function (order)
 					{
@@ -228,7 +226,7 @@ define('OrderHistory.List.View'
 						{
 						columns.push(dynamic_column);
 						}
-debugger;
+
 						var model = new Backbone.Model({title: new Handlebars.SafeString(_('<span class="tranid">$(0)</span>').translate(order.get('tranid')))
 							,	touchpoint: 'customercenter'
 							,	detailsURL: '/purchases/view/' + order.get('recordtype')  + '/' + order.get('internalid')

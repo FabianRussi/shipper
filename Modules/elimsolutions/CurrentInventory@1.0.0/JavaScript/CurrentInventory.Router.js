@@ -74,7 +74,7 @@ define('CurrentInventory.Router'
 
             , itemDetails: function (id) {
                 console.log("made it to itemDetails");
-                debugger;
+            
 
                 // var params_options = _.parseUrlOptions(options);
                 var model = new CurrentInventoryItemDetailModel(); //.getInventoryItem(id)
