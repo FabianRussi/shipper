@@ -56,7 +56,7 @@ define('ListHeader.View'
 		,	'change [data-action="select-all"]': 'selectAll'
 		,	'change [data-action="unselect-all"]': 'unselectAll'
 		,   'keyup [data-action="po-filter"]':'sortpo'
-
+		,   'blur [data-action="po-filter"]':'sortpo'
 			/*
 			 * range-filter focus/blur work together to update the date range when:
 			 * Blur happens on a field and user don't focus on the other during a defined interval
@@ -361,11 +361,14 @@ define('ListHeader.View'
 		// the collection used by the view MUST have an update method
 		// this method is going to be called whenever a sort/filter value changes
 		// @return {ListHeader.View} Returns itself
-	,	updateCollection: function ()
+	,	updateCollection: function (params)
 		{
 			var range = null
-			,	collection = this.collection;
-
+			   if(params){
+			var collection= params
+			   }else{ collection = this.collection;
+			   }
+			
 			if (this.selectedRange)
 			{
 				//@class RangeFilter
@@ -596,13 +599,28 @@ define('ListHeader.View'
 
 		,sortpo:function()
 		{
-             debugger;
-	     	var collection = this.collection.models;
+    
+	     	
 			var value = jQuery("#po").val();
-			_.filter(collection, function(item, index) {
-				return _.contains([value], item.get("otherrefnum"));
-			  })
-
+			if(value && value.length>=3)
+			{
+				this.updateCollection();
+				var collection = this.collection.models;
+				var collectionResult = _.filter(collection, function(item, index) {
+					return (item.get("otherrefnum") && item.get("otherrefnum").indexOf(value)!=-1) || (item.get("tranid") && item.get("tranid").indexOf(value)!=-1);
+				  })
+				  this.collection.models = collectionResult;
+				  this.collection.length = this.collection.models.length;
+				  this.view.render();
+				  jQuery("#po").val(value);
+			}else{
+				if(!value){
+					this.updateCollection();
+				}
+			}
+			
+			  //this.updateCollection(collectionResult);
+			  
 		}
 		
 		// @method clearRangeFilterTimeout
