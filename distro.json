@@ -16,6 +16,7 @@
         "elimsolutions/LoginRegisterOverrides": "2.4.0",
         "elimsolutions/MenuTreeOverrides": "2.1.4",
         "elimsolutions/CurrentInventory": "1.0.0",
+        "elimsolutions/CreateSalesOrders": "1.0.0",
         "suitecommerce/Account": "2.4.0",
         "suitecommerce/Address": "2.4.3",
         "suitecommerce/AjaxRequestsKiller": "2.0.2",
@@ -200,7 +201,9 @@
                     "QuoteToSalesOrderWizard",
                     "Case",
                     "BrontoIntegration",
-                    "CurrentInventory"
+                    "CurrentInventory",
+                    "CreateSalesOrders"
+
                 ],
                 "amdclean": false,
                 "amdConfig": {
@@ -390,6 +393,7 @@
                 "SC.BaseComponent",
                 "Cart.Component",
                 "CurrentInventory.Model",
+                "CreateSalesOrders.Model",
                 "CurrentInventory.ItemDetail.Model",
                 "CurrentInventory.ItemDetail.ServiceController"
             ],
@@ -566,6 +570,7 @@
                         },
                         "Address",
                         "CurrentInventory",
+                        "CreateSalesOrders",
                         "Backbone.CollectionView",
                         "BackboneExtras",
                         "Case",

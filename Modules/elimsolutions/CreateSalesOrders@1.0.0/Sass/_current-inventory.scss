@@ -1,0 +1,52 @@
+table.current-inventory-list-current-inventorys-table td {
+    font-size: 0.9rem !important;
+    line-height: 30px;
+}
+
+th.current-inventory-list-content-table-header-row-title {
+    width: 170px;
+}
+
+th.current-inventory-list-content-table-header-row-request-date {
+    width: 365px;
+}
+
+table.current-inventory-list-current-inventorys-table td.recordviews-description span {
+    font-size: 13px !important;
+}
+
+tr.current-inventory-list-content-table-header-row th span {
+    font-size: 15px;
+    margin: 15px 0px;
+    display: block;
+    font-weight: normal;
+}
+
+tr.current-inventory-list-content-table-header-row {
+    border-bottom: 2px solid #d2e8f0;
+    margin-bottom: 44px !important;
+}
+
+input.form-control.curr-inv-srch {
+    margin-top: 10px !important;
+    border-radius: 5px !important;
+    font-weight: 600 !important;
+    width: 70%;
+    display: inline-block;
+    @media screen and (min-width: 768px) {
+        width: 85%;
+    }
+}
+
+#main .current-inventory-list-empty-section {
+    padding: 40px 15px 15px 15px;
+    text-align: center;
+}
+
+button.btn.btn-lg.btn-primary.goSearch {
+    font-size: 15px !important;
+    margin-left: 8px !important;
+    padding: 9px !important;
+    margin-top: -6px !important;
+    display: inline-block;
+}

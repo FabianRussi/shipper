@@ -17,6 +17,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
         },
         createFilteredResults: function(val) {
             console.log("createFilteredResults");
+
             debugger;
             var value = val;
             var origonalArr = this.collection.models[0].attributes.records.slice();
@@ -40,7 +41,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
             }
         },
         GetFilteredResults: function(options) {
-
+            debugger;
             console.log("made it to ROuter kesu");
             debugger;
             options = (options) ? Utils.parseUrlOptions(options) : { page: 1 };
