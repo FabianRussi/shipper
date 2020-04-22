@@ -16,6 +16,7 @@
         "elimsolutions/LoginRegisterOverrides": "2.4.0",
         "elimsolutions/MenuTreeOverrides": "2.1.4",
         "elimsolutions/CurrentInventory": "1.0.0",
+        "elimsolutions/CreateSalesOrders": "1.0.0",
         "suitecommerce/Account": "2.4.0",
         "suitecommerce/Address": "2.4.3",
         "suitecommerce/AjaxRequestsKiller": "2.0.2",
@@ -162,8 +163,7 @@
             "lessSourcemap": false,
             "jsRequire": true
         },
-        "javascript": [
-            {
+        "javascript": [{
                 "entryPoint": "SC.MyAccount.Starter",
                 "exportFile": "myaccount.js",
                 "dependencies": [
@@ -201,7 +201,9 @@
                     "QuoteToSalesOrderWizard",
                     "Case",
                     "BrontoIntegration",
-                    "CurrentInventory"
+                    "CurrentInventory",
+                    "CreateSalesOrders"
+
                 ],
                 "amdclean": false,
                 "amdConfig": {
@@ -391,6 +393,7 @@
                 "SC.BaseComponent",
                 "Cart.Component",
                 "CurrentInventory.Model",
+                "CreateSalesOrders.Model",
                 "CurrentInventory.ItemDetail.Model",
                 "CurrentInventory.ItemDetail.ServiceController"
             ],
@@ -491,13 +494,11 @@
                 "footer.tpl",
                 "footer_simplified.tpl"
             ],
-            "applications": [
-                {
+            "applications": [{
                     "name": "MyAccount",
                     "exportFile": "myaccount.css",
                     "prefixAllWith": "#main",
-                    "dependencies": [
-                        {
+                    "dependencies": [{
                             "module": "font-awesome",
                             "neverPrefix": true,
                             "include": [
@@ -569,6 +570,7 @@
                         },
                         "Address",
                         "CurrentInventory",
+                        "CreateSalesOrders",
                         "Backbone.CollectionView",
                         "BackboneExtras",
                         "Case",
@@ -627,8 +629,7 @@
                     "name": "Checkout",
                     "exportFile": "checkout.css",
                     "prefixAllWith": "#main",
-                    "dependencies": [
-                        {
+                    "dependencies": [{
                             "module": "font-awesome",
                             "neverPrefix": true,
                             "include": [
