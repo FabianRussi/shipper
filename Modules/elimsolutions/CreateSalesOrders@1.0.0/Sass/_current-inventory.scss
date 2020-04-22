@@ -50,3 +50,58 @@ button.btn.btn-lg.btn-primary.goSearch {
     margin-top: -6px !important;
     display: inline-block;
 }
+#item-table{
+float: right;
+width: 42%;
+}
+
+@media screen and (max-width: 768px) {
+        #item-table{
+        width: 85%;
+    }
+  
+}
+
+#table-header th {
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+}
+ #table-header th {
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+}
+#item-table th {
+    background: #462c98;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    display: table-cell;
+}
+
+
+    #item-table td {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    .trclass{
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+    color: #8d8d8d;
+
+    border-top: none;
+    border-bottom: 1px solid #cbcbcb;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border-right: 1px solid #cbcbcb;
+
+}
+.border{
+    border: 1px solid #cbcbcb;
+    border-top: 0;
+}
