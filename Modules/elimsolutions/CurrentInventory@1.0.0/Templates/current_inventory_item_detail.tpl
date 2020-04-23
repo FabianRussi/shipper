@@ -1,3 +1,5 @@
+{{log this}}
+
 <style>
     tbody#curInv td.recordviews-title a.recordviews-title-anchor {
         color: #000;
@@ -17,16 +19,16 @@
     }
 </style>
 <section class="current-inventory-list">
-    <header class="current-inventory-list-header">
+    {{!--     <header class="current-inventory-list-header">
         <h2>{{Title}}</h2>
-    </header>
+    </header> --}}
 
-  {{!--   <input type="text" placeholder="search for an item..." class="form-control curr-inv-srch" data-type="curr-inv-srch"
+    {{!--   <input type="text" placeholder="search for an item..." class="form-control curr-inv-srch" data-type="curr-inv-srch"
         id="currInv" value="{{searchFilterValue}}" autofocus />
     <button class="btn btn-lg btn-primary goSearch" data-type="goSearch">Search Items</button> --}}
 
     <div data-view="List.Header"></div>
-{{!--     <div class="current-inventory-list-results-container">
+    {{!--     <div class="current-inventory-list-results-container">
         {{#if collectionLength}}
 
         <table class="current-inventory-list-current-inventorys-table">
@@ -72,7 +74,82 @@
     {{/if}}
 </section>
 
-<h1>OIE FLOID</h1>
+{{!-- <h3>ID:: {{model.id}}</h3> --}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <div style="width: 100%; height: 100%; background: gray;"></div>
+        </div>
+        <div class="col-xs-9">
+            <h4>{{Title}}</h4>
+            {{!-- <br />
+            Item Description: {{model.description}} --}}
+            <br />
+            Height: {{model.height}}
+            <br />
+            Length: {{model.type}}
+            <br />
+            Weight: {{model.weight}}
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Quantity on Hand</th>
+                <th>Lot Numbers</th>
+                <th>Expiration Date</th>
+                <th>Reorder Point</th>
+                <th>Quantity On Order</th>
+                <th>Quantity Available</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each model.locations}}
+            <tr>
+                <td>{{invDetLocation}}</td>
+                <td>{{invDetQuantityOnHand}}</td>
+                <td>{{serial}}</td>
+                <td>{{invDetExpirationDate}}</td>
+                <td>{{reorderPoint}}</td>
+                <td>{{onOrder}}</td>
+                <td>{{available}}</td>
+                <td>{{invDetStatus}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- <div class="row">
+        <div class="col-xs-6">
+            Location: {{location}}
+            <br />
+            Quantity on Hand: {{quantity}}
+            <br />
+            Lot Numbers:
+            <br />
+            Expiration Date: {{expirationDate}}
+        </div>
+        <div class="col-xs-6">
+            Quantity Available: {{available}}
+            <br />
+            Status:
+            <br />
+            Reorder Point: {{reorderPoint}}
+            <br />
+            Quantity on Order:
+        </div>
+    </div> --}}
+    {{!-- <br /> --}}
+    {{!-- {{/each}} --}}
+</div>
 
 {{!----
 The context variables for this template are not currently documented. Use the {{log this}} helper to view the context variables in the Console of your browser's developer tools.
