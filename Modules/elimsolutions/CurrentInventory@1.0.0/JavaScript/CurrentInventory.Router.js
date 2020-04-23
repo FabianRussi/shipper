@@ -22,7 +22,7 @@ define('CurrentInventory.Router'
 
             routes: {
                 'current-inventory?:options': 'GetFilteredResults',
-                'item-details/view/:id': 'itemDetails' //?options
+                'item-details?:options': 'itemDetails' //?options
             }
 
             , initialize: function (application) {
@@ -72,46 +72,20 @@ define('CurrentInventory.Router'
                 view.showContent();
             }
 
-            , itemDetails: function (id) {
-                // var params_options = _.parseUrlOptions(options);
-                var model = {}; //new CurrentInventoryItemDetailModel();
-                model.internalId = 19213;
-                model.name = 'BE 10150';
-                model.description = 'Item description';
-                model.type = 'Item type';
-                model.basePrice = 300;
-                model.height = 30;
-                model.weight = 4.5;
-                model.location = 'Item location';
-                model.reorderPoint = 'Item reorder point';
-                model.serial = 'Item serial';
-                model.onHand = 'Item on hand';
-                model.available = 'Item available';
-                model.stockUnit = 'Item stockUnit';
-                model.binNumber = 'Item binNumber';
-                model.status = 'Item status';
-                model.quantity = 'Item quantity';
-                model.expirationDate = 'Item expirationDate';
-                model.locationDetails = 'Item locationDetails';
-                model.locationCommited = 'Item locationCommited';
-
+            , itemDetails: function (param) {
+                var id = SC.Utils.getParameterByName(location.href, 'id');
+                var itemDetailVM = {};
+                var itemDetailModel = new CurrentInventoryItemDetailModel();
                 var view = new CurrentInventoryItemDetailView({
                     application: this.application
                     , id: id
-                    , model: model
                 });
 
-                view.showContent();
-
-                // var item = new WebOrderApprovalPendingApprovalCollection();
-                /*  var view = new WebOrderApprovalPendingApprovalListView({
-                     collection: collection,
-                     application: this.application,
-                     page: params_options.page,
-                     options: params_options
-                 });
-                 view.showContent();
-  */
+                itemDetailModel.fetch({ data: { id: id } }).done(function (data) {
+                    itemDetailVM = data;
+                    view.model = itemDetailVM;
+                    view.showContent();
+                });
             }
 
             //https://customercentersecure.eshipperplus.com/portal/my_account-local.ssp/item-details/view/4108

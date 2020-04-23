@@ -11,9 +11,10 @@ define(
         , 'SC.Configuration'
         , 'jQuery'
         , 'underscore'
+        , 'CurrentInventory.ItemDetail.Model'
     ]
     , function (
-        current_inventory_list
+        current_inventory_item_detail
         , Backbone
         , BackboneCompositeView
         , BackboneCollectionView
@@ -24,18 +25,19 @@ define(
         , Configuration
         , jQuery
         , _
+        , CurrentInventoryItemDetailModel
     ) {
         'use strict';
 
         return Backbone.View.extend({
 
-            template: current_inventory_list
+            template: current_inventory_item_detail //current_inventory_list
 
             , attributes: { 'class': 'CurrentInventoryListView' }
 
-            , title: _('Item Detail View').translate()
+            , title: _('Product Dimensions').translate()
 
-            , page_header: _('Item Detail View').translate()
+            , page_header: _('Product Dimensions').translate()
 
             , searchFilterValue: ''
 
@@ -44,10 +46,12 @@ define(
 
             , initialize: function (options) {
 
+                var self = this;
                 this.options = options;
                 this.application = options.application;
 
                 this.options.showCurrentPage = true;
+
                 // this.options.searchFilterValue = options.searchFilterValue;
 
                 /* console.log(this.options);
@@ -57,8 +61,6 @@ define(
 
                 var url_options = _.parseUrlOptions(Backbone.history.fragment);
 
-                console.log(url_options);
-
                 this.searchFilterValue = url_options.srch;
                 this.page = this._getPageFromUrl(url_options.page);
                 this.page = this.page - 1;
@@ -66,8 +68,19 @@ define(
                 console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this); */
+
+                BackboneCompositeView.add(this);
             }
 
+            , render: function () {
+                this.groupByDate(this.model);
+                Backbone.View.prototype.render.apply(this, this.model);
+            }
+
+            , groupByDate: function (model) {
+                debugger;
+                // _.filter(model.locations, function (loc) { return loc. == "" });
+            }
 
             , _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
@@ -170,10 +183,10 @@ define(
             }
 
             , getContext: function () {
-                console.log("Testing ... : " + this.options.options);
+                // console.log("Testing ... : " + this.options.options);
 
                 return {
-                    Title: 'Item Detail View'
+                    Title: 'Product Dimensions'
                     , page_header: this.page_header
                     // , collection: this.collection
                     // , searchFilterValue: this.searchFilterValue
@@ -185,6 +198,7 @@ define(
                     // , showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
                     // @property {Boolean} showCurrentPage
                     , showCurrentPage: this.options.showCurrentPage
+                    , model: this.model
                 };
             }
         });

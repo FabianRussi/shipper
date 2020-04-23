@@ -33,7 +33,5 @@ define('CurrentInventory.ItemDetail.Model', [
                 console.log('JSONERR', JSON.stringify(err));
             }
         }
-    }
-
     });
 });
