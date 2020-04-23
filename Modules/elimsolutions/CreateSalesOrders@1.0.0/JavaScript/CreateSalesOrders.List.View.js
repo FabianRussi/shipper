@@ -15,6 +15,13 @@ define(
             attributes: { 'class': 'CreateSalesOrdersListView' }
 
             ,
+            events: {
+                'click .delete-item': 'removeItem',
+                'click #add-items': 'addItemRow',
+                'keyup [data-type="curr-inv-srch"]': 'searchFilter',
+                'click [data-type="goSearch"]': 'goSearch',
+                'change #items': 'showAmount'
+            },
             title: _('Place A New Sales Order').translate()
 
             ,
@@ -29,7 +36,7 @@ define(
 
             ,
             initialize: function(options) {
-                
+
                 this.options = options;
                 this.application = options.application;
 
@@ -49,6 +56,8 @@ define(
                 this.searchFilterValue = url_options.srch;
                 this.page = this._getPageFromUrl(url_options.page);
                 this.page = this.page - 1;
+                this.locations = this.options.collection.models[0].get("locations");
+                this.taxcode = this.options.collection.models[0].get("TaxsCode")
 
                 console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
@@ -62,6 +71,52 @@ define(
                 var page_number = parseInt(url_value, 10);
                 return !isNaN(page_number) && page_number > 0 ? page_number : 1;
             },
+            addItemRow: function(e) {
+
+                e.preventDefault();
+                var qty = 1;
+                var string = '';
+                string += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
+                string += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt=""> </td>'
+                string += '<td >' + jQuery('#items option:selected').text() + '</td>'
+                string += '<td> amount: <span> ' + jQuery('#amount').val() + '</span> </td>'
+                string += '<td> qty: <span> ' + jQuery('#qty').val() + '</span> </td>'
+                string += '<td> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button> </td> </tr>'
+                jQuery('#table-summary').append(string);
+                var arrayItems = sessionStorage.getItem('jsonItem');
+                if (arrayItems) {
+                    arrayItems = JSON.parse(arrayItems);
+                    arrayItems.push({
+                        itemid: jQuery('#items option:selected').val(),
+                        qty: jQuery('#qty').val(),
+                        amount: jQuery('#amount').val(),
+                        tax: jQuery('#taxcode option:selected').text(),
+                        locations: jQuery('#locations option:selected').val()
+                    });
+                    sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
+                } else {
+                    arrayItems = [{
+                        itemid: jQuery('#items option:selected').val(),
+                        qty: jQuery('#qty').val(),
+                        amount: jQuery('#amount').val(),
+                        tax: jQuery('#taxcode option:selected').text(),
+                        locations: jQuery('#locations option:selected').val()
+                    }];
+                    sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
+                }
+
+            },
+            removeItem: function(e) {
+                var id = e.currentTarget.id;
+                var idRemove = id.replace("itemremove-", "");
+                var attr = jQuery(e.currentTarget).parent('td').parent('tr').attr('data-attr');
+                jQuery(e.currentTarget).parent('td').parent('tr').remove();
+                var arrayItems = JSON.parse(sessionStorage.getItem('jsonItem'));
+                var resultArray = _.filter(arrayItems, function(item) {
+                    return (item.itemid != idRemove) || (item.locations != attr.split(';')[2] || item.tax != attr.split(';')[1]);
+                })
+                sessionStorage.setItem('jsonItem', JSON.stringify(resultArray));
+            },
             listenCollection: function() {
                 this.setLoading(true);
 
@@ -73,10 +128,13 @@ define(
                 console.log(this.options);
 
                 this.setLoading(false);
-            }
-
-
-            ,
+            },
+            showAmount: function(e) {
+                var selected = _.filter(this.collection.models[0].get('records'), function(item) {
+                    return item.Name == jQuery('#items option:selected').text();
+                })
+                jQuery('#amount').val(selected[0]['Base Price']);
+            },
             setupListHeader: function() {
                 // manges sorting and filtering of the collection
                 this.listHeader = new ListHeaderView({
@@ -94,17 +152,7 @@ define(
             setLoading: function(is_loading) {
                 //@property {Boolean} isLoading
                 this.isLoading = is_loading;
-            }
-
-            // @property {Object} events
-            ,
-            events: {
-                'keyup [data-type="curr-inv-srch"]': 'searchFilter',
-                'click [data-type="goSearch"]': 'goSearch'
-            }
-
-
-            ,
+            },
             searchFilter: function(e) {
 
                 var value = jQuery("#currInv").val();
@@ -217,11 +265,12 @@ define(
 
 
             // ,
-            getContext: function() {    
+            getContext: function() {
                 return {
                     Title: 'Place A New Sales Orders',
                     page_header: this.page_header,
                     collection: this.options.options, //collection,
+                    addresses: this.options.addresses.models,
                     searchFilterValue: this.searchFilterValue
                         // @property {Boolean} collectionLength
                         ,
@@ -234,7 +283,9 @@ define(
                     showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
                         // @property {Boolean} showCurrentPage
                         ,
-                    showCurrentPage: this.options.showCurrentPage
+                    showCurrentPage: this.options.showCurrentPage,
+                    locations: this.locations,
+                    taxcode: this.taxcode
                 };
             }
         });

@@ -14,6 +14,10 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
 
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
+            this.addresses = ProfileModel.getInstance().get('addresses');;
+
+            console.log(JSON.stringify(this.addresses))
+
         },
         createFilteredResults: function(val) {
 
@@ -48,6 +52,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
             var view = new CreateSalesOrdersListView({
                 application: this.application,
                 collection: this.collection,
+                addresses: this.addresses,
                 options: filteredResults
             });
             this.collection.on('reset', view.showContent, view);
