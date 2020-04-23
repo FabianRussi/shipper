@@ -151,6 +151,7 @@ define(
             }
             , childViews: {
                 'CurrentInventory.List.Items': function () {
+                    debugger;
                     var recs = this.options.options;
                     var arr = this.chunkArray(recs, this.collection.models[0].get('recordsPerPage'));
                     recs = arr[this.page];
@@ -158,7 +159,7 @@ define(
                         return new Backbone.Model({
                             title: currentinventorymodel['Name'],
 
-                            internalid: currentinventorymodel.internalid
+                            internalid: currentinventorymodel.id
                             , showInModal: false
                             , generateRemoveButton: false
                             , columns: [
