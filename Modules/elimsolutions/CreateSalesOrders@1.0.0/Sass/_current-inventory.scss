@@ -1,0 +1,107 @@
+table.current-inventory-list-current-inventorys-table td {
+    font-size: 0.9rem !important;
+    line-height: 30px;
+}
+
+th.current-inventory-list-content-table-header-row-title {
+    width: 170px;
+}
+
+th.current-inventory-list-content-table-header-row-request-date {
+    width: 365px;
+}
+
+table.current-inventory-list-current-inventorys-table td.recordviews-description span {
+    font-size: 13px !important;
+}
+
+tr.current-inventory-list-content-table-header-row th span {
+    font-size: 15px;
+    margin: 15px 0px;
+    display: block;
+    font-weight: normal;
+}
+
+tr.current-inventory-list-content-table-header-row {
+    border-bottom: 2px solid #d2e8f0;
+    margin-bottom: 44px !important;
+}
+
+input.form-control.curr-inv-srch {
+    margin-top: 10px !important;
+    border-radius: 5px !important;
+    font-weight: 600 !important;
+    width: 70%;
+    display: inline-block;
+    @media screen and (min-width: 768px) {
+        width: 85%;
+    }
+}
+
+#main .current-inventory-list-empty-section {
+    padding: 40px 15px 15px 15px;
+    text-align: center;
+}
+
+button.btn.btn-lg.btn-primary.goSearch {
+    font-size: 15px !important;
+    margin-left: 8px !important;
+    padding: 9px !important;
+    margin-top: -6px !important;
+    display: inline-block;
+}
+#item-table{
+float: right;
+width: 42%;
+}
+
+@media screen and (max-width: 768px) {
+        #item-table{
+        width: 85%;
+    }
+  
+}
+
+#table-header th {
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+}
+ #table-header th {
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+}
+#item-table th {
+    background: #462c98;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    display: table-cell;
+}
+
+
+    #item-table td {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    .trclass{
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+    color: #8d8d8d;
+
+    border-top: none;
+    border-bottom: 1px solid #cbcbcb;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border-right: 1px solid #cbcbcb;
+
+}
+.border{
+    border: 1px solid #cbcbcb;
+    border-top: 0;
+}

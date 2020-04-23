@@ -169,6 +169,12 @@ define(
 							,	name: 'amount'
 							,	value: return_authorization.get('amount_formatted')
 							}
+							,	{
+								label: _('Po No:').translate()
+							,	type: 'currency'
+							,	name: 'amount'
+							,	value: return_authorization.get('otherrefnum')
+							}
 						,	{
 								label: _('Status:').translate()
 							,	type: 'status'

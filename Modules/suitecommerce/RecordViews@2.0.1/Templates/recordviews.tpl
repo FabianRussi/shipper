@@ -8,6 +8,7 @@
 <tr class="recordviews-row" data-item-id="{{id}}" data-navigation-hashtag="{{detailsURL}}" data-action="navigate">
 	<td class="recordviews-title" data-name="title">
 		<span class="recordviews-title-value">
+			{{log this}}
 			{{#if isNavigable}}
 			<a class="recordviews-title-anchor" href="#" data-touchpoint="{{touchpoint}}" data-id="{{id}}" data-hashtag="{{detailsURL}}" {{#if showInModal}}data-toggle="show-in-modal"{{/if}}>
 			{{/if}}
