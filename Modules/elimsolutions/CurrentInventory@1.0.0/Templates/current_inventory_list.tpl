@@ -2,11 +2,10 @@
     tbody#curInv td.recordviews-title a.recordviews-title-anchor {
         color: #000;
         font-weight: 100;
-        cursor: default;
+        cursor: pointer;
         position:relative;
+        z-index: 9999;
     }
-
-
     tbody#curInv td.recordviews-title:before{
         background:transparent;
         content: "";
@@ -27,10 +26,10 @@
 
     <div data-view="List.Header"></div>
     <div class="current-inventory-list-results-container">
+       
         {{#if collectionLength}}
-
         <table class="current-inventory-list-current-inventorys-table">
-            <thead class="current-inventory-list-content-table">
+            <thead class="current-inventory-list-content-table">       
             <tr class="current-inventory-list-content-table-header-row">
                 <th class="current-inventory-list-content-table-header-row-title">
                     <span>{{translate 'Name'}}</span>
