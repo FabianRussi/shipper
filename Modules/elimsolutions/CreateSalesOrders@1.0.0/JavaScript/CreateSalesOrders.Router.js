@@ -11,14 +11,12 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
 
         ,
         initialize: function(application) {
-            debugger;
+
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
         },
         createFilteredResults: function(val) {
-            console.log("createFilteredResults");
 
-            debugger;
             var value = val;
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
@@ -41,11 +39,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
             }
         },
         GetFilteredResults: function(options) {
-            debugger;
-            console.log("made it to ROuter kesu");
-            debugger;
             options = (options) ? Utils.parseUrlOptions(options) : { page: 1 };
-            console.log("Options Were : " + JSON.stringify(options));
             options.page = options.page || 1;
             options.srch = options.srch || '';
 

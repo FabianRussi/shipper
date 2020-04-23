@@ -12,14 +12,15 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
 
         ,
         initialize: function(application) {
-            debugger;
+          
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
         }
 
         ,
         createFilteredResults: function(val) {
-            debugger;
+      
+   
             console.log("createFilteredResults");
             var value = val;
             var origonalArr = this.collection.models[0].attributes.records.slice();

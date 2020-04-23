@@ -70,6 +70,7 @@ define(
 		//@return {Array<RecordViews.View.Column>}
 	,	normalizeColumns: function ()
 		{
+		
 			return _.map(this.model.get('columns'), function (column)
 			{
 				column.showLabel = !!column.label;
