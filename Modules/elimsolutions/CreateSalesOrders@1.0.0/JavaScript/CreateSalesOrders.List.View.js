@@ -29,7 +29,7 @@ define(
 
             ,
             initialize: function(options) {
-                debugger;
+                
                 this.options = options;
                 this.application = options.application;
 
@@ -217,9 +217,7 @@ define(
 
 
             // ,
-            getContext: function() {
-                console.log("Testing |||||||||  : " + JSON.stringify(this.options.options));
-                debugger;
+            getContext: function() {    
                 return {
                     Title: 'Place A New Sales Orders',
                     page_header: this.page_header,

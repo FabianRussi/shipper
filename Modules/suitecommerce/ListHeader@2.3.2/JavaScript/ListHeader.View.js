@@ -599,7 +599,7 @@ define('ListHeader.View'
 
 		,sortpo:function()
 		{
-    
+  
 	     	
 			var value = jQuery("#po").val();
 			if(value && value.length>=3)

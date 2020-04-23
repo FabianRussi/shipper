@@ -42,6 +42,9 @@
 						<th class="return-authorization-list-content-table-header-row-currency">
 							<span>{{translate 'Amount'}}</span>
 						</th>
+						<th class="order-history-list-recordviews-actionable-status-header">
+								<span>{{translate 'Po No.'}}</span>
+							</th>
 						<th class="return-authorization-list-content-table-header-row-status">
 							<span>{{translate 'Status'}}</span>
 						</th>

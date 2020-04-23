@@ -228,7 +228,7 @@ define(
 
             , getContext: function () {
                 console.log("Testing ... : " + this.options.options);
-
+    
                 return {
                     Title: 'Current Inventory Status'
                     , page_header: this.page_header
