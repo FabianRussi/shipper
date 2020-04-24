@@ -79,12 +79,13 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-3">
-            <div style="width: 100%; height: 100%; background: gray;"></div>
+            {{!-- <div style="width: 100%; height: 100%; background: gray;"></div> --}}
+            <img src="{{storedisplayimage}}" alt='Item image' />
         </div>
         <div class="col-xs-9">
             <h4>{{Title}}</h4>
-            {{!-- <br />
-            Item Description: {{model.description}} --}}
+            <br />
+            Item Weight: {{model.weight}}
             <br />
             Height: {{model.height}}
             <br />
@@ -112,16 +113,16 @@
             </tr>
         </thead>
         <tbody>
-            {{#each model.locations}}
+            {{#each model.serials}}
             <tr>
-                <td>{{invDetLocation}}</td>
-                <td>{{invDetQuantityOnHand}}</td>
+                <td>{{locationName}}</td>
+                <td>{{quantityOnHand}}</td>
                 <td>{{serial}}</td>
-                <td>{{invDetExpirationDate}}</td>
+                <td>{{expirationdate}}</td>
                 <td>{{reorderPoint}}</td>
-                <td>{{onOrder}}</td>
-                <td>{{available}}</td>
-                <td>{{invDetStatus}}</td>
+                <td>{{qtyOnOrder}}</td>
+                <td>{{qtySum}}</td>
+                <td>{{inventorystatus}}</td>
             </tr>
             {{/each}}
         </tbody>
