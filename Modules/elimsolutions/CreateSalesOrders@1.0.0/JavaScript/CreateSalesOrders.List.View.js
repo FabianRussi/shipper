@@ -20,7 +20,8 @@ define(
                 'click #add-items': 'addItemRow',
                 'keyup [data-type="curr-inv-srch"]': 'searchFilter',
                 'click [data-type="goSearch"]': 'goSearch',
-                'change #items': 'showAmount'
+                'change #items': 'showAmount',
+                'click #plase-order': 'createSlesOrder'
             },
             title: _('Place A New Sales Order').translate()
 
@@ -37,20 +38,15 @@ define(
             ,
             initialize: function(options) {
 
+
                 this.options = options;
                 this.application = options.application;
-
                 this.options.showCurrentPage = true;
                 this.options.searchFilterValue = options.searchFilterValue;
-
                 console.log(this.options);
-
-
                 this.listenCollection();
                 this.setupListHeader();
-
                 var url_options = _.parseUrlOptions(Backbone.history.fragment);
-
                 console.log(url_options);
 
                 this.searchFilterValue = url_options.srch;
@@ -62,24 +58,23 @@ define(
                 console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this);
+                sessionStorage.removeItem('jsonItem');
 
-            }
-
-
-            ,
+            },
             _getPageFromUrl: function(url_value) {
                 var page_number = parseInt(url_value, 10);
                 return !isNaN(page_number) && page_number > 0 ? page_number : 1;
             },
-            addItemRow: function(e) {
 
+            addItemRow: function(e) {
+                debugger;
                 e.preventDefault();
                 var qty = 1;
                 var string = '';
                 string += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
                 string += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt=""> </td>'
                 string += '<td >' + jQuery('#items option:selected').text() + '</td>'
-                // string += '<td> amount: <span> ' + jQuery('#amount').val() + '</span> </td>'
+                string += '<td> amount: <span> ' + jQuery('#amount').val() + '</span> </td>'
                 string += '<td> qty: <span> ' + jQuery('#qty').val() + '</span> </td>'
                 string += '<td> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button> </td> </tr>'
                 jQuery('#table-summary').append(string);
@@ -91,7 +86,7 @@ define(
                         qty: jQuery('#qty').val(),
                         amount: jQuery('#amount').val(),
                         tax: jQuery('#taxcode option:selected').text(),
-                        locations: jQuery('#locations option:selected').val()
+                        locations: jQuery('#locations option:selected').val(),
                     });
                     sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
                 } else {
@@ -102,6 +97,7 @@ define(
                         tax: jQuery('#taxcode option:selected').text(),
                         locations: jQuery('#locations option:selected').val()
                     }];
+                    var customerId = '';
                     sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
                 }
 
@@ -146,9 +142,51 @@ define(
                     sorts: this.sortOptions,
                     allowEmptyBoundaries: true
                 });
-            }
+            },
+            //Btn submit
+            createSlesOrder: function() {
+                debugger;
+                var addresses = jQuery('#addressesee  option:selected').val();
+                var formData = sessionStorage.getItem('jsonItem');
+                var arrData = JSON.parse(formData);
+                if (addresses == '') {
+                    jQuery('#messageAddress').html('teeees');
+                    arrData.push({
+                        postalCode: jQuery('#postalCode').val(),
+                        addr1: jQuery('#addr1').val(),
+                        addr2: jQuery('#addr2').val(),
+                        city: jQuery('#customer').val()
+                    })
+                } else {
+                    arrData.push({ addresses: addresses });
+                }
+                arrData.push({
+                    orderNumber: jQuery('#orderNumber').val(),
+                    memo: jQuery('#memo').val(),
+                    customer: jQuery('#city').val()
 
-            ,
+                })
+                sessionStorage.setItem('jsonItem', JSON.stringify(arrData));
+                var jsonInfoForm = sessionStorage.getItem('jsonItem');
+                this.returnCreatesalesOrder(jsonInfoForm);
+                console.log('response', jsonInfoForm)
+            },
+
+
+            returnCreatesalesOrder: function(jsonInfoForm) {
+                var message = '';
+                debugger;
+                jQuery.ajax({
+                        method: "GET",
+                        url: "/app/site/hosting/scriptlet.nl?script=892&deploy=1&compid=5445214&h=217e3241105accc13a29&jsonInfoForm=" + jsonInfoForm,
+                        dataType: "json"
+                    })
+                    .done(function(msg) {
+
+                    })
+
+
+            },
             setLoading: function(is_loading) {
                 //@property {Boolean} isLoading
                 this.isLoading = is_loading;
