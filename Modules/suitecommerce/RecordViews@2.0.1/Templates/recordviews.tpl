@@ -10,7 +10,7 @@
 		<span class="recordviews-title-value">
 			{{log this}}
 			{{#if isNavigable}}
-			<a class="recordviews-title-anchor" href="/{{id}}" data-touchpoint="{{touchpoint}}" data-id="{{id}}"  {{#if showInModal}}data-toggle="show-in-modal"{{/if}}>
+			<a class="recordviews-title-anchor" href="#/item-details?id={{id}}" data-touchpoint="{{touchpoint}}" data-id="{{id}}"  {{#if showInModal}}data-toggle="show-in-modal"{{/if}}>
 			{{/if}}
 				{{title}}
 			{{#if isNavigable}}
