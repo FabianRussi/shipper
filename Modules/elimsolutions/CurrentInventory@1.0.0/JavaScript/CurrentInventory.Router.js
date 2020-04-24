@@ -1,25 +1,24 @@
-define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInventory.ItemDetail.View', 'Profile.Model', 'CurrentInventory.Model', 'CurrentInventory.ItemDetail.Model', 'Backbone', 'Utils'], function(
+define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInventory.ItemDetail.View', 'Profile.Model', 'CurrentInventory.Model', 'CurrentInventory.ItemDetail.Model', 'Backbone', 'Utils'], function (
     CurrentInventoryListView, CurrentInventoryItemDetailView, ProfileModel, CurrentInventoryModel, CurrentInventoryItemDetailModel, Backbone, Utils
 ) {
     'use strict';
 
     return Backbone.Router.extend({
 
-            routes: {
-                'current-inventory?:options': 'GetFilteredResults',
-                'item-details?:options': 'itemDetails' //?options
-            }
+        routes: {
+            'current-inventory?:options': 'GetFilteredResults',
+            'item-details?:options': 'itemDetails' //?options
+        }
 
         ,
-        initialize: function(application) {
+        initialize: function (application) {
 
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
         }
 
         ,
-        createFilteredResults: function(val) {
-
+        createFilteredResults: function (val) {
 
             console.log("createFilteredResults");
             var value = val;
@@ -43,7 +42,7 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
                 return arrFiltered;
             }
         },
-        GetFilteredResults: function(options) {
+        GetFilteredResults: function (options) {
             console.log("made it to ROuter");
 
             options = (options) ? Utils.parseUrlOptions(options) : { page: 1 };
@@ -62,22 +61,20 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
             view.showContent();
         }
 
-            , itemDetails: function (param) {
-                var id = SC.Utils.getParameterByName(location.href, 'id');
-                var itemDetailVM = {};
-                var itemDetailModel = new CurrentInventoryItemDetailModel();
-                var view = new CurrentInventoryItemDetailView({
-                    application: this.application
-                    , id: id
-                });
+        , itemDetails: function (param) {
+            var id = SC.Utils.getParameterByName(location.href, 'id');
+            var itemDetailVM = {};
+            var itemDetailModel = new CurrentInventoryItemDetailModel();
+            var view = new CurrentInventoryItemDetailView({
+                application: this.application
+                , id: id
+            });
 
-                itemDetailModel.fetch({ data: { id: id } }).done(function (data) {
-                    itemDetailVM = data;
-                    view.model = itemDetailVM;
-                    view.showContent();
-                });
-            }
-
-        //https://customercentersecure.eshipperplus.com/portal/my_account-local.ssp/item-details/view/4108
+            itemDetailModel.fetch({ data: { id: id } }).done(function (data) {
+                itemDetailVM = data;
+                view.model = itemDetailVM;
+                view.showContent();
+            });
+        }
     });
 });

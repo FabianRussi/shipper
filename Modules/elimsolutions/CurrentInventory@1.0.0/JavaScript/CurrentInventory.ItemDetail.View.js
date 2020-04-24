@@ -31,7 +31,7 @@ define(
 
         return Backbone.View.extend({
 
-            template: current_inventory_item_detail //current_inventory_list
+            template: current_inventory_item_detail
 
             , attributes: { 'class': 'CurrentInventoryListView' }
 
@@ -73,13 +73,29 @@ define(
             }
 
             , render: function () {
-                this.groupByDate(this.model);
+                this.model.serials = this.groupByDate(this.model);
                 Backbone.View.prototype.render.apply(this, this.model);
             }
 
             , groupByDate: function (model) {
                 debugger;
-                // _.filter(model.locations, function (loc) { return loc. == "" });
+
+                var withDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate != "" });
+                var withDatesGrouped = _.groupBy(withDates, "serial");
+                var arr = [];
+
+                for (var key in withDatesGrouped) {
+                    arr.push(withDatesGrouped[key][0]);
+                    for (var i = 1; i < withDatesGrouped[key].length; i++) {
+                        arr[arr.length - 1] = { ...arr[i - 1], ...withDatesGrouped[key][i] };
+                    }
+                }
+
+                for (var i = 0; i < arr.length; i++) {
+                    arr[i] = { ...arr[i], ...model.locations[i] };
+                }
+
+                return arr;
             }
 
             , _getPageFromUrl: function (url_value) {
@@ -98,7 +114,6 @@ define(
 
                 this.setLoading(false);
             }
-
 
             , setupListHeader: function () {
                 // manges sorting and filtering of the collection

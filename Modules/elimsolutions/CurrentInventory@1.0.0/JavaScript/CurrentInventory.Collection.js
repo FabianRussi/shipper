@@ -1,28 +1,23 @@
 define('CurrentInventory.Collection'
-    ,   [  'CurrentInventory.Model'
+    , ['CurrentInventory.Model'
 
-        ,	'underscore'
-        ,	'Backbone'
-        ,	'Utils'
+        , 'underscore'
+        , 'Backbone'
+        , 'Utils'
     ]
-    ,   function (
+    , function (
         CurrentInventoryModel
 
-        ,	_
-        ,	Backbone
-    )
-    {
+        , _
+        , Backbone
+    ) {
         'use strict';
 
         return Backbone.Collection.extend(
             {
                 model: CurrentInventoryModel
 
-                ,	initialize: function (response)
-                {
-
-
-
+                , initialize: function (response) {
                     // this.totalRecordsFound = response.totalRecordsFound;
                     // this.recordsPerPage = response.recordsPerPage;
 
