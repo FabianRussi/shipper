@@ -24,7 +24,7 @@
 <section class="current-inventory-list">
 
     <header class="current-inventory-list-header">
-        <h2>{{Title}}</h2>
+        <h2  style="margin-left: 29px">Create New Order</h2>
     </header>
 
 
@@ -33,7 +33,7 @@
         <table style="display:inline-block;">
             <tbody>
                 <tr>
-                    <td data-column="Customer">Customer <br /> <input type="text"></td>
+                    <td data-column="Customer">Customer Name <br /> <input type="text"></td>
                     <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input type="text"></td>
                 </tr>
                 <tr>
@@ -45,7 +45,7 @@
                     <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input type="text"></td>
                 </tr>
                 <tr>
-                    <td data-column="Status">Status <br /> <input disabled placeholder="Pending Approval" type="text"></td>
+                    <!-- <td data-column="Status">Status <br /> <input disabled placeholder="Pending Approval" type="text"></td> -->
                     <td data-column="Shipping City">Shipping City <br /> <input type="text"></td>
                 </tr>
             
@@ -90,7 +90,8 @@
                 <tr>
                     <td data-column="Shipping Addressee">Item <br />
                         {{#if collectionLength}}
-                            <select id="items" name="addressee">
+                            <select id="items" name="addressee"  style="
+                            font-size: 0.7rem!important;">
                             <option value=""></option>
                                 {{#each collection}}
                                     <option value={{id}}>{{Name}}</option>
@@ -100,7 +101,8 @@
                     </td>
                     <td data-column="Order Number">Location <br /> 
                   
-                            <select id="locations" name="locations">
+                            <select id="locations" name="locations"  style="
+                            font-size: 0.7rem!important;">
                             <option value=""></option>
                                 {{#each locations}}
                                     <option value={{id}}>{{name}}</option>
@@ -108,23 +110,31 @@
                             </select>
                       
                     </td>
-                    <td data-column="Order Number">Tax Code <br /> 
+                    <td style="display:none" data-column="Order Number">Tax Code <br /> 
                   
                             <select id="taxcode" name="taxcode">
-                            <option value=""></option>
-                                {{#each taxcode}}
-                                    <option value={{id}}>{{name}}</option>
-                                {{/each}}
+                                    <option value='11'>CA-S-ON</option>
                             </select>
                       
                     </td>
-                     <td data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td>
+                      <!-- <td   style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td> 
                     <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
-                    <td> <button id="add-items"> Add </button></td>
+                    <td> <button id="add-items"> Add </button></td> -->
                 </tr>
             </tbody>
         </table>
-
+        <table>
+            <tbody> 
+                  </td>
+    <td   style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td> 
+  <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
+  <td> <button id="add-items" style="background: #462c98; padding: 10px 20px; border: none; color: #fff; width: 90px;  margin-top: 15px; border-radius: 6px;
+"> Add  </button></td>
+<td> <button id="plase-order" style="background: #462c98; padding: 10px 20px; border: none; color: #fff; width: 90px;  margin-top: 15px; border-radius: 6px;
+    ">Place Order</button></td>
+</tr>
+</tbody>
+</table>
     </div>
 
     <!--<div data-view="List.Header"></div>-->
