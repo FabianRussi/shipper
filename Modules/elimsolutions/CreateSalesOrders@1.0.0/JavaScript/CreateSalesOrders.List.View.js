@@ -9,12 +9,8 @@ define(
 
         return Backbone.View.extend({
 
-            template: create_sales_order_list
-
-            ,
-            attributes: { 'class': 'CreateSalesOrdersListView' }
-
-            ,
+            template: create_sales_order_list,
+            attributes: { 'class': 'CreateSalesOrdersListView' },
             events: {
                 'click .delete-item': 'removeItem',
                 'click #add-items': 'addItemRow',
@@ -23,19 +19,10 @@ define(
                 'change #items': 'showAmount',
                 'click #plase-order': 'createSlesOrder'
             },
-            title: _('Place A New Sales Order').translate()
-
-            ,
-            page_header: _('Create sale order').translate()
-
-            ,
-            searchFilterValue: ''
-
-            ,
-            filteredResults: []
-
-
-            ,
+            title: _('Place A New Sales Order').translate(),
+            page_header: _('Create sale order').translate(),
+            searchFilterValue: '',
+            filteredResults: [],
             initialize: function(options) {
 
 
@@ -48,18 +35,17 @@ define(
                 this.setupListHeader();
                 var url_options = _.parseUrlOptions(Backbone.history.fragment);
                 console.log(url_options);
-
                 this.searchFilterValue = url_options.srch;
                 this.page = this._getPageFromUrl(url_options.page);
                 this.page = this.page - 1;
                 this.locations = this.options.collection.models[0].get("locations");
                 this.taxcode = this.options.collection.models[0].get("TaxsCode")
+                this.customerId = this.options.customerId;
 
                 console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this);
                 sessionStorage.removeItem('jsonItem');
-
             },
             _getPageFromUrl: function(url_value) {
                 var page_number = parseInt(url_value, 10);
@@ -67,7 +53,7 @@ define(
             },
 
             addItemRow: function(e) {
-                debugger;
+
                 e.preventDefault();
                 var qty = 1;
                 var string = '';
@@ -97,7 +83,9 @@ define(
                         tax: jQuery('#taxcode option:selected').text(),
                         locations: jQuery('#locations option:selected').val()
                     }];
-                    var customerId = '';
+                    var customerId = this.customerId;
+
+
                     sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
                 }
 
@@ -113,6 +101,9 @@ define(
                 })
                 sessionStorage.setItem('jsonItem', JSON.stringify(resultArray));
             },
+
+
+
             listenCollection: function() {
                 this.setLoading(true);
 
@@ -122,7 +113,6 @@ define(
                 });
 
                 console.log(this.options);
-
                 this.setLoading(false);
             },
             showAmount: function(e) {
@@ -145,48 +135,70 @@ define(
             },
             //Btn submit
             createSlesOrder: function() {
-                debugger;
                 var addresses = jQuery('#addressesee  option:selected').val();
                 var formData = sessionStorage.getItem('jsonItem');
                 var arrData = JSON.parse(formData);
-                if (addresses == '') {
-                    jQuery('#messageAddress').html('teeees');
+                if (addresses) {
+                    arrData.push({ addresses: addresses });
+                }
+                if (addresses == '' && jQuery('#postalCode').val() == '') {
+                    // 
+                    this.completeField();
+                    alert('If I do not select an address, you must complete the fields for shipping address');
+                    return;
+                } else {
                     arrData.push({
                         postalCode: jQuery('#postalCode').val(),
                         addr1: jQuery('#addr1').val(),
                         addr2: jQuery('#addr2').val(),
-                        city: jQuery('#customer').val()
+                        city: jQuery('#city').val()
                     })
-                } else {
-                    arrData.push({ addresses: addresses });
                 }
                 arrData.push({
                     orderNumber: jQuery('#orderNumber').val(),
                     memo: jQuery('#memo').val(),
-                    customer: jQuery('#city').val()
-
+                    customer: jQuery('#customer').val(),
+                    customerId: this.customerId
                 })
                 sessionStorage.setItem('jsonItem', JSON.stringify(arrData));
-                var jsonInfoForm = sessionStorage.getItem('jsonItem');
-                this.returnCreatesalesOrder(jsonInfoForm);
-                console.log('response', jsonInfoForm)
+                this.returnCreatesalesOrder(sessionStorage.getItem('jsonItem'));
+                console.log('response', sessionStorage.getItem('jsonItem'))
             },
 
-
             returnCreatesalesOrder: function(jsonInfoForm) {
-                var message = '';
-                debugger;
+                var response;
                 jQuery.ajax({
                         method: "GET",
                         url: "/app/site/hosting/scriptlet.nl?script=892&deploy=1&compid=5445214&h=217e3241105accc13a29&jsonInfoForm=" + jsonInfoForm,
-                        dataType: "json"
+                        dataType: "json",
+                        cache: false,
+                        async: true
+
                     })
                     .done(function(msg) {
+                        if (msg) {
+                            response = msg;
+                            var msj;
 
+                            jQuery(':input').val('');
+                            jQuery('#postalCode').removeAttr('style');
+                            jQuery('#addr1').removeAttr('style');
+                            jQuery('#addr2').removeAttr('style');
+                            jQuery('#city').removeAttr('style');
+                            jQuery('#table-summary').children().remove();
+                            sessionStorage.removeItem('jsonItem');
+                            alert('Sale order id ' + response.idOrder + '-' + 'Number of order ' + response.soNumber);
+                        }
                     })
-
-
             },
+
+            completeField: function() {
+                jQuery('#postalCode').css('background-color', '#ffff52')
+                jQuery('#addr1').css('background-color', '#ffff52')
+                jQuery('#addr2').css('background-color', '#ffff52')
+                jQuery('#city').css('background-color', '#ffff52')
+            },
+
             setLoading: function(is_loading) {
                 //@property {Boolean} isLoading
                 this.isLoading = is_loading;
@@ -202,9 +214,7 @@ define(
                     window.location.href = gurl2;
                 }
                 //this._render();
-            }
-
-            ,
+            },
             goSearch: function() {
 
                 var value = jQuery("#currInv").val();
@@ -213,9 +223,7 @@ define(
                 var gurl2 = _.setUrlParameter(gurl, 'page', '0');
                 console.log(gurl2);
                 window.location.href = gurl2;
-            }
-
-            ,
+            },
             chunkArray: function(myArray, chunk_size) {
                 var index = 0;
                 var arrayLength = myArray.length;
@@ -294,15 +302,15 @@ define(
             getSelectedMenu: function() {
                 return 'createsalesorders';
             },
-            // ,
-            // getBreadcrumbPages: function() {
-            //     return {
-            //         text: 'Current Inventory'
-            //     };
-            // }
+
+            getBreadcrumbPages: function() {
+                return {
+                    text: 'Create Sale Order'
+                };
+            }
 
 
-            // ,
+            ,
             getContext: function() {
                 return {
                     Title: 'Place A New Sales Orders',
