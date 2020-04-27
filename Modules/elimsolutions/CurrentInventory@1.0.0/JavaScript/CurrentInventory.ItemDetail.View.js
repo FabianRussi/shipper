@@ -43,7 +43,6 @@ define(
 
             , filteredResults: []
 
-
             , initialize: function (options) {
 
                 var self = this;
@@ -87,14 +86,14 @@ define(
                 for (var key in withDatesGrouped) {
                     arr.push(withDatesGrouped[key][0]);
                     for (var i = 1; i < withDatesGrouped[key].length; i++) {
-                        arr[arr.length - 1] = { ...arr[i - 1], ...withDatesGrouped[key][i] };
+                        arr[arr.length - 1] = jQuery.extend(arr[i - 1], withDatesGrouped[key][i]); //{ ...arr[i - 1], ...withDatesGrouped[key][i] };
                     }
                 }
 
                 for (var i = 0; i < arr.length; i++) {
-                    arr[i] = { ...arr[i], ...model.locations[i] };
+                    jQuery.extend(arr[i], model.locations[i]);
+                    // arr[i] = { ...arr[i], ...model.locations[i] };
                 }
-
                 return arr;
             }
 
