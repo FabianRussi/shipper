@@ -54,7 +54,6 @@ define(
 
                 console.log(this.options);
 
-
                 this.listenCollection();
                 this.setupListHeader();
 
@@ -69,9 +68,7 @@ define(
                 console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this);
-
             }
-
 
             , _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
@@ -85,11 +82,8 @@ define(
                     , reset: _.bind(this.setLoading, this, false)
                 });
 
-                console.log(this.options);
-
                 this.setLoading(false);
             }
-
 
             , setupListHeader: function () {
                 // manges sorting and filtering of the collection
@@ -113,7 +107,6 @@ define(
                 'keyup [data-type="curr-inv-srch"]': 'searchFilter',
                 'click [data-type="goSearch"]': 'goSearch'
             }
-
 
             , searchFilter: function (e) {
 
@@ -229,7 +222,7 @@ define(
 
             , getContext: function () {
                 console.log("Testing ... : " + this.options.options);
-    
+
                 return {
                     Title: 'Current Inventory Status'
                     , page_header: this.page_header
@@ -243,6 +236,8 @@ define(
                     , showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
                     // @property {Boolean} showCurrentPage
                     , showCurrentPage: this.options.showCurrentPage
+                    //@property {Boolean} showBackToAccount
+                    , showBackToAccount: Configuration.get('siteSettings.sitetype') === 'STANDARD'
                 };
             }
         });

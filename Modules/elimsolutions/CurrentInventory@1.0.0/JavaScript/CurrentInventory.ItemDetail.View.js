@@ -72,13 +72,11 @@ define(
             }
 
             , render: function () {
-                this.model.serials = this.groupByDate(this.model);
+                this.model.attributes.serials = this.groupByDate(this.model.attributes);
                 Backbone.View.prototype.render.apply(this, this.model);
             }
 
             , groupByDate: function (model) {
-                debugger;
-
                 var withDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate != "" });
                 var withDatesGrouped = _.groupBy(withDates, "serial");
                 var arr = [];
@@ -86,13 +84,12 @@ define(
                 for (var key in withDatesGrouped) {
                     arr.push(withDatesGrouped[key][0]);
                     for (var i = 1; i < withDatesGrouped[key].length; i++) {
-                        arr[arr.length - 1] = jQuery.extend(arr[i - 1], withDatesGrouped[key][i]); //{ ...arr[i - 1], ...withDatesGrouped[key][i] };
+                        arr[arr.length - 1] = jQuery.extend(arr[i - 1], withDatesGrouped[key][i]);
                     }
                 }
 
                 for (var i = 0; i < arr.length; i++) {
                     jQuery.extend(arr[i], model.locations[i]);
-                    // arr[i] = { ...arr[i], ...model.locations[i] };
                 }
                 return arr;
             }
@@ -213,6 +210,8 @@ define(
                     // @property {Boolean} showCurrentPage
                     , showCurrentPage: this.options.showCurrentPage
                     , model: this.model
+                    //@property {Boolean} showBackToAccount
+                    , showBackToAccount: Configuration.get('siteSettings.sitetype') === 'STANDARD'
                 };
             }
         });
