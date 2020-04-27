@@ -6,7 +6,6 @@
         position: relative;
     }
 
-
     tbody#curInv td.recordviews-title:before {
         background: transparent;
         content: "";
@@ -17,16 +16,11 @@
     }
 </style>
 
-
-
-
-
 <section class="current-inventory-list">
 
     <header class="current-inventory-list-header">
         <h2  style="margin-left: 29px">Create New Order</h2>
     </header>
-
 
     <div class="modal-body">
 
@@ -107,8 +101,7 @@
                                 {{#each locations}}
                                     <option value={{id}}>{{name}}</option>
                                 {{/each}}
-                            </select>
-                      
+                            </select>                   
                     </td>
                     <td style="display:none" data-column="Order Number">Tax Code <br /> 
                   
@@ -136,7 +129,6 @@
 </tbody>
 </table>
     </div>
-
     <!--<div data-view="List.Header"></div>-->
     <!-- <div class="current-inventory-list-results-container">
 
@@ -170,7 +162,6 @@
         </div>
 
 </section> -->
-
 
     {{!----
 The context variables for this template are not currently documented. Use the {{log this}} helper to view the context variables in the Console of your browser's developer tools.

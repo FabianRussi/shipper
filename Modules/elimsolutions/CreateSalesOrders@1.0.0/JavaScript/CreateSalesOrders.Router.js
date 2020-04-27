@@ -14,9 +14,8 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
 
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
-            this.addresses = ProfileModel.getInstance().get('addresses');;
-
-            console.log(JSON.stringify(this.addresses))
+            this.addresses = ProfileModel.getInstance().get('addresses');
+            this.customerId = ProfileModel.getInstance().id;
 
         },
         createFilteredResults: function(val) {
@@ -53,6 +52,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
                 application: this.application,
                 collection: this.collection,
                 addresses: this.addresses,
+                customerId: this.customerId,
                 options: filteredResults
             });
             this.collection.on('reset', view.showContent, view);
