@@ -80,7 +80,12 @@
     <div class="row">
         <div class="col-xs-3">
             {{!-- <div style="width: 100%; height: 100%; background: gray;"></div> --}}
-            <img src="{{storedisplayimage}}" alt='Item image' />
+            {{#if storedisplayimage}}
+            <img src="{{storedisplayimage}}" alt='No image' class="img-responsive" style="width: 80%;" />
+            {{else}}
+            <img src="http://shopping.na3.netsuite.com/core/media/media.nl?id=8177&c=5445214&h=ed54bd30cef863e94128"
+                alt='No image' class="img-responsive" style="width: 80%;" />
+            {{/if}}
         </div>
         <div class="col-xs-9">
             <h4>{{Title}}</h4>
