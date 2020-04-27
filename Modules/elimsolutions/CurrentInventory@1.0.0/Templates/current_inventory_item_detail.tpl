@@ -74,7 +74,12 @@
     {{/if}}
 </section>
 
-{{!-- <h3>ID:: {{model.id}}</h3> --}}
+{{#if showBackToAccount}}
+<a href="/" class="reorder-items-list-button-back">
+    <i class="reorder-items-list-button-back-icon"></i>
+    {{translate 'Back to Account'}}
+</a>
+{{/if}}
 
 <div class="container">
     <div class="row">

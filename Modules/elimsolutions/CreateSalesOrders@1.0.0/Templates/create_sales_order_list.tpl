@@ -16,119 +16,136 @@
     }
 </style>
 
+{{#if showBackToAccount}}
+<a href="/" class="reorder-items-list-button-back">
+    <i class="reorder-items-list-button-back-icon"></i>
+    {{translate 'Back to Account'}}
+</a>
+{{/if}}
+
 <section class="current-inventory-list">
 
     <header class="current-inventory-list-header">
-        <h2  style="margin-left: 29px">Create New Order</h2>
+        <h2 style="margin-left: 29px">Create New Order</h2>
     </header>
 
-    <div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <table style="display:inline-block;">
+                    <tbody>
+                        <tr>
+                            <td data-column="Customer">Customer Name <br /> <input id="customer" type="text"></td>
+                            <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode"
+                                    type="text"></td>
+                        </tr>
+                        <tr>
+                            <td data-column="Order Number">Order Number <br /> <input id="orderNumber" type="text"></td>
+                            <td data-column="Shipping Address Line 1">Shipping Address Line 1 <br /> <input id="addr1"
+                                    type="text"></td>
+                        </tr>
+                        <tr>
+                            <td data-column="Memo">Memo <br /> <input id="memo" type="text"></td>
+                            <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input id="addr2"
+                                    type="text"></td>
+                        </tr>
+                        <tr>
+                            <!-- <td data-column="Status">Status <br /> <input disabled placeholder="Pending Approval" type="text"></td> -->
+                            <td data-column="Shipping City">Shipping City <br /> <input id="city" type="text"></td>
+                        </tr>
 
-        <table style="display:inline-block;">
-            <tbody>
-                <tr>
-                    <td data-column="Customer">Customer Name <br /> <input id="customer" type="text"></td>
-                    <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode" type="text"></td>
-                </tr>
-                <tr>
-                    <td data-column="Order Number">Order Number <br /> <input id="orderNumber" type="text"></td>
-                    <td data-column="Shipping Address Line 1">Shipping Address Line 1 <br /> <input id="addr1" type="text"></td>
-                </tr>
-                <tr>
-                    <td data-column="Memo">Memo <br /> <input id="memo" type="text"></td>
-                    <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input id="addr2" type="text"></td>
-                </tr>
-                <tr>
-                    <!-- <td data-column="Status">Status <br /> <input disabled placeholder="Pending Approval" type="text"></td> -->
-                    <td data-column="Shipping City">Shipping City <br /> <input id="city" type="text"></td>
-                </tr>
-            
-                <tr>
-                    <td data-column="Shipping Addressee">Shipping Addressee <br />
-                        <select id="addressesee" name="addressesee">
-                            <option value=""></option>
-                            {{#if addresses}}
-                            {{log addresses}}
-                               {{#each addresses}}
+                        <tr>
+                            <td data-column="Shipping Addressee">Shipping Addressee <br />
+                                <select id="addressesee" name="addressesee">
+                                    <option value=""></option>
+                                    {{#if addresses}}
+                                    {{#each addresses}}
                                     {{#if addr1}}
-                                        <option value={{internalid}}>{{addr1}}</option>
+                                    <option value={{internalid}}>{{addr1}}</option>
                                     {{/if}}
                                     {{#if addr2}}
-                                        <option value={{internalid}}>{{addr2}}</option>
+                                    <option value={{internalid}}>{{addr2}}</option>
                                     {{/if}}
                                     {{#if addr3}}
-                                        <option value={{internalid}}>{{addr3}}</option>
+                                    <option value={{internalid}}>{{addr3}}</option>
                                     {{/if}}
                                     {{/each}}
-                                
-                            {{/if}}
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
-        <table id="item-table">
-            <thead>
-                <tr id="table-header">
-                    <th colspan="3"> Items Added </th>
-                </tr>
-            </thead>
-            <tbody id="table-summary" class="border">
+                                    {{/if}}
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-5">
+                <table id="item-table">
+                    <thead>
+                        <tr id="table-header">
+                            <th colspan="3"> Items Added </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-summary" class="border">
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        <table style="display:inline-block;">
-            <tbody>
-                <tr>
-                    <td data-column="Shipping Addressee">Item <br />
-                        {{#if collectionLength}}
-                            <select id="items" name="addressee"  style="
+        <div class="row">
+            <div class="col-xs-6">
+                <table style="display:inline-block;">
+                    <tbody>
+                        <tr>
+                            <td data-column="Shipping Addressee">Item <br />
+                                {{#if collectionLength}}
+                                <select id="items" name="addressee" style="
                             font-size: 0.7rem!important;">
-                            <option value=""></option>
-                                {{#each collection}}
+                                    <option value=""></option>
+                                    {{#each collection}}
                                     <option value={{id}}>{{Name}}</option>
-                                {{/each}}
-                            </select>
-                        {{/if}}
-                    </td>
-                    <td data-column="Order Number">Location <br /> 
-                  
-                            <select id="locations" name="locations"  style="
+                                    {{/each}}
+                                </select>
+                                {{/if}}
+                            </td>
+                            <td data-column="Order Number">Location <br />
+
+                                <select id="locations" name="locations" style="
                             font-size: 0.7rem!important;">
-                            <option value=""></option>
-                                {{#each locations}}
+                                    <option value=""></option>
+                                    {{#each locations}}
                                     <option value={{id}}>{{name}}</option>
-                                {{/each}}
-                            </select>                   
-                    </td>
-                    <td style="display:none" data-column="Order Number">Tax Code <br /> 
-                  
-                            <select id="taxcode" name="taxcode">
+                                    {{/each}}
+                                </select>
+                            </td>
+                            <td style="display:none" data-column="Order Number">Tax Code <br />
+
+                                <select id="taxcode" name="taxcode">
                                     <option value='11'>CA-S-ON</option>
-                            </select>
-                      
-                    </td>
-                      <!-- <td   style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td> 
+                                </select>
+
+                            </td>
+                            <!-- <td   style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td> 
                     <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
                     <td> <button id="add-items"> Add </button></td> -->
-                </tr>
-            </tbody>
-        </table>
-        <table>
-            <tbody> 
-                  </td>
-    <td   style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td> 
-  <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
-  <td> <button id="add-items" style="background: #462c98; padding: 10px 20px; border: none; color: #fff; width: 90px;  margin-top: 15px; border-radius: 6px;
-"> Add  </button></td>
-<td> <button id="plase-order" style="background: #462c98; padding: 10px 20px; border: none; color: #fff; width: 90px;  margin-top: 15px; border-radius: 6px;
-    ">Place Order</button></td>
-</tr>
-</tbody>
-</table>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        </td>
+                        <td style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value=""
+                                type="text"></td>
+                        <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
+                        <td> <button id="add-items" class="place-order-btn"> Add </button></td>
+                        <td> <button id="place-order" class="place-order-btn">Place Order</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
     <!--<div data-view="List.Header"></div>-->
     <!-- <div class="current-inventory-list-results-container">
 

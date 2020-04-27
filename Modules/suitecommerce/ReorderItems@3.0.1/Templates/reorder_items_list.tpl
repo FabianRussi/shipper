@@ -6,7 +6,6 @@
 }}
 
 {{#if showBackToAccount}}
-
 	<a href="/" class="reorder-items-list-button-back">
 		<i class="reorder-items-list-button-back-icon"></i>
 		{{translate 'Back to Account'}}

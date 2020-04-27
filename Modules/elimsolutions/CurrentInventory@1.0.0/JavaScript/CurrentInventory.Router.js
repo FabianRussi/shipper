@@ -72,7 +72,7 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
 
             itemDetailModel.fetch({ data: { id: id } }).done(function (data) {
                 itemDetailVM = data;
-                view.model = itemDetailVM;
+                view.model = new Backbone.Model(itemDetailVM);
                 view.showContent();
             });
         }

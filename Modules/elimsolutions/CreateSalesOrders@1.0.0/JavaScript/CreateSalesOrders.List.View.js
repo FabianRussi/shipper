@@ -1,6 +1,6 @@
 define(
     'CreateSalesOrders.List.View', ['create_sales_order_list.tpl', 'Backbone', 'Backbone.CompositeView', 'Backbone.CollectionView', 'RecordViews.View', 'ListHeader.View', 'GlobalViews.Pagination.View', 'GlobalViews.ShowingCurrent.View', 'SC.Configuration', 'jQuery', 'underscore'],
-    function(
+    function (
         create_sales_order_list, Backbone, BackboneCompositeView, BackboneCollectionView, RecordViewsView, ListHeaderView, GlobalViewsPaginationView, GlobalViewsShowingCurrentView, Configuration, jQuery, _
 
 
@@ -17,13 +17,13 @@ define(
                 'keyup [data-type="curr-inv-srch"]': 'searchFilter',
                 'click [data-type="goSearch"]': 'goSearch',
                 'change #items': 'showAmount',
-                'click #plase-order': 'createSlesOrder'
+                'click #place-order': 'createSlesOrder'
             },
             title: _('Place A New Sales Order').translate(),
             page_header: _('Create sale order').translate(),
             searchFilterValue: '',
             filteredResults: [],
-            initialize: function(options) {
+            initialize: function (options) {
 
 
                 this.options = options;
@@ -47,12 +47,12 @@ define(
                 BackboneCompositeView.add(this);
                 sessionStorage.removeItem('jsonItem');
             },
-            _getPageFromUrl: function(url_value) {
+            _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
                 return !isNaN(page_number) && page_number > 0 ? page_number : 1;
             },
 
-            addItemRow: function(e) {
+            addItemRow: function (e) {
 
                 e.preventDefault();
                 var qty = 1;
@@ -90,13 +90,13 @@ define(
                 }
 
             },
-            removeItem: function(e) {
+            removeItem: function (e) {
                 var id = e.currentTarget.id;
                 var idRemove = id.replace("itemremove-", "");
                 var attr = jQuery(e.currentTarget).parent('td').parent('tr').attr('data-attr');
                 jQuery(e.currentTarget).parent('td').parent('tr').remove();
                 var arrayItems = JSON.parse(sessionStorage.getItem('jsonItem'));
-                var resultArray = _.filter(arrayItems, function(item) {
+                var resultArray = _.filter(arrayItems, function (item) {
                     return (item.itemid != idRemove) || (item.locations != attr.split(';')[2] || item.tax != attr.split(';')[1]);
                 })
                 sessionStorage.setItem('jsonItem', JSON.stringify(resultArray));
@@ -104,7 +104,7 @@ define(
 
 
 
-            listenCollection: function() {
+            listenCollection: function () {
                 this.setLoading(true);
 
                 this.collection.on({
@@ -115,26 +115,26 @@ define(
                 console.log(this.options);
                 this.setLoading(false);
             },
-            showAmount: function(e) {
-                var selected = _.filter(this.collection.models[0].get('records'), function(item) {
+            showAmount: function (e) {
+                var selected = _.filter(this.collection.models[0].get('records'), function (item) {
                     return item.Name == jQuery('#items option:selected').text();
                 })
                 jQuery('#amount').val(selected[0]['Base Price']);
             },
-            setupListHeader: function() {
+            setupListHeader: function () {
                 // manges sorting and filtering of the collection
                 this.listHeader = new ListHeaderView({
                     view: this,
                     application: this.application,
                     collection: this.collection
-                        // ,	filters: this.filterOptions
-                        ,
+                    // ,	filters: this.filterOptions
+                    ,
                     sorts: this.sortOptions,
                     allowEmptyBoundaries: true
                 });
             },
             //Btn submit
-            createSlesOrder: function() {
+            createSlesOrder: function () {
                 var addresses = jQuery('#addressesee  option:selected').val();
                 var formData = sessionStorage.getItem('jsonItem');
                 var arrData = JSON.parse(formData);
@@ -165,17 +165,17 @@ define(
                 console.log('response', sessionStorage.getItem('jsonItem'))
             },
 
-            returnCreatesalesOrder: function(jsonInfoForm) {
+            returnCreatesalesOrder: function (jsonInfoForm) {
                 var response;
                 jQuery.ajax({
-                        method: "GET",
-                        url: "/app/site/hosting/scriptlet.nl?script=892&deploy=1&compid=5445214&h=217e3241105accc13a29&jsonInfoForm=" + jsonInfoForm,
-                        dataType: "json",
-                        cache: false,
-                        async: true
+                    method: "GET",
+                    url: "/app/site/hosting/scriptlet.nl?script=892&deploy=1&compid=5445214&h=217e3241105accc13a29&jsonInfoForm=" + jsonInfoForm,
+                    dataType: "json",
+                    cache: false,
+                    async: true
 
-                    })
-                    .done(function(msg) {
+                })
+                    .done(function (msg) {
                         if (msg) {
                             response = msg;
                             var msj;
@@ -192,18 +192,18 @@ define(
                     })
             },
 
-            completeField: function() {
+            completeField: function () {
                 jQuery('#postalCode').css('background-color', '#ffff52')
                 jQuery('#addr1').css('background-color', '#ffff52')
                 jQuery('#addr2').css('background-color', '#ffff52')
                 jQuery('#city').css('background-color', '#ffff52')
             },
 
-            setLoading: function(is_loading) {
+            setLoading: function (is_loading) {
                 //@property {Boolean} isLoading
                 this.isLoading = is_loading;
             },
-            searchFilter: function(e) {
+            searchFilter: function (e) {
 
                 var value = jQuery("#currInv").val();
                 var url = window.location.href;
@@ -215,7 +215,7 @@ define(
                 }
                 //this._render();
             },
-            goSearch: function() {
+            goSearch: function () {
 
                 var value = jQuery("#currInv").val();
                 var url = window.location.href;
@@ -224,7 +224,7 @@ define(
                 console.log(gurl2);
                 window.location.href = gurl2;
             },
-            chunkArray: function(myArray, chunk_size) {
+            chunkArray: function (myArray, chunk_size) {
                 var index = 0;
                 var arrayLength = myArray.length;
                 var tempArray = [];
@@ -236,11 +236,11 @@ define(
                 return tempArray;
             },
             childViews: {
-                'CreateSalesOrders.List.Items': function() {
+                'CreateSalesOrders.List.Items': function () {
                     var recs = this.options.options;
                     var arr = this.chunkArray(recs, this.collection.models[0].get('recordsPerPage'));
                     recs = arr[this.page];
-                    var records_collection = new Backbone.Collection(recs.map(function(CreateSalesOrdersModel) {
+                    var records_collection = new Backbone.Collection(recs.map(function (CreateSalesOrdersModel) {
                         return new Backbone.Model({
                             title: CreateSalesOrdersModel['Name'],
 
@@ -248,30 +248,30 @@ define(
                             showInModal: false,
                             generateRemoveButton: false,
                             columns: [{
-                                    label: 'Description',
-                                    type: 'description',
-                                    name: 'description',
-                                    value: CreateSalesOrdersModel['Description']
-                                }, {
-                                    label: 'Available Quantity',
-                                    type: 'Available Quantity',
-                                    name: 'Available Quantity',
-                                    value: CreateSalesOrdersModel['Available']
-                                }
+                                label: 'Description',
+                                type: 'description',
+                                name: 'description',
+                                value: CreateSalesOrdersModel['Description']
+                            }, {
+                                label: 'Available Quantity',
+                                type: 'Available Quantity',
+                                name: 'Available Quantity',
+                                value: CreateSalesOrdersModel['Available']
+                            }
 
                                 , {
-                                    label: 'On Hand Quantity',
-                                    type: 'On Hand Quantity',
-                                    name: 'On Hand Quantity',
-                                    value: CreateSalesOrdersModel['On Hand']
-                                }
+                                label: 'On Hand Quantity',
+                                type: 'On Hand Quantity',
+                                name: 'On Hand Quantity',
+                                value: CreateSalesOrdersModel['On Hand']
+                            }
 
                                 , {
-                                    label: 'Committed Quantity',
-                                    type: 'Committed Quantity',
-                                    name: 'Committed Quantity',
-                                    value: CreateSalesOrdersModel['Committed']
-                                }
+                                label: 'Committed Quantity',
+                                type: 'Committed Quantity',
+                                name: 'Committed Quantity',
+                                value: CreateSalesOrdersModel['Committed']
+                            }
                             ]
                         });
                     }));
@@ -283,27 +283,27 @@ define(
                     });
 
                 },
-                'GlobalViews.Pagination': function() {
+                'GlobalViews.Pagination': function () {
                     return new GlobalViewsPaginationView(_.extend({
                         totalPages: Math.ceil(this.options.options.length / this.collection.models[0].get('recordsPerPage'))
                     }, Configuration.defaultPaginationSettings));
                 },
-                'GlobalViews.ShowCurrentPage': function() {
+                'GlobalViews.ShowCurrentPage': function () {
                     return new GlobalViewsShowingCurrentView({
                         items_per_page: this.collection.models[0].get('recordsPerPage'),
                         total_items: this.options.options.length,
                         total_pages: Math.ceil(this.options.options.length / this.collection.models[0].get('recordsPerPage'))
                     });
                 },
-                'List.Header': function() {
+                'List.Header': function () {
                     return this.listHeader;
                 }
             },
-            getSelectedMenu: function() {
+            getSelectedMenu: function () {
                 return 'createsalesorders';
             },
 
-            getBreadcrumbPages: function() {
+            getBreadcrumbPages: function () {
                 return {
                     text: 'Create Sale Order'
                 };
@@ -311,27 +311,27 @@ define(
 
 
             ,
-            getContext: function() {
+            getContext: function () {
                 return {
                     Title: 'Place A New Sales Orders',
                     page_header: this.page_header,
                     collection: this.options.options, //collection,
                     addresses: this.options.addresses.models,
                     searchFilterValue: this.searchFilterValue
-                        // @property {Boolean} collectionLength
-                        ,
+                    // @property {Boolean} collectionLength
+                    ,
                     collectionLength: this.options.options.length
-                        // @property {Boolean} isLoading
-                        ,
+                    // @property {Boolean} isLoading
+                    ,
                     isLoading: this.isLoading
-                        // @property {Boolean} showPagination
-                        ,
+                    // @property {Boolean} showPagination
+                    ,
                     showPagination: !!(this.options.options.length && this.collection.models[0].get('recordsPerPage'))
-                        // @property {Boolean} showCurrentPage
-                        ,
-                    showCurrentPage: this.options.showCurrentPage,
-                    locations: this.locations,
-                    taxcode: this.taxcode
+                    // @property {Boolean} showCurrentPage
+                    , showCurrentPage: this.options.showCurrentPage
+                    , locations: this.locations
+                    , taxcode: this.taxcode
+                    , showBackToAccount: Configuration.get('siteSettings.sitetype') === 'STANDARD'
                 };
             }
         });
