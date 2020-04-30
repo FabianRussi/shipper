@@ -602,7 +602,7 @@ define('ListHeader.View'
   
 	     	
 			var value = jQuery("#po").val();
-			if(value && value.length>=3)
+			if(value && value.length>=2)
 			{
 				this.updateCollection();
 				var collection = this.collection.models;
