@@ -7,7 +7,7 @@ define('CreateSalesOrders', ['CreateSalesOrders.Router'], function(
         MenuItems: {
             parent: 'orders',
             id: 'createsalesorders',
-            name: 'Create Sales Orders',
+            name: 'Create New Order',
             url: 'create-order',
             index: 0
         }

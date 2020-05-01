@@ -34,7 +34,7 @@ function saleOrderCreation(param) {
         if (!data.addresses.addresses) {
             nlapiLogExecution('DEBUG', 'zip', JSON.stringify(data.addresses.postalCode));
             var subrecord = order.createSubrecord('shippingaddress');
-            subrecord.setFieldValue("country", ""); //Country must be set before setting the other address fields
+            subrecord.setFieldValue("country", data.addresses.country); //Country must be set before setting the other address fields
             subrecord.setFieldValue("addressee", data.dataOrder.customer);
             subrecord.setFieldValue("addrphone", "");
             subrecord.setFieldValue("addr1", data.addresses.addr1);
