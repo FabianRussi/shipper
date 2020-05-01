@@ -1190,13 +1190,14 @@ define(
             },
             //Btn submit
             createSlesOrder: function() {
+
                 var addresses = jQuery('#addressesee  option:selected').val();
                 var formData = sessionStorage.getItem('jsonItem');
                 var arrData = JSON.parse(formData);
                 if (addresses) {
                     arrData.push({ addresses: addresses });
-                }
-                if (addresses == '' && jQuery('#postalCode').val() == '') {
+
+                } else if (addresses == '' && jQuery('#postalCode').val() == '') {
                     // 
                     this.completeField();
                     alert('If I do not select an address, you must complete the fields for shipping address');
