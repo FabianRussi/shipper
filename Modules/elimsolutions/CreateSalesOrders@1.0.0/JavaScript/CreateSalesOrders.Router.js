@@ -11,15 +11,14 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
 
         ,
         initialize: function(application) {
-
             this.application = application;
             this.collection = ProfileModel.getInstance().get('currentinventory');
             this.addresses = ProfileModel.getInstance().get('addresses');
             this.customerId = ProfileModel.getInstance().id;
 
         },
-        createFilteredResults: function(val) {
 
+        createFilteredResults: function(val) {
             var value = val;
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
@@ -47,7 +46,6 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
             options.srch = options.srch || '';
 
             var filteredResults = this.createFilteredResults(options.srch);
-
             var view = new CreateSalesOrdersListView({
                 application: this.application,
                 collection: this.collection,
