@@ -6,11 +6,11 @@
 }}
 
 <tr class="recordviews-row" data-item-id="{{id}}" data-navigation-hashtag="{{detailsURL}}" data-action="navigate">
-	<a href="garcha"><td class="recordviews-title" data-name="title">
+	<a href=""><td class="recordviews-title" data-name="title">
 		<span class="recordviews-title-value">
-			{{log this}}
+		
 			{{#if isNavigable}}
-			<a class="recordviews-title-anchor" href="#/item-details?id={{id}}" data-touchpoint="{{touchpoint}}" data-id="{{id}}"  {{#if showInModal}}data-toggle="show-in-modal"{{/if}}>
+			{{#if url}}	<a class="recordviews-title-anchor" href="#/item-details?id={{id}}"data-touchpoint="{{touchpoint}}" data-id="{{id}}"  {{#if showInModal}}data-toggle="show-in-modal"{{/if}}> {{/if}}
 			{{/if}}
 				{{title}}
 			{{#if isNavigable}}

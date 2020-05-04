@@ -1,4 +1,4 @@
-{{log this}}
+
 
 <style>
     tbody#curInv td.recordviews-title a.recordviews-title-anchor {

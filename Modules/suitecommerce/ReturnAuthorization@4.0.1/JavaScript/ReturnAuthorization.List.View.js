@@ -151,30 +151,31 @@ define(
 					,	internalid: return_authorization.get('internalid')
 
 					,	columns: [
+						{
+							label: _('Po No:').translate()
+						,	type: 'currency'
+						,	name: 'amount'
+						,	value: return_authorization.get('otherrefnum')
+						},
 							{
 								label: _('Date:').translate()
 							,	type: 'date'
 							,	name: 'request-date'
 							,	value: return_authorization.get('trandate')
 							}
-						,	{
-								label: _('Items:').translate()
-							,	type: 'items'
-							,	name: 'items'
-							,	value: return_authorization.get('quantity')
-							}
-						,	{
-								label: _('Amount:').translate()
-							,	type: 'currency'
-							,	name: 'amount'
-							,	value: return_authorization.get('amount_formatted')
-							}
-							,	{
-								label: _('Po No:').translate()
-							,	type: 'currency'
-							,	name: 'amount'
-							,	value: return_authorization.get('otherrefnum')
-							}
+						// ,	{
+						// 		label: _('Items:').translate()
+						// 	,	type: 'items'
+						// 	,	name: 'items'
+						// 	,	value: return_authorization.get('quantity')
+						// 	}
+						// ,	{
+						// 		label: _('Amount:').translate()
+						// 	,	type: 'currency'
+						// 	,	name: 'amount'
+						// 	,	value: return_authorization.get('amount_formatted')
+						// 	}
+						
 						,	{
 								label: _('Status:').translate()
 							,	type: 'status'

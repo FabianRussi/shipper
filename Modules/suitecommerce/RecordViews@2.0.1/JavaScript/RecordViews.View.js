@@ -80,6 +80,15 @@ define(
 			});
 		}
 
+		,urlparams:function(){
+		var url=window.location.href
+		var flag=true;
+		if( url.indexOf("returns"!=-1)){
+			flag=false;
+		}
+
+return flag
+		}
 		//@method getContext @return {RecordViews.View.Context}
 	,	getContext: function ()
 		{
@@ -87,6 +96,7 @@ define(
 			return {
 				//@property {Backbone.Model} model
 				model: this.model
+			,	url:this.urlparams()
 				//@property {String} id
 			,	id: this.model.id
 				//@property {Boolean} isNavigable
