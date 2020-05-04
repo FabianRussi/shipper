@@ -32,19 +32,19 @@
 						<th class="return-authorization-list-content-table-header-row-title">
 							<span>{{translate 'Return No.'}}</span>
 						</th>
+						<th class="order-history-list-recordviews-actionable-status-header">
+								<span>{{translate 'Po No.'}}</span>
+							</th>
 							<th class="return-authorization-list-content-table-header-row-date">
 							<span>{{translate 'Date'}}</span>
 						</th>
 						</th>
-							<th class="return-authorization-list-content-table-header-row-date">
+							<!-- <th class="return-authorization-list-content-table-header-row-date">
 							<span>{{translate 'Items'}}</span>
-						</th>
-						<th class="return-authorization-list-content-table-header-row-currency">
+						</th> -->
+						<!-- <th class="return-authorization-list-content-table-header-row-currency">
 							<span>{{translate 'Amount'}}</span>
-						</th>
-						<th class="order-history-list-recordviews-actionable-status-header">
-								<span>{{translate 'Po No.'}}</span>
-							</th>
+						</th> -->
 						<th class="return-authorization-list-content-table-header-row-status">
 							<span>{{translate 'Status'}}</span>
 						</th>
