@@ -204,23 +204,24 @@ define('OrderHistory.List.View'
 
 						var columns = [
 							{
+								label: _('PO No:').translate()
+							,	type: 'PO No'
+							,	name: 'PO No'
+							,	value: order.get('otherrefnum')
+							},
+							{
 								label: _('Date:').translate()
 							,	type: 'date'
 							,	name: 'date'
 							,	value: order.get('trandate')
 							},
-						    {
-								label: _('Amount:').translate()
-							,	type: 'currency'
-							,	name: 'amount'
-							,	value: order.get('amount_formatted')
-							},
-							{
-								label: _('PO No:').translate()
-							,	type: 'PO No'
-							,	name: 'PO No'
-							,	value: order.get('otherrefnum')
-							}];
+						  //  {
+							// 	label: _('Amount:').translate()
+							// ,	type: 'currency'
+							// ,	name: 'amount'
+							// ,	value: order.get('amount_formatted')
+							// },
+						];
 
 						if (!_.isUndefined(dynamic_column))
 						{

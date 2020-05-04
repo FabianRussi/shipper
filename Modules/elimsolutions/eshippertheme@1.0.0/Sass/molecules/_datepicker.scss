@@ -180,8 +180,33 @@
 	}
 
 	.day.old {
-		color: $sc-color-theme-400;
+		//color: $sc-color-theme-400;
+		color: white!important;
+		pointer-events: none;
+
 	}
+
+	.day.new {
+		//color: $sc-color-theme-400;
+		color: white!important;
+		pointer-events: none;
+	}
+
+    .old:hover{
+	
+		color: white!important;
+		background-color: white;
+		pointer-events: none;
+
+	}
+	.new:hover{
+		pointer-events: none;
+		color: white!important;
+		background-color: white;
+	}
+
+
+
 
 	.day.new,
 	.day.disabled,

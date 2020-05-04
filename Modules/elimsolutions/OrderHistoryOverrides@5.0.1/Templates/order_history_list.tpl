@@ -16,9 +16,7 @@
 	<header class="order-history-list-header">
 		<h2>{{pageHeader}}</h2>
 	</header>
-
-	
-	<div class="order-history-list-header-nav">
+	<!-- <div class="order-history-list-header-nav">
 		<div class="order-history-list-header-button-group">
 			{{#if openIsActive}}
 				<span class="order-history-list-header-button-open-active">{{translate 'Open'}}</span>					
@@ -40,8 +38,7 @@
 				<a href="/purchases" class="order-history-list-header-button-all">{{translate 'All'}}</a>
 			{{/if}}
 		</div>
-	</div>
-
+	</div> -->
 	<div data-view="ListHeader" {{#if openIsActive}}style="display:none;"{{/if}}></div>
 
 	{{#if collectionLengthGreaterThan0}}
@@ -50,14 +47,17 @@
 			<thead class="order-history-list-recordviews-actionable-header">
 				<tr>
 					<th class="order-history-list-recordviews-actionable-title-header">
-						<span>{{translate 'Purchase No.'}}</span>
+						<span>{{translate 'eS+ Order No.'}}</span>
+					</th>
+					<th class="order-history-list-recordviews-actionable-status-header">
+						<span>{{translate 'Customer Order No.'}}</span>
 					</th>
 					<th class="order-history-list-recordviews-actionable-date-header">
 						<span>{{translate 'Date'}}</span>
 					</th>
-					<th class="order-history-list-recordviews-actionable-currency-header">
+					<!-- <th class="order-history-list-recordviews-actionable-currency-header">
 						<span>{{translate 'Amount'}}</span>
-					</th>
+					</th> -->
 					{{#if isSCISIntegrationEnabled}}
 						{{#unless inStoreIsActive}}
 							<th class="order-history-list-recordviews-actionable-origin-header">
@@ -65,15 +65,13 @@
 							</th>
 						{{/unless}}
 					{{else}}
-					<th class="order-history-list-recordviews-actionable-status-header">
-						<span>{{translate 'Po No.'}}</span>
-					</th>
+				
 						<th class="order-history-list-recordviews-actionable-status-header">
 							<span>{{translate 'Status'}}</span>
 						</th>
 					{{/if}}
 					<th class="order-history-list-recordviews-actionable-actions-header">
-						<span>{{translate 'Track Items'}}</span>
+						<span>{{translate 'Tracking Details'}}</span>
 					</th>
 				</tr>
 			</thead>
