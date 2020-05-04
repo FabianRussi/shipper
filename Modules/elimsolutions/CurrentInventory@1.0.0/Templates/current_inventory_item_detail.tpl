@@ -83,7 +83,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-3">
+        <!-- <div class="col-xs-3">
             {{!-- <div style="width: 100%; height: 100%; background: gray;"></div> --}}
             {{#if storedisplayimage}}
             <img src="{{storedisplayimage}}" alt='No image' class="img-responsive" style="width: 80%;" />
@@ -91,8 +91,14 @@
             <img src="http://shopping.na3.netsuite.com/core/media/media.nl?id=8177&c=5445214&h=ed54bd30cef863e94128"
                 alt='No image' class="img-responsive" style="width: 80%;" />
             {{/if}}
-        </div>
+        </div> -->
         <div class="col-xs-9">
+                <h4>Item Name</h4>
+                <br />
+                {{model.name}}
+
+                <br />
+                <br />
             <h4>{{Title}}</h4>
             <br />
             Item Weight: {{model.weight}}
@@ -113,12 +119,12 @@
         <thead>
             <tr>
                 <th>Location</th>
-                <th>Quantity on Hand</th>
-                <th>Lot Numbers</th>
-                <th>Expiration Date</th>
-                <th>Reorder Point</th>
-                <th>Quantity On Order</th>
+                <th>Lot Number</th>
+                <th>Expiry Date</th>
                 <th>Quantity Available</th>
+                <th>Quantity Committed</th>
+                <th>Quantity on Hand</th>
+                <th>Reorder Point</th>        
                 <th>Status</th>
             </tr>
         </thead>
@@ -126,12 +132,12 @@
             {{#each model.serials}}
             <tr>
                 <td>{{locationName}}</td>
-                <td>{{quantityOnHand}}</td>
                 <td>{{serial}}</td>
-                <td>{{expirationdate}}</td>
+                 <td>{{expirationdate}}</td>
+                  <td>{{qtySum}}</td>
+                  <td>{{qtyOnOrder}}</td>
+                <td>{{quantityOnHand}}</td>
                 <td>{{reorderPoint}}</td>
-                <td>{{qtyOnOrder}}</td>
-                <td>{{qtySum}}</td>
                 <td>{{inventorystatus}}</td>
             </tr>
             {{/each}}
