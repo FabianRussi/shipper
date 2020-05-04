@@ -81,9 +81,10 @@ define(
 		}
 
 		,urlparams:function(){
+			debugger
 		var url=window.location.href
 		var flag=true;
-		if( url.indexOf("returns"!=-1)){
+		if( url.indexOf("returns")!=-1){
 			flag=false;
 		}
 
