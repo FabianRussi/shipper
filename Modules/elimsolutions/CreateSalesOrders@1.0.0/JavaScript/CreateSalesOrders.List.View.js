@@ -55,19 +55,20 @@ define(
 
                 e.preventDefault();
                 //  var qty = 1;
+
                 var string = '';
                 string += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
                 string += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt=""  style="max-width:48px!important;"   >  </td>'
                 string += '<td style="text-align: left;" >' + jQuery('#items option:selected').text() + '</td>'
-                string += '<td> Qty: <span> ' + jQuery('#qty').val() + '</span> </td>'
-                string += '<td> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button> </td> </tr>'
+                string += '<td style="float:right;margin-top: -44px;padding-right: 45px;"> Qty: <span> ' + jQuery('#qty').val() + '</span> </td>'
+                string += '<td style="float:right;margin-top: -44px;"> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button> </td> </tr>'
                 string += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span> </td>'
 
                 var item = jQuery('#items option:selected').val();
                 var qty = jQuery('#qty').val();
                 var location = jQuery('#locations option:selected').text();
                 var arrayItems = sessionStorage.getItem('jsonItem');
-                if(qty <= 0 ) {return alert('Quantity cannot be 0 or less than 0.')};
+                if (qty <= 0) { return alert('Quantity cannot be 0 or less than 0.') };
                 var addItem = this.qtyAvailable(qty, item, location)
                 if (addItem.available) {
                     jQuery('#table-summary').append(string);
@@ -138,14 +139,14 @@ define(
 
                     return item.id == id;
                 })
-                if (parseInt(selected[0].Available) <= parseInt(val)) {
+                if (parseInt(selected[0].Available) < parseInt(val)) {
                     available = false;
-                    obj.message = 'The quantity available for this item is ' + selected[0].Available;
+                    // obj.message = 'The quantity available for this item is ' + selected[0].Available;order placed exceeds quantity available
+                    obj.message = 'Order placed exceeds quantity available ';
                 } else if (selected[0].Location.name != location || location == '') {
                     obj.message = 'No inventory in this location';
                     available = false;
                 }
-
                 obj.available = available;
                 return obj;
             },
