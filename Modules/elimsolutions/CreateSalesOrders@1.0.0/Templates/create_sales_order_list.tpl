@@ -17,10 +17,10 @@
 </style>
 
 {{#if showBackToAccount}}
-    <a href="/" class="reorder-items-list-button-back">
-        <i class="reorder-items-list-button-back-icon"></i>
-        {{translate 'Back to Account'}}
-    </a>
+<a href="/" class="reorder-items-list-button-back">
+    <i class="reorder-items-list-button-back-icon"></i>
+    {{translate 'Back to Account'}}
+</a>
 {{/if}}
 
 <section class="current-inventory-list">
@@ -36,32 +36,35 @@
                     <tbody>
                         <tr>
                             <td data-column="Customer">Customer Name <br /> <input id="customer" type="text"></td>
-                            <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode" type="text"></td>
+                            <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode"
+                                    type="text"></td>
                         </tr>
                         <tr>
                             <td data-column="Order Number">Order Number <br /> <input id="orderNumber" type="text"></td>
-                            <td data-column="Shipping Address Line 1">Shipping Address Line 1 <br /> <input id="addr1" type="text"></td>
+                            <td data-column="Shipping Address Line 1">Shipping Address Line 1 <br /> <input id="addr1"
+                                    type="text"></td>
                         </tr>
                         <tr>
                             <td data-column="Memo">Memo <br /> <input id="memo" type="text"></td>
-                            <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input id="addr2" type="text"></td>
+                            <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input id="addr2"
+                                    type="text"></td>
                         </tr>
                         <tr>
                             <td data-column="Shipping Addressee">Saved Addresses <br />
                                 <select id="addressesee" name="addressesee">
                                     <option value=""></option>
                                     {{#if addresses}}
-                                        {{#each addresses}}
-                                            {{#if addr1}}
-                                                <option value={{internalid}}>{{addr1}}</option>
-                                            {{/if}}
-                                            {{#if addr2}}
-                                                <option value={{internalid}}>{{addr2}}</option>
-                                            {{/if}}
-                                            {{#if addr3}}
-                                                <option value={{internalid}}>{{addr3}}</option>
-                                            {{/if}}
-                                        {{/each}}
+                                    {{#each addresses}}
+                                    {{#if addr1}}
+                                    <option value={{internalid}}>{{addr1}}</option>
+                                    {{/if}}
+                                    {{#if addr2}}
+                                    <option value={{internalid}}>{{addr2}}</option>
+                                    {{/if}}
+                                    {{#if addr3}}
+                                    <option value={{internalid}}>{{addr3}}</option>
+                                    {{/if}}
+                                    {{/each}}
 
                                     {{/if}}
                                 </select>
@@ -73,9 +76,9 @@
                             <td data-column="Shipping City">Shipping Country <br />
                                 <select id="country" name="country">
                                     {{#if countries}}
-                                        {{#each countries}}
-                                            <option value={{value}}>{{text}}</option>
-                                        {{/each}}
+                                    {{#each countries}}
+                                    <option value={{value}}>{{text}}</option>
+                                    {{/each}}
                                     {{/if}}
                                 </select>
                             </td>
@@ -108,13 +111,13 @@
                         <tr>
                             <td data-column="Shipping Addressee">Item <br />
                                 {{#if collectionLength}}
-                                    <select id="items" name="addressee" style="
+                                <select id="items" name="addressee" style="
                             font-size: 0.7rem!important;">
-                                        <option value=""></option>
-                                        {{#each collection}}
-                                            <option value={{id}}>{{Name}}</option>
-                                        {{/each}}
-                                    </select>
+                                    <option value=""></option>
+                                    {{#each collection}}
+                                    <option value={{id}}>{{Name}}</option>
+                                    {{/each}}
+                                </select>
                                 {{/if}}
                             </td>
                             <td data-column="Order Number">Location <br />
@@ -123,7 +126,7 @@
                             font-size: 0.7rem!important;">
                                     <option value=""></option>
                                     {{#each locations}}
-                                        <option value={{id}}>{{name}}</option>
+                                    <option value={{id}}>{{name}}</option>
                                     {{/each}}
                                 </select>
                             </td>
@@ -143,7 +146,8 @@
                 <table>
                     <tbody>
                         </td>
-                        <td style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value="" type="text"></td>
+                        <td style="display:none" data-column="">Amount <br /> <input disabled="" id="amount" value=""
+                                type="text"></td>
                         <td data-column="">Quantity <br /> <input id='qty' type="number"></td>
                         <td> <button id="add-items" class="place-order-btn"> Add </button></td>
                         <td> <button id="place-order" class="place-order-btn">Place Order</button></td>
