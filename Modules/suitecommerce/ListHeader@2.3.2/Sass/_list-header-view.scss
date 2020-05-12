@@ -120,7 +120,7 @@
 
   @media (min-width: $screen-md-min){
     width: auto;
-    margin-left: $sc-margin-lv2;
+    // margin-left: $sc-margin-lv2;
   }
   .list-header-view-accordion-body-select {
     width: calc(100% - #{$sc-margin-lv2} - 44px);

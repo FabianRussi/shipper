@@ -29,7 +29,7 @@
         <h2>{{Title}}</h2>
     </header>
 
-    <input type="text" placeholder="search for an item..." class="form-control curr-inv-srch" data-type="curr-inv-srch"
+    <input type="text" placeholder="Search for an item" class="form-control curr-inv-srch" data-type="curr-inv-srch"
         id="currInv" value="{{searchFilterValue}}" autofocus />
     <button class="btn btn-lg btn-primary goSearch" data-type="goSearch">Search Items</button>
 

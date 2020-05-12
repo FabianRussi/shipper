@@ -36,18 +36,17 @@
                     <tbody>
                         <tr>
                             <td data-column="Customer">Customer Name <br /> <input id="customer" type="text"></td>
-                            <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode"
-                                    type="text"></td>
-                        </tr>
-                        <tr>
-                            <td data-column="Order Number">Order Number <br /> <input id="orderNumber" type="text"></td>
                             <td data-column="Shipping Address Line 1">Shipping Address Line 1 <br /> <input id="addr1"
                                     type="text"></td>
                         </tr>
                         <tr>
-                            <td data-column="Memo">Memo <br /> <input id="memo" type="text"></td>
+                            <td data-column="Order Number">Order Number <br /> <input id="orderNumber" type="text"></td>
                             <td data-column="Shipping Address Line 2">Shipping Address Line 2 <br /> <input id="addr2"
                                     type="text"></td>
+                        </tr>
+                        <tr>
+                            <td data-column="Memo">Memo <br /> <input id="memo" type="text"></td>
+                            <td data-column="Shipping City">Shipping City <br /> <input id="city" type="text"></td>
                         </tr>
                         <tr>
                             <td data-column="Shipping Addressee">Saved Addresses <br />
@@ -69,7 +68,8 @@
                                     {{/if}}
                                 </select>
                             </td>
-                            <td data-column="Shipping City">Shipping City <br /> <input id="city" type="text"></td>
+                            <td data-column="Shipping Postal Code">Shipping Postal Code <br /> <input id="postalCode"
+                                    type="text"></td>
                         </tr>
                         <tr>
                             <td data-column="Status"><br /> <span></span></td>

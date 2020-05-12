@@ -78,26 +78,31 @@ define(
 
             , groupByDate: function (model) {
                 var withDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate != "" });
-                var withDatesGrouped = _.groupBy(withDates, "serial");
-                var arr = [];
+                var withDatesGroupedByLocation = _.groupBy(withDates, function (d) {
+                    return (d.location + "|" + d.expirationdate);
+                });
 
-                for (var key in withDatesGrouped) {
-                    arr.push(withDatesGrouped[key][0]);
-                    for (var i = 1; i < withDatesGrouped[key].length; i++) {
-                        arr[arr.length - 1] = jQuery.extend(arr[i - 1], withDatesGrouped[key][i]);
+                var ret = [];
+
+                for (var key in withDatesGroupedByLocation) {
+                    var obj = withDatesGroupedByLocation[key][0];
+                    for (var i = 0; i < withDatesGroupedByLocation[key].length; i++) {
+                        if (obj.serial.indexOf(withDatesGroupedByLocation[key][i].serial) < 0) {
+                            obj.serial += ', ' + withDatesGroupedByLocation[key][i].serial;
+                            obj.qtySum = parseInt(obj.qtySum) + parseInt(withDatesGroupedByLocation[key][i].qtySum);
+                        }
                     }
+                    ret[ret.length] = obj;
                 }
-
-                for (var i = 0; i < arr.length; i++) {
-                    jQuery.extend(arr[i], model.locations[i]);
-                }
-                return arr;
+                // var withoutDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate == "" });
+                return ret;
             }
 
             , _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
                 return !isNaN(page_number) && page_number > 0 ? page_number : 1;
             }
+
             , listenCollection: function () {
                 this.setLoading(true);
 

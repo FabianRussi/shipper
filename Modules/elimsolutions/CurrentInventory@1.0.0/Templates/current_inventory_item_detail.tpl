@@ -1,4 +1,4 @@
-
+{{log this}}
 
 <style>
     tbody#curInv td.recordviews-title a.recordviews-title-anchor {
@@ -93,21 +93,21 @@
             {{/if}}
         </div> -->
         <div class="col-xs-9">
-                <h4>Item Name</h4>
-                <br />
-                {{model.name}}
+            <h4>Item Name</h4>
+            <br />
+            {{model.name}}
 
-                <br />
-                <br />
+            <br />
+            <br />
             <h4>{{Title}}</h4>
             <br />
-            Item Weight: {{model.weight}}
+            Weight: {{model.weight}}
             <br />
             Height: {{model.height}}
             <br />
             Length: {{model.type}}
             <br />
-            Weight: {{model.weight}}
+            Width: {{model.width}}
         </div>
     </div>
 </div>
@@ -124,18 +124,18 @@
                 <th>Quantity Available</th>
                 <th>Quantity Committed</th>
                 <th>Quantity on Hand</th>
-                <th>Reorder Point</th>        
+                <th>Reorder Point</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             {{#each model.serials}}
             <tr>
-                <td>{{locationName}}</td>
+                <td>{{location}}</td>
                 <td>{{serial}}</td>
-                 <td>{{expirationdate}}</td>
-                  <td>{{qtySum}}</td>
-                  <td>{{qtyOnOrder}}</td>
+                <td>{{expirationdate}}</td>
+                <td>{{qtySum}}</td>
+                <td>{{qtyOnOrder}}</td>
                 <td>{{quantityOnHand}}</td>
                 <td>{{reorderPoint}}</td>
                 <td>{{inventorystatus}}</td>

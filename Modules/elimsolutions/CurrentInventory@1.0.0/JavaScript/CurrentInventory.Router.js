@@ -17,10 +17,8 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
             this.collection = ProfileModel.getInstance().get('currentinventory');
         }
 
-        ,
-        createFilteredResults: function (val) {
-
-            console.log("createFilteredResults");
+        , createFilteredResults: function (val) {
+            // console.log("createFilteredResults");
             var value = val;
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
