@@ -31,13 +31,13 @@ define('OrderHistory'
 
 			return {
 				id: 'orders'
-			,	name: _('Purchases').translate()
+			,	name: _('orders').translate()
 			,	index: 1
 			,	permission: isSCISIntegrationEnabled ? 'transactions.tranPurchases.1,transactions.tranEstimate.1,transactions.tranPurchasesReturns.1' : 'transactions.tranSalesOrd.1,transactions.tranEstimate.1,transactions.tranRtnAuth.1'
 			,	permissionOperator: 'OR'
 			,	children: [{
 					id: 'purchases'
-				,	name: _('Purchase History').translate()
+				,	name: _('Orders History').translate()
 				,	url: 'purchases'
 				,	index: 1
 				,	permission: isSCISIntegrationEnabled ? 'transactions.tranFind.1,transactions.tranPurchases.1' : 'transactions.tranFind.1,transactions.tranSalesOrd.1'
