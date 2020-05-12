@@ -62,11 +62,9 @@ define(
 
                 if (qty <= 0) {
                     return alert('Quantity cannot be 0 or less than 0.');
-                };
+                }
 
                 var addItem = this.qtyAvailable(qty, item, location);
-
-                debugger;
 
                 if (addItem.available) {
                     if ($('#itemid-' + item).length > 0 && addItem.qtyAvailable >= (parseInt($('#qty-' + item).text()) + parseInt($('#qty').val()))) {
@@ -149,8 +147,6 @@ define(
                 var selected = _.filter(this.collection.models[0].get('records'), function (item) {
                     return item.id == id;
                 });
-
-                debugger;
 
                 if (parseInt(selected[0].Available) < parseInt(val) || ((jQuery('#qty-' + id).text() != "") && ((parseInt(jQuery('#qty-' + id).text()) + parseInt($('#qty').val())) > parseInt(selected[0].Available)))) {
                     available = false;
