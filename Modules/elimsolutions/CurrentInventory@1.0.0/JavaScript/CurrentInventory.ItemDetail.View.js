@@ -72,7 +72,17 @@ define(
             }
 
             , render: function () {
-                this.model.attributes.serials = this.groupByDateAndSerial(this.model.attributes);
+                debugger
+                var serials=this.groupByDateAndSerial(this.model.attributes);
+                for(var i=0;i<this.model.get("locations").length;i++){
+                    var currentLoc = this.model.get("locations")[i];
+                    for(var t=0;t<serials.length;t++){
+                        if(currentLoc.locationName == serials[t].location){
+                            serials[t].reorderPoint = currentLoc.reorderPoint;
+                        }
+                    }
+                }
+                this.model.attributes.serials = serials;
                 Backbone.View.prototype.render.apply(this, this.model);
             }
 
