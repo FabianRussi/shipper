@@ -33,7 +33,7 @@
 							<span>{{translate 'Return No.'}}</span>
 						</th>
 						<th class="order-history-list-recordviews-actionable-status-header">
-								<span>{{translate 'Po No.'}}</span>
+								<span>{{translate 'Customer Order No.'}}</span>
 							</th>
 							<th class="return-authorization-list-content-table-header-row-date">
 							<span>{{translate 'Date'}}</span>

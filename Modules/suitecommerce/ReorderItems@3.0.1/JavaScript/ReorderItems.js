@@ -27,16 +27,16 @@ define('ReorderItems'
 
 		MenuItems: function () 
 		{
-			var isSCISIntegrationEnabled = Configuration.get('siteSettings.isSCISIntegrationEnabled', false);
+			// var isSCISIntegrationEnabled = Configuration.get('siteSettings.isSCISIntegrationEnabled', false);
 
-			return {
-				parent: 'orders'
-			,	id: 'reorderitems'
-			,	name: _('Reorder Items').translate()
-			,	url: 'reorderItems'
-			,	index: 4
-			,	permission: isSCISIntegrationEnabled ? 'transactions.tranFind.1,transactions.tranPurchases.1' : 'transactions.tranFind.1,transactions.tranSalesOrd.1'
-			};
+			// return {
+			// 	parent: 'orders'
+			// ,	id: 'reorderitems'
+			// ,	name: _('Reorder Items').translate()
+			// ,	url: 'reorderItems'
+			// ,	index: 4
+			// ,	permission: isSCISIntegrationEnabled ? 'transactions.tranFind.1,transactions.tranPurchases.1' : 'transactions.tranFind.1,transactions.tranSalesOrd.1'
+			// };
 		}
 
 	,	mountToApp: function (application)

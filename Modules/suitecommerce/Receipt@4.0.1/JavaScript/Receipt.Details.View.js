@@ -113,7 +113,7 @@ define(
 			else if (created_from && created_from.internalid)
 			{
 				breadcrumb_pages.push({
-					text: _('Purchase History').translate()
+					text: _('Order History').translate()
 				,	href: '/purchases'
 				});
 
