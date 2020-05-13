@@ -210,7 +210,7 @@ define(
 			}
 		,	{
 				value: 'tranid'
-			,	name: _('Sort By Customer Order No.').translate()
+			,	name: _('Sort By Return No.').translate()
 			}
 		]
 
