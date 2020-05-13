@@ -72,11 +72,11 @@ define(
             }
 
             , render: function () {
-                this.model.attributes.serials = this.groupByDate(this.model.attributes);
+                this.model.attributes.serials = this.groupByDateAndSerial(this.model.attributes);
                 Backbone.View.prototype.render.apply(this, this.model);
             }
 
-            , groupByDate: function (model) {
+            , groupByDateAndSerial: function (model) {
                 var withDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate != "" });
                 var withDatesGroupedByLocation = _.groupBy(withDates, function (d) {
                     return (d.location + "|" + d.expirationdate);

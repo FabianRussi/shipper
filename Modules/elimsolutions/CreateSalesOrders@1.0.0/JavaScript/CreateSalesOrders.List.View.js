@@ -64,7 +64,7 @@ define(
                     return alert('Quantity cannot be 0 or less than 0.');
                 }
 
-                var addItem = this.qtyAvailable(qty, item, location);
+                var addItem = this.getQuantityAvailable(qty, item, location);
 
                 if (addItem.available) {
                     if ($('#itemid-' + item).length > 0 && addItem.qtyAvailable >= (parseInt($('#qty-' + item).text()) + parseInt($('#qty').val()))) {
@@ -141,7 +141,7 @@ define(
                 jQuery('#amount').val(selected[0]['Base Price']);
 
             },
-            qtyAvailable: function (val, id, location) {
+            getQuantityAvailable: function (val, id, location) {
                 var available = true;
                 var obj = {};
                 var selected = _.filter(this.collection.models[0].get('records'), function (item) {
@@ -150,8 +150,8 @@ define(
 
                 if (parseInt(selected[0].Available) < parseInt(val) || ((jQuery('#qty-' + id).text() != "") && ((parseInt(jQuery('#qty-' + id).text()) + parseInt($('#qty').val())) > parseInt(selected[0].Available)))) {
                     available = false;
-                    var available = jQuery('#qty-' + id).length > 0 ? parseInt(selected[0].Available) - parseInt(jQuery('#qty-' + id).text()) : parseInt(selected[0].Available);
-                    obj.message = 'Order placed exceeds quantity available: ' + available;
+                    var availableQty = jQuery('#qty-' + id).length > 0 ? parseInt(selected[0].Available) - parseInt(jQuery('#qty-' + id).text()) : parseInt(selected[0].Available);
+                    obj.message = 'Order placed exceeds quantity available: ' + availableQty;
                 } else if (selected[0].Location.name != location || location == '') {
                     obj.message = 'No inventory in this location';
                     available = false;
