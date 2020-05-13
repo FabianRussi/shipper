@@ -147,7 +147,7 @@ input.list-header-view-accordion-body-input {
   @extend .list-header-filter-input;
   margin-bottom: $sc-margin-lv2;
   padding      : $sc-padding-lv2 $sc-padding-lv1;
-
+  width: 125px;
   @media (min-width: $screen-sm-min) {
     display: inline-block;
     width  : 100%;
@@ -156,7 +156,7 @@ input.list-header-view-accordion-body-input {
   @media (min-width: $screen-md-min) {
     margin-bottom: 0;
     margin-right : $sc-margin-lv2;
-    width        : 150px;
+    width        : 126px;;
   }
 }
 

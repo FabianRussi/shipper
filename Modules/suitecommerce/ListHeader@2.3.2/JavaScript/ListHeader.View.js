@@ -611,6 +611,7 @@ define('ListHeader.View'
 				  })
 				  this.collection.models = collectionResult;
 				  this.collection.length = this.collection.models.length;
+				 
 				  this.view.render();
 				  jQuery("#po").val(value);
 			}else{
@@ -618,7 +619,11 @@ define('ListHeader.View'
 					this.updateCollection();
 				}
 			}
-			
+			if( this.collection.length<19){
+				$("#global-pagination").css("display","none");
+			  }else{
+				$("#global-pagination").css("display","block");
+			  }
 			  //this.updateCollection(collectionResult);
 			  
 		}

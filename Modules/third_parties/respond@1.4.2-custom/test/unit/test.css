@@ -27,7 +27,7 @@
 /*styles for 480px and up - media type purposely left out here to test that in the process */
 @media (min-width: 480px) {
 	#testelem {
-		width: 150px;
+		width: 151px;
 	}
 	#testelem[class=foo] {
 		height: 200px;
@@ -37,7 +37,7 @@
 /*styles for 500px and under*/
 @media screen and (max-width: 460px) {
 	#testelem {
-		height: 150px;
+		height: 152px;
 	}
 }
 

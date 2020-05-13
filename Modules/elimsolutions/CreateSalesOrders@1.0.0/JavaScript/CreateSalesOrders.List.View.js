@@ -1206,23 +1206,35 @@ define(
                 var addresses = jQuery('#addressesee  option:selected').val();
                 var formData = sessionStorage.getItem('jsonItem');
                 var arrData = JSON.parse(formData);
-                if (addresses) {
-                    arrData.push({ addresses: addresses });
+                var postal = jQuery('#postalCode').val();
+                var addr1 = jQuery('#addr1').val();
+                var addr2 = jQuery('#addr2').val();
+                var city = jQuery('#city').val();
+                var countrie = jQuery('#country').val();
+                var flag=false
+               if(postal||addr1||addr2||city||countrie)flag=true
 
-                } else if (addresses == '' && jQuery('#postalCode').val() == '') {
-                    // 
-                    this.completeField();
-                    alert('If I do not select an address, you must complete the fields for shipping address');
+                if (addresses&&flag){
+                    alert("You added more than one shipping address, please select only one");
                     return;
-                } else {
-                    arrData.push({
-                        postalCode: jQuery('#postalCode').val(),
-                        addr1: jQuery('#addr1').val(),
-                        addr2: jQuery('#addr2').val(),
-                        city: jQuery('#city').val(),
-                        country: jQuery('#country option:selected').val()
-                    })
                 }
+                    if (addresses) {
+                        arrData.push({ addresses: addresses });
+
+                    } else if (addresses == '' && jQuery('#postalCode').val() == '') {
+                        // 
+                        this.completeField();
+                        alert('If I do not select an address, you must complete the fields for shipping address');
+                        return;
+                    } else {
+                        arrData.push({
+                            postalCode: jQuery('#postalCode').val(),
+                            addr1: jQuery('#addr1').val(),
+                            addr2: jQuery('#addr2').val(),
+                            city: jQuery('#city').val(),
+                            country: jQuery('#country option:selected').val()
+                        })
+                    }
                 arrData.push({
                     orderNumber: jQuery('#orderNumber').val(),
                     memo: jQuery('#memo').val(),

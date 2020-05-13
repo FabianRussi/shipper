@@ -177,7 +177,7 @@ define('OrderHistory.Details.View'
 			, getBreadcrumbPages: function () {
 				return [
 					{
-						text: _('Purchase History').translate()
+						text: _('Order History').translate()
 						, href: '/purchases'
 					}
 					, {

@@ -47,11 +47,11 @@ define('OrderHistory.List.View'
 			//@property {Function} template
 			template: order_history_list_tpl
 			//@property {String} title
-			, title: _('Purchase History').translate()
+			, title: _('Order History').translate()
 			//@property {String} className
 			, className: 'OrderListView'
 			//@property {String} page_header
-			, page_header: _('Purchase History').translate()
+			, page_header: _('Order History').translate()
 			//@property {Object} attributes
 			, attributes: {
 				'class': 'OrderListView'

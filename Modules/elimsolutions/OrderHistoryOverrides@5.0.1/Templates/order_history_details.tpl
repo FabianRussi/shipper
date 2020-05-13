@@ -5,11 +5,11 @@
 	may use this code subject to the terms that govern your access and use.
 }}
 
-<a href="/purchases" class="order-history-details-back-btn">{{translate '&lt; Back to Purchases'}}</a>
+<a href="/purchases" class="order-history-details-back-btn">{{translate '&lt; Back to Orders'}}</a>
 <section>
 	<header>
 		<h2 class="order-history-details-order-title" data-origin='{{originName}}'>
-			<span class="order-history-details-order-title">{{title}} </span><b> <span class="order-history-details-order-number">{{model.tranid}}</span></b>
+			<span class="order-history-details-order-title">Order </span><b> <span class="order-history-details-order-number">{{model.tranid}}</span></b>
 			<span class="order-history-details-total-formatted">
 				{{model.summary.total_formatted}}
 			</span>
@@ -39,7 +39,7 @@
 				</p>
 				{{#if showPurchaseOrderNumber}}
 					<p class="order-history-details-header-purchase-order-number-info">
-						{{translate '<span class="order-history-details-header-purchase-order-info-purchase-order-number-label">Purchase Order Number: </span> <span class="order-history-details-header-purchase-order-number">$(0)</span>' model.purchasenumber}}
+						{{translate '<span class="order-history-details-header-purchase-order-info-purchase-order-number-label">Order Number: </span> <span class="order-history-details-header-purchase-order-number">$(0)</span>' model.purchasenumber}}
 					</p>
 				{{/if}}
 				{{#if showQuoteDetail}}
