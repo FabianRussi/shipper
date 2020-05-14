@@ -60,6 +60,7 @@
   @extend .list-header-expander-button;
   width   : auto;
   overflow: hidden;
+  display : none;
 
   @media (min-width: $screen-sm-min) {
     position: relative;

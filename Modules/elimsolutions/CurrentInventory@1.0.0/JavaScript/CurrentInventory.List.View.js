@@ -43,6 +43,11 @@ define(
 
             , filteredResults: []
 
+            , events: {
+                'keyup [data-type="curr-inv-srch"]': 'searchFilter',
+                'click [data-type="goSearch"]': 'goSearch',
+                'change #location': 'filterLocations'
+            }
 
             , initialize: function (options) {
 
@@ -51,21 +56,16 @@ define(
 
                 this.options.showCurrentPage = true;
                 this.options.searchFilterValue = options.searchFilterValue;
-
-                console.log(this.options);
+                this.locations = this.getAllLocations();
 
                 this.listenCollection();
                 this.setupListHeader();
 
                 var url_options = _.parseUrlOptions(Backbone.history.fragment);
-
-                console.log(url_options);
-
                 this.searchFilterValue = url_options.srch;
                 this.page = this._getPageFromUrl(url_options.page);
                 this.page = this.page - 1;
 
-                console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this);
             }
@@ -102,14 +102,7 @@ define(
                 this.isLoading = is_loading;
             }
 
-            // @property {Object} events
-            , events: {
-                'keyup [data-type="curr-inv-srch"]': 'searchFilter',
-                'click [data-type="goSearch"]': 'goSearch'
-            }
-
             , searchFilter: function (e) {
-
                 var value = jQuery("#currInv").val();
                 var url = window.location.href;
                 var gurl = _.setUrlParameter(url, 'srch', value);
@@ -118,11 +111,9 @@ define(
                 if (e.keyCode == 13 || value === "") {
                     window.location.href = gurl2;
                 }
-                //this._render();
             }
 
             , goSearch: function () {
-
                 var value = jQuery("#currInv").val();
                 var url = window.location.href;
                 var gurl = _.setUrlParameter(url, 'srch', value);
@@ -142,9 +133,9 @@ define(
                 }
                 return tempArray;
             }
+
             , childViews: {
                 'CurrentInventory.List.Items': function () {
-                    debugger;
                     var recs = this.options.options;
                     var arr = this.chunkArray(recs, this.collection.models[0].get('recordsPerPage'));
                     recs = arr[this.page];
@@ -191,7 +182,6 @@ define(
                         , collection: records_collection
                         , viewsPerRow: 1
                     });
-
                 }
                 , 'GlobalViews.Pagination': function () {
                     return new GlobalViewsPaginationView(_.extend({
@@ -219,10 +209,54 @@ define(
                 };
             }
 
+            , getAllLocations: function () {
+                var locations = [];
+                for (var i = 0; i < this.options.collection.models.length; i++) {
+                    for (var o = 0; o < this.options.collection.models[i].attributes.locations.length; o++) {
+                        locations.push(this.options.collection.models[i].attributes.locations[o]);
+                    }
+                }
+                return locations;
+            }
+
+            , filterLocations: function () {
+                var locations = [];
+                for (var i = 0; i < this.options.collection.models.length; i++) {
+                    for (var o = 0; o < this.options.collection.models[i].attributes.records.length; o++) {
+                        locations.push(this.options.collection.models[i].attributes.records[o]);
+                    }
+                }
+
+                var selected = _.filter(locations, function (item) {
+                    return item.Location.id == jQuery('#location option:selected').val();
+                })
+
+                this.childViewInstances['CurrentInventory.List.Items']['CurrentInventory.List.Items'].childViewInstance.models = selected;
+                $('#curInv').empty();
+
+                for (var i = 0; i < selected.length; i++) {
+                    $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
+                        '<td class="recordviews-title" data-name="title"><span class="recordviews-title-value">' +
+                        '<a class="recordviews-title-anchor" href="#/item-details?id=" data-touchpoint="customercenter" data-id="">' + selected[i].Name + '</a></span></td> ' +
+                        '<td class="recordviews-description" data-name="description"> <span class="recordviews-label">' + selected[i].Description + '</span>' +
+                        '<span class="recordviews-value"></span></td><td class="recordviews-Available Quantity" data-name="Available Quantity">' +
+                        '<span class="recordviews-label">Available Quantity</span> <span class="recordviews-value">' + selected[i].Available + '</span></td><td class="recordviews-On Hand Quantity" data-name="On Hand Quantity"> ' +
+                        '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' + selected[i]['On Hand'] + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
+                        '<span class="recordviews-label">Committed Quantity</span> <span class="recordviews-value">' + selected[i].Committed + '</span> </td> </tr>');
+                }
+
+                var selectedQty = selected.length;
+
+                if (selectedQty == 0 || selectedQty > 20) {
+                    $('.global-views-showing-current').css('display', 'none');
+                }
+                else {
+                    $('.global-views-showing-current').css('display', 'block');
+                    $('.global-views-showing-current').text('Showing 1 - ' + selectedQty + ' of ' + selectedQty);
+                }
+            }
 
             , getContext: function () {
-                console.log("Testing ... : " + this.options.options);
-
                 return {
                     Title: 'Current Inventory Status'
                     , page_header: this.page_header
@@ -238,6 +272,7 @@ define(
                     , showCurrentPage: this.options.showCurrentPage
                     //@property {Boolean} showBackToAccount
                     , showBackToAccount: Configuration.get('siteSettings.sitetype') === 'STANDARD'
+                    , locations: this.locations
                 };
             }
         });

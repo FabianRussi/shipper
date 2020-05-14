@@ -23,7 +23,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
             if (!value) {
-                console.log("createFilteredResults 1");
+                // console.log("createFilteredResults 1");
                 return origonalArr;
             }
             if (value) {
