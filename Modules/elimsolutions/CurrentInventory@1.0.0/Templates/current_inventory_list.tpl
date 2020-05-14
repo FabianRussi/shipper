@@ -1,3 +1,5 @@
+{{log 'this: ' this}}
+
 <style>
     tbody#curInv td.recordviews-title a.recordviews-title-anchor {
         color: #000;
@@ -17,6 +19,7 @@
     }
 </style>
 
+
 {{#if showBackToAccount}}
 <a href="/" class="reorder-items-list-button-back">
     <i class="reorder-items-list-button-back-icon"></i>
@@ -28,6 +31,15 @@
     <header class="current-inventory-list-header">
         <h2>{{Title}}</h2>
     </header>
+
+    <select id="location" name="location" class="locationDropdown">
+        <option value="" selected disabled>Sort by Location</option>
+        {{#if locations}}
+        {{#each locations}}
+        <option value={{id}}>{{name}}</option>
+        {{/each}}
+        {{/if}}
+    </select>
 
     <input type="text" placeholder="Search for an item" class="form-control curr-inv-srch" data-type="curr-inv-srch"
         id="currInv" value="{{searchFilterValue}}" autofocus />
@@ -55,7 +67,6 @@
                     <th class="current-inventory-list-content-table-header-row-currency">
                         <span>{{translate 'On Hand Quantity'}}</span>
                     </th>
-
                 </tr>
             </thead>
             <tbody id="curInv" data-view="CurrentInventory.List.Items"></tbody>
