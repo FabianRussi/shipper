@@ -24,6 +24,7 @@ define(
             page_header: _('Create sale order').translate(),
             searchFilterValue: '',
             filteredResults: [],
+            
             initialize: function (options) {
                 this.options = options;
                 this.application = options.application;

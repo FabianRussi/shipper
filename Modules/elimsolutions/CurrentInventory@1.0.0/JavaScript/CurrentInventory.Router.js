@@ -23,7 +23,7 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
             if (!value) {
-                console.log("createFilteredResults 1");
+                // console.log("createFilteredResults 1");
                 return origonalArr;
             }
             if (value) {
@@ -41,10 +41,10 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
             }
         },
         GetFilteredResults: function (options) {
-            console.log("made it to ROuter");
+            // console.log("made it to ROuter");
 
             options = (options) ? Utils.parseUrlOptions(options) : { page: 1 };
-            console.log("Options Were : " + JSON.stringify(options));
+            // console.log("Options Were : " + JSON.stringify(options));
             options.page = options.page || 1;
             options.srch = options.srch || '';
 
