@@ -58,28 +58,17 @@ define(
                 this.options.searchFilterValue = options.searchFilterValue;
                 this.locations = this.getAllLocations();
 
-                // console.log(this.options);
-
                 this.listenCollection();
                 this.setupListHeader();
 
                 var url_options = _.parseUrlOptions(Backbone.history.fragment);
-
-                // console.log(url_options);
-
                 this.searchFilterValue = url_options.srch;
                 this.page = this._getPageFromUrl(url_options.page);
                 this.page = this.page - 1;
 
-                // console.log('Backbone.history.fragment : ' + Backbone.history.fragment);
                 jQuery('.curr-inv-srch').focus();
                 BackboneCompositeView.add(this);
             }
-
-            /* , render: function () {
-                $(this.el).html(this.template(this.options.collection.models.toJSON()));
-                return this;
-            } */
 
             , _getPageFromUrl: function (url_value) {
                 var page_number = parseInt(url_value, 10);
@@ -122,7 +111,6 @@ define(
                 if (e.keyCode == 13 || value === "") {
                     window.location.href = gurl2;
                 }
-                //this._render();
             }
 
             , goSearch: function () {
