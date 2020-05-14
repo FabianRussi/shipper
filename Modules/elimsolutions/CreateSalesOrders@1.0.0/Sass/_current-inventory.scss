@@ -28,11 +28,11 @@ tr.current-inventory-list-content-table-header-row {
 }
 
 input.form-control.curr-inv-srch {
-    margin-top   : 10px !important;
-    border-radius: 5px !important;
+    margin-top      : 10px !important;
+    border-radius   : 5px !important;
     // font-weight  : 600 !important;
-    width        : 70%;
-    display      : inline-block;
+    width           : 70%;
+    display         : inline-block;
 
     @media screen and (min-width: 768px) {
         width: 85%;
@@ -110,6 +110,13 @@ button.btn.btn-lg.btn-primary.goSearch {
     border-top: 0;
 }
 
-.place-order-btn{
-    background: #462c98; padding: 10px 20px; border: none; color: #fff; width: 90px;  margin-top: 15px; border-radius: 6px; width: auto;
+.place-order-btn {
+    background   : #462c98;
+    padding      : 10px 20px;
+    border       : none;
+    color        : #fff;
+    width        : 90px;
+    margin-top   : 15px;
+    border-radius: 6px;
+    width        : auto;
 }
