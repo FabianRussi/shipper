@@ -72,12 +72,12 @@ define(
             }
 
             , render: function () {
-                debugger
-                var serials=this.groupByDateAndSerial(this.model.attributes);
-                for(var i=0;i<this.model.get("locations").length;i++){
+                debugger;
+                var serials = this.groupByDateAndSerial(this.model.attributes);
+                for (var i = 0; i < this.model.get("locations").length; i++) {
                     var currentLoc = this.model.get("locations")[i];
-                    for(var t=0;t<serials.length;t++){
-                        if(currentLoc.locationName == serials[t].location){
+                    for (var t = 0; t < serials.length; t++) {
+                        if (currentLoc.locationName == serials[t].location) {
                             serials[t].reorderPoint = currentLoc.reorderPoint;
                         }
                     }
@@ -102,10 +102,16 @@ define(
                             obj.qtySum = parseInt(obj.qtySum) + parseInt(withDatesGroupedByLocation[key][i].qtySum);
                         }
                     }
+                    obj.qtyAvailable = this.getQuantityAvailable(model.locations, key);
                     ret[ret.length] = obj;
                 }
-                // var withoutDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate == "" });
                 return ret;
+            }
+
+            , getQuantityAvailable: function (locations, key) {
+                var keyStr = key.split('|')[0];
+                var location = _.filter(locations, function (loc) { return loc.locationName == keyStr });
+                return location[0].quantityAvailable;
             }
 
             , _getPageFromUrl: function (url_value) {

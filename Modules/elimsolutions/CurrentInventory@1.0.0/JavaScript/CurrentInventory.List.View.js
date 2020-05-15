@@ -53,7 +53,6 @@ define(
 
                 this.options = options;
                 this.application = options.application;
-
                 this.options.showCurrentPage = true;
                 this.options.searchFilterValue = options.searchFilterValue;
                 this.locations = this.getAllLocations();
@@ -107,7 +106,7 @@ define(
                 var url = window.location.href;
                 var gurl = _.setUrlParameter(url, 'srch', value);
                 var gurl2 = _.setUrlParameter(gurl, 'page', '0');
-                console.log(gurl2);
+                // console.log(gurl2);
                 if (e.keyCode == 13 || value === "") {
                     window.location.href = gurl2;
                 }
@@ -118,7 +117,7 @@ define(
                 var url = window.location.href;
                 var gurl = _.setUrlParameter(url, 'srch', value);
                 var gurl2 = _.setUrlParameter(gurl, 'page', '0');
-                console.log(gurl2);
+                // console.log(gurl2);
                 window.location.href = gurl2;
             }
 
@@ -213,7 +212,9 @@ define(
                 var locations = [];
                 for (var i = 0; i < this.options.collection.models.length; i++) {
                     for (var o = 0; o < this.options.collection.models[i].attributes.locations.length; o++) {
-                        locations.push(this.options.collection.models[i].attributes.locations[o]);
+                        if (!this.locationIsInRecords(this.options.collection.models[i].attributes.records, this.options.collection.models[i].attributes.locations[o].name)) {
+                            locations.push(this.options.collection.models[i].attributes.locations[o]);
+                        }
                     }
                 }
                 return locations;
@@ -227,18 +228,24 @@ define(
                     }
                 }
 
-                var selected = _.filter(locations, function (item) {
-                    return item.Location.id == jQuery('#location option:selected').val();
-                })
+                var selectedOption = jQuery('#location option:selected').val();
+                var selected = null;
 
-                this.childViewInstances['CurrentInventory.List.Items']['CurrentInventory.List.Items'].childViewInstance.models = selected;
+                if (selectedOption != "allLocations") {
+                    selected = _.filter(locations, function (item) {
+                        return item.Location.id == selectedOption;
+                    });
+                } else {
+                    selected = locations;
+                }
+
                 $('#curInv').empty();
 
                 for (var i = 0; i < selected.length; i++) {
                     $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
                         '<td class="recordviews-title" data-name="title"><span class="recordviews-title-value">' +
-                        '<a class="recordviews-title-anchor" href="#/item-details?id=" data-touchpoint="customercenter" data-id="">' + selected[i].Name + '</a></span></td> ' +
-                        '<td class="recordviews-description" data-name="description"> <span class="recordviews-label">' + selected[i].Description + '</span>' +
+                        '<a class="recordviews-title-anchor" href="#/item-details?id=' + selected[i].id + '" data-touchpoint="customercenter" data-id="' + selected[i].id + '">' + selected[i].Name + '</a></span></td> ' +
+                        '<td class="recordviews-description" data-name="description"> <span class="">' + selected[i].Description + '</span>' +
                         '<span class="recordviews-value"></span></td><td class="recordviews-Available Quantity" data-name="Available Quantity">' +
                         '<span class="recordviews-label">Available Quantity</span> <span class="recordviews-value">' + selected[i].Available + '</span></td><td class="recordviews-On Hand Quantity" data-name="On Hand Quantity"> ' +
                         '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' + selected[i]['On Hand'] + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
@@ -246,15 +253,23 @@ define(
                 }
 
                 var selectedQty = selected.length;
-
-                if (selectedQty == 0 || selectedQty > 20) {
-                    $('.global-views-showing-current').css('display', 'none');
+                if (selectedQty == 0 || selectedQty < 20) {
+                    $('.current-inventory-list-case-list-paginator').css('display', 'none');
                 }
                 else {
-                    $('.global-views-showing-current').css('display', 'block');
-                    $('.global-views-showing-current').text('Showing 1 - ' + selectedQty + ' of ' + selectedQty);
+                    $('.current-inventory-list-case-list-paginator').css('display', 'block');
                 }
             }
+
+            , locationIsInRecords: function (records, name) {
+                for (var i = 0; i < records.length; i++) {
+                    if (records[i].Location.name == name) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
 
             , getContext: function () {
                 return {
