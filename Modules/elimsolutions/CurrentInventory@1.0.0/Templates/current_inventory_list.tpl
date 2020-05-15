@@ -33,7 +33,8 @@
     </header>
 
     <select id="location" name="location" class="locationDropdown">
-        <option value="" selected disabled>Sort by Location</option>
+        {{!-- <option value="" selected disabled>Sort by Location</option> --}}
+        <option value="allLocations">All Locations</option>
         {{#if locations}}
         {{#each locations}}
         <option value={{id}}>{{name}}</option>
@@ -47,7 +48,6 @@
 
     <div data-view="List.Header"></div>
     <div class="current-inventory-list-results-container">
-
         {{#if collectionLength}}
         <table class="current-inventory-list-current-inventorys-table">
             <thead class="current-inventory-list-content-table">
@@ -71,7 +71,6 @@
             </thead>
             <tbody id="curInv" data-view="CurrentInventory.List.Items"></tbody>
         </table>
-
         {{else}}
         {{#if isLoading}}
         <p class="current-inventory-list-empty">{{translate 'Loading...'}}</p>
