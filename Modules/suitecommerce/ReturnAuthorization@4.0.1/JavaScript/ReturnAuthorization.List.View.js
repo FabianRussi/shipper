@@ -210,7 +210,7 @@ define(
 			}
 		,	{
 				value: 'tranid'
-			,	name: _('Sort By Return No.').translate()
+			,	name: _('Sort by RMA No.').translate()
 			}
 		]
 
