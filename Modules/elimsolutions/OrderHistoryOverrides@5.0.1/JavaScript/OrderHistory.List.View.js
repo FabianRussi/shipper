@@ -140,7 +140,7 @@ define('OrderHistory.List.View'
 				}
 				, {
 					value: 'tranid'
-					, name: _('Sort by Customer Order No.').translate()
+					, name: _('Sort by eS+ Order No.').translate()
 				}
 				/* ,	{
 						value: 'amount'

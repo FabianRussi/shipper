@@ -1269,9 +1269,9 @@ define(
                             jQuery('#country').removeAttr('style');
                             jQuery('#table-summary').children().remove();
                             sessionStorage.removeItem('jsonItem');
-                            alert('Sale order id ' + response.idOrder + '-' + 'Number of order ' + response.soNumber);
+                            alert('Your order number is Number ' + response.soNumber);
                         } else {
-                            alert('The order is purchased has not been created, check the entered data');
+                           // alert('The order is purchased has not been created, check the entered data');
                         }
                     })
             },

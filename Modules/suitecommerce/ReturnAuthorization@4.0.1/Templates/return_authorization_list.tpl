@@ -30,7 +30,7 @@
 				<thead class="return-authorization-list-content-table">
 					<tr class="return-authorization-list-content-table-header-row">
 						<th class="return-authorization-list-content-table-header-row-title">
-							<span>{{translate 'Return No.'}}</span>
+							<span>{{translate 'RMA No.'}}</span>
 						</th>
 						<th class="order-history-list-recordviews-actionable-status-header">
 								<span>{{translate 'Customer Order No.'}}</span>

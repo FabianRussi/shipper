@@ -399,6 +399,34 @@ define('ListHeader.View'
 			//@class ListHeader.View
 			return this;
 		}
+		,	updateCollectionCustom: function (params)
+		{
+			var range = {
+
+			}
+			this.page = params.page;
+			
+			var collection = this.collection;
+			 
+			
+			if (this.selectedRange)
+			{
+				//@class RangeFilter
+				//If there is no date selected i keep the range empty in order to get "transactions" dated in the future
+				range = {
+					//@property {String} from
+					from: this.selectedRange.from || (this.allowEmptyBoundaries ? '' : this.rangeFilterOptions.fromMin)
+					//@property {String} to
+				,	to: this.selectedRange.to || (this.allowEmptyBoundaries ? '' : this.rangeFilterOptions.toMax)
+				};
+			}
+
+			//@lass Collection.Filter
+			 
+
+			//@class ListHeader.View
+			return this;
+		}
 
 		// @method getFilter @param {String} value @returns {Object} a specific filter
 	,	getFilter: function (value)
@@ -604,8 +632,33 @@ define('ListHeader.View'
 			var value = jQuery("#po").val();
 			if(value && value.length>=2)
 			{
-				this.updateCollection();
-				var collection = this.collection.models;
+				
+				var pages =Math.ceil(this.collection.totalRecordsFound/20);
+				var collection = [];
+				var self = this;
+				for(var i =1;i<=pages;i++){
+					this.collection.fetch({
+						async: false
+				 // 	//@property {value:String} filter
+				 // ,	filter: this.selectedFilter
+				 // 	//@property {RangeFilter} range
+				 // ,	range: range
+				 // 	//@property {value:String} sort
+				 // ,	sort: this.selectedSort
+					 //@property {String} order
+				 ,	order: 1
+				 ,	page: i
+				 // 	//@property {Number} killerId
+				 // ,	killerId: AjaxRequestsKiller.getKillerId()
+				 }).done(function(data){
+					debugger;
+					collection = collection.concat(self.collection.models);
+				 });
+					 
+					 
+				}
+				
+				
 				var collectionResult = _.filter(collection, function(item, index) {
 					return (item.get("otherrefnum") && item.get("otherrefnum").indexOf(value)!=-1) || (item.get("tranid") && item.get("tranid").indexOf(value)!=-1);
 				  })
@@ -614,16 +667,18 @@ define('ListHeader.View'
 				 
 				  this.view.render();
 				  jQuery("#po").val(value);
+				  if( this.collection.length<19){
+					$("#global-pagination").css("display","none");
+				  }else{
+					$("#global-pagination").css("display","block");
+				  }
+				
 			}else{
 				if(!value){
 					this.updateCollection();
 				}
 			}
-			if( this.collection.length<19){
-				$("#global-pagination").css("display","none");
-			  }else{
-				$("#global-pagination").css("display","block");
-			  }
+		
 			  //this.updateCollection(collectionResult);
 			  
 		}
