@@ -270,7 +270,6 @@ define(
                 return true;
             }
 
-
             , getContext: function () {
                 return {
                     Title: 'Current Inventory Status'

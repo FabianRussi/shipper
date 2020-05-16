@@ -87,7 +87,10 @@ define(
             }
 
             , groupByDateAndSerial: function (model) {
-                var withDates = _.filter(model.serials, function (loc) { return loc.invDetExpirationDate != "" });
+                var withDates = _.filter(model.serials, function (loc) {
+                    var r = loc.expirationdate != ""
+                    return r;
+                });
                 var withDatesGroupedByLocation = _.groupBy(withDates, function (d) {
                     return (d.location + "|" + d.expirationdate);
                 });
@@ -111,7 +114,10 @@ define(
             , getQuantityAvailable: function (locations, key) {
                 var keyStr = key.split('|')[0];
                 var location = _.filter(locations, function (loc) { return loc.locationName == keyStr });
-                return location[0].quantityAvailable;
+                if (location[0] != undefined) {
+                    return location[0].quantityAvailable;
+                }
+                return 0;
             }
 
             , _getPageFromUrl: function (url_value) {
