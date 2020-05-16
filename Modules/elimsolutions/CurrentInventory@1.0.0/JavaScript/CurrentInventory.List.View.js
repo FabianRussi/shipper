@@ -163,14 +163,14 @@ define(
                                     label: 'On Hand Quantity'
                                     , type: 'On Hand Quantity'
                                     , name: 'On Hand Quantity'
-                                    , value: currentinventorymodel['On Hand']
+                                    , value: currentinventorymodel['Committed']
                                 }
 
                                 , {
                                     label: 'Committed Quantity'
                                     , type: 'Committed Quantity'
                                     , name: 'Committed Quantity'
-                                    , value: currentinventorymodel['Committed']
+                                    , value: currentinventorymodel['On Hand']
                                 }
                             ]
                         });
@@ -221,6 +221,7 @@ define(
             }
 
             , filterLocations: function () {
+                debugger;
                 var locations = [];
                 for (var i = 0; i < this.options.collection.models.length; i++) {
                     for (var o = 0; o < this.options.collection.models[i].attributes.records.length; o++) {
@@ -239,8 +240,11 @@ define(
                     selected = locations;
                 }
 
-                $('#curInv').empty();
 
+
+                
+                $('#curInv').empty();
+debugger;
                 for (var i = 0; i < selected.length; i++) {
                     $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
                         '<td class="recordviews-title" data-name="title"><span class="recordviews-title-value">' +
@@ -248,8 +252,8 @@ define(
                         '<td class="recordviews-description" data-name="description"> <span class="">' + selected[i].Description + '</span>' +
                         '<span class="recordviews-value"></span></td><td class="recordviews-Available Quantity" data-name="Available Quantity">' +
                         '<span class="recordviews-label">Available Quantity</span> <span class="recordviews-value">' + selected[i].Available + '</span></td><td class="recordviews-On Hand Quantity" data-name="On Hand Quantity"> ' +
-                        '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' + selected[i]['On Hand'] + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
-                        '<span class="recordviews-label">Committed Quantity</span> <span class="recordviews-value">' + selected[i].Committed + '</span> </td> </tr>');
+                        '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' +  selected[i].Committed + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
+                        '<span class="recordviews-label">Committed Quantity</span> <span class="recordviews-value">' + selected[i]['On Hand'] + '</span> </td> </tr>');
                 }
 
                 var selectedQty = selected.length;
