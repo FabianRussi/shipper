@@ -123,11 +123,19 @@ define(
                 }
                 else {
                     for (var i = 0; i < model.locations.length; i++) {
-                        var obj = JSON.parse(JSON.stringify(model.serials[0]));
-                        obj.location = model.locations[i].locationName;
-                        obj.qtyAvailable = model.locations[i].quantityAvailable;
-                        obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
-                        ret[ret.length] = obj;
+                        if (model.serials.length > 0) {
+                            var obj = JSON.parse(JSON.stringify(model.serials[0]));
+                            obj.location = model.locations[i].locationName;
+                            obj.qtyAvailable = model.locations[i].quantityAvailable;
+                            obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
+                            ret[ret.length] = obj;
+                        } else {
+                            var obj = {};
+                            obj.location = model.locations[i].locationName;
+                            obj.qtyAvailable = model.locations[i].quantityAvailable;
+                            obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
+                            ret[ret.length] = obj;
+                        }
                     }
                 }
                 return ret;
