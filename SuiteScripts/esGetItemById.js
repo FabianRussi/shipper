@@ -58,25 +58,26 @@ function getItemById(params) {
         var searchBin = nlapiSearchRecord('item', 'customsearch8741', filter, null) || null;
         var json = {
             locations: [],
-            serials: []
+            serials:[]
         }
-        var ss = nlapiSearchRecord('inventorydetail', 8972, ['item', 'is', id], null)
-        if (ss) {
-            for (var ii = 0; ii < ss.length; ii++) {
+        var ss = nlapiSearchRecord('inventorydetail',8972,['item','is',id],null)
+        if(ss){
+            for(var ii=0;ii<ss.length;ii++){
                 var columns = ss[ii].getAllColumns();
-
-                json.serials.push({
-                    serial: ss[ii].getText(columns[0]),
-                    expirationdate: ss[ii].getValue(columns[5]),
-                    inventorystatus: ss[ii].getText(columns[2]),
-                    location: ss[ii].getText(columns[6]),
-                    qtyOnOrder: ss[ii].getValue(columns[7]),
-                    qtyIndividual: ss[ii].getValue(columns[3]),
-                    qtySum: ss[ii].getValue(columns[8])
-                })
+      
+                    json.serials.push({
+                        serial : ss[ii].getText(columns[0]), 
+                        expirationdate: ss[ii].getValue(columns[5]), 
+                        inventorystatus: ss[ii].getText(columns[2]),
+                        location:ss[ii].getText(columns[6]),
+                        qtyOnOrder: ss[ii].getValue(columns[7]),
+                        qtyIndividual: ss[ii].getValue(columns[3]),
+                        qtySum: ss[ii].getValue(columns[8])
+                      })
+            
+                
             }
         }
-        
         var ss = nlapiSearchRecord('item', null, filter, null)
         var item = nlapiLoadRecord(ss[0].getRecordType(), ss[0].getId());
         var lines = item.getLineItemCount('locations')
@@ -84,15 +85,16 @@ function getItemById(params) {
 
         for (var t = 1; t <= lines; t++) {
             var locationName = item.getLineItemValue('locations', 'location_display', t);
-            nlapiLogExecution('DEBUG', 'reorderpoint: === ' + id, item.getLineItemValue('locations', 'reorderpoint', t));
+           nlapiLogExecution('DEBUG', 'reorderpoint: === '+id, item.getLineItemValue('locations', 'reorderpoint', t));
             json.locations.push({
-                reorderPoint: item.getLineItemValue('locations', 'reorderpoint', t),
-                quantityOnHand: item.getLineItemValue('locations', 'quantityonhand', t),
-                quantityAvailable: item.getLineItemValue('locations', 'quantityavailable', t),
-                locationName: locationName
-            })
+                reorderPoint:item.getLineItemValue('locations', 'reorderpoint', t),
+                quantityOnHand:item.getLineItemValue('locations', 'quantityonhand', t),
+                quantityAvailable:item.getLineItemValue('locations', 'quantityavailable', t),
+                locationName:locationName
+            })  
         }
 
+        
         var search = nlapiSearchRecord('item', null, filter, null) || null;
         var item = nlapiLoadRecord(search[0].getRecordType(), search[0].getId());
         json.id = search[0].getId();
@@ -101,6 +103,7 @@ function getItemById(params) {
         json.weight = item.getFieldValue("weight")
         json.width = item.getFieldValue("custitem_es_depth")
         json.length = item.getFieldValue("custitem_es_length")
+
 
         var myJson = JSON.stringify(json);
 
