@@ -123,7 +123,7 @@ define(
                 }
                 else {
                     for (var i = 0; i < model.locations.length; i++) {
-                        let obj = JSON.parse(JSON.stringify(model.serials[0]));
+                        var obj = JSON.parse(JSON.stringify(model.serials[0]));
                         obj.location = model.locations[i].locationName;
                         obj.qtyAvailable = model.locations[i].quantityAvailable;
                         obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
