@@ -46,7 +46,7 @@ define(
 			{
 
 				//Define the fields to be returned
-				this.fields = this.fields || ['isperson', 'email', 'internalid', 'name', 'overduebalance', 'phoneinfo', 'companyname', 'firstname', 'lastname', 'middlename', 'emailsubscribe', 'campaignsubscriptions', 'paymentterms', 'creditlimit', 'balance', 'creditholdoverride'];
+				this.fields = this.fields || ['isperson', 'email', 'internalid', 'name', 'overduebalance', 'phoneinfo', 'companyname', 'firstname', 'lastname', 'middlename', 'emailsubscribe', 'campaignsubscriptions', 'paymentterms', 'creditlimit', 'balance', 'creditholdoverride','custentity_json_store'];
 
 				profile = ModelsInit.customer.getFieldValues(this.fields);
 
@@ -67,7 +67,7 @@ define(
 			}
 			else
 			{
-				profile = ModelsInit.customer.getFieldValues(['addressbook', 'balance', 'campaignsubscriptions', 'companyname', 'creditcards', 'creditholdoverride', 'creditlimit', 'email', 'emailsubscribe', 'firstname', 'internalid', 'isperson', 'lastname', 'middlename', 'name', 'paymentterms', 'phoneinfo', 'vatregistration']);
+				profile = ModelsInit.customer.getFieldValues(['addressbook', 'balance', 'campaignsubscriptions', 'companyname', 'creditcards', 'creditholdoverride', 'creditlimit', 'email', 'emailsubscribe', 'firstname', 'internalid', 'isperson', 'lastname', 'middlename', 'name', 'paymentterms', 'phoneinfo', 'vatregistration','custentity_json_store']);
 
 				profile.isLoggedIn = ModelsInit.session.isLoggedIn2() ? 'T' : 'F';
 				profile.isRecognized = ModelsInit.session.isRecognized() ? 'T' : 'F';
@@ -82,7 +82,15 @@ define(
 			profile.language = ModelsInit.session.getShopperLanguageLocale();
 			profile.currency = ModelsInit.session.getShopperCurrency();
 			profile.priceLevel = ModelsInit.session.getShopperPriceLevel().internalid ? ModelsInit.session.getShopperPriceLevel().internalid : ModelsInit.session.getSiteSettings(['defaultpricelevel']).defaultpricelevel;
-
+			// var url = "https://5445214.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=853&deploy=1&compid=5445214&h=f953005733f94638f9d5&esID=" + nlapiGetUser();
+			// console.log('URL', url);
+			// var a = { "User-Agent-x": "SuiteScript-Call" };
+			// var response = nlapiRequestURL(url, null, a, 'GET');
+			// var body = response.getBody();
+			// var body = body.replace(/\r?\n|\r/g, '');
+			//profile.currentinventory = JSON.parse(body);
+			profile.currentinventory =  ModelsInit.customer.getCustomFieldValues();
+			profile.currentinventoryJson = {};
 			return profile;
 		}
 

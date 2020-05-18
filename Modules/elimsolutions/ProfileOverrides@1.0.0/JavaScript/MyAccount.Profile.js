@@ -121,7 +121,7 @@ define(
                 }
                 else
                 {
-                    profile_model_instance.get('currentinventory').reset([]);
+                    //profile_model_instance.get('currentinventory').reset([]);
                 }
 
 

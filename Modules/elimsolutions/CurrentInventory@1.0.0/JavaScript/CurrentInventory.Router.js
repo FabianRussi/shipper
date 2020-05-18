@@ -14,13 +14,17 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
         initialize: function (application) {
 
             this.application = application;
-            this.collection = ProfileModel.getInstance().get('currentinventory');
+            debugger
+            this.collection = new Backbone.Collection( JSON.parse(ProfileModel.getInstance().get('currentinventory')[2].value ));// ProfileModel.getInstance().get('currentinventory');
+            var r = 0;
         }
 
         , createFilteredResults: function (val) {
             // console.log("createFilteredResults");
             var value = val;
+            if(this.collection.length === 0)return [];
             var origonalArr = this.collection.models[0].attributes.records.slice();
+           // var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
             if (!value) {
                 // console.log("createFilteredResults 1");
@@ -49,7 +53,6 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
             options.srch = options.srch || '';
 
             var filteredResults = this.createFilteredResults(options.srch);
-
             var view = new CurrentInventoryListView({
                 application: this.application,
                 collection: this.collection,

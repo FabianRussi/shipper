@@ -12,7 +12,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
         ,
         initialize: function(application) {
             this.application = application;
-            this.collection = ProfileModel.getInstance().get('currentinventory');
+            this.collection = new Backbone.Collection( JSON.parse(ProfileModel.getInstance().get('currentinventory')[2].value ));// ProfileModel.getInstance().get('currentinventory');
             this.addresses = ProfileModel.getInstance().get('addresses');
             this.customerId = ProfileModel.getInstance().id;
 
@@ -20,6 +20,7 @@ define('CreateSalesOrders.Router', ['CreateSalesOrders.List.View', 'Profile.Mode
 
         createFilteredResults: function(val) {
             var value = val;
+            if(this.collection.length === 0)return [];
             var origonalArr = this.collection.models[0].attributes.records.slice();
             var arrFiltered = [];
             if (!value) {
