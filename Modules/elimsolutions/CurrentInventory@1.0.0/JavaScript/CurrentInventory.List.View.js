@@ -240,35 +240,39 @@ define(
                     selected = locations;
                 }
 
-                if (selectedOption != "allLocations") {
-                    selected = _.unique(selected, 'Name');
-                }
+                // if (selectedOption != "allLocations") {
+                selected = _.unique(selected, 'Name');
+                // }
 
                 $('#curInv').empty();
 
                 for (var i = 0; i < selected.length; i++) {
                     var ret = [];
-                    var currentAvailable = "";
-                    var currentonHand ='';
+                    var currentAvailable = '';
+                    var currentonHand = '';
+                    var quantityCommited = '';
+
                     if (selectedOption != "allLocations") {
                         ret = selected[i].locationsDetails.filter(function (item) {
                             return item.locationName === jQuery('#location option:selected').text();
-                           
-                        })
+                        });
                         currentAvailable = ret[0].quantityAvailable;
-                        currentonHand=ret[0].quantityOnHand;
+                        currentonHand = ret[0].quantityOnHand;
+                        quantityCommited = ret[0].quantityCommited;
                     }
                     else {
-                        currentAvailable=selected[i].Available;
-                        currentonHand=selected[i]['On Hand'];
+                        currentonHand = selected[i]['On Hand'];
+                        currentAvailable = selected[i].Available;
+                        currentAvailable = selected[i].quantityCommited;
                     }
+
                     $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
                         '<td class="recordviews-title" data-name="title"><span class="recordviews-title-value">' +
                         '<a class="recordviews-title-anchor" href="#/item-details?id=' + selected[i].id + '" data-touchpoint="customercenter" data-id="' + selected[i].id + '">' + selected[i].Name + '</a></span></td> ' +
                         '<td class="recordviews-description" data-name="description"> <span class="">' + selected[i].Description + '</span>' +
                         '<span class="recordviews-value"></span></td><td class="recordviews-Available Quantity" data-name="Available Quantity">' +
-                        '<span class="recordviews-label">Available Quantity</span> <span class="recordviews-value">' +currentAvailable + '</span></td><td class="recordviews-On Hand Quantity" data-name="On Hand Quantity"> ' +
-                        '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' + selected[i].Committed + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
+                        '<span class="recordviews-label">Available Quantity</span> <span class="recordviews-value">' + currentAvailable + '</span></td><td class="recordviews-On Hand Quantity" data-name="On Hand Quantity"> ' +
+                        '<span class="recordviews-label">On Hand Quantity</span> <span class="recordviews-value">' + quantityCommited + '</span>  </td>  <td class="recordviews-Committed Quantity" data-name="Committed Quantity"> ' +
                         '<span class="recordviews-label">Committed Quantity</span> <span class="recordviews-value">' + currentonHand + '</span> </td> </tr>');
                 }
 
