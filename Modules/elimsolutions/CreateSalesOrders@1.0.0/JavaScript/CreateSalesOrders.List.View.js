@@ -72,14 +72,14 @@ define(
                         qty = parseInt(qty) + parseInt($('#qty-' + item).text());
                         $('#qty-' + item).text(qty);
                     } else if ($('#itemid-' + item).length == 0) {
-                        var item = '';
-                        item += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
-                        item += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt="" style="max-width:48px!important;"></td>'
-                        item += '<td style="text-align: left;">' + jQuery('#items option:selected').text() + '</td>'
-                        item += '<td style="float:right;margin-top: -44px; padding-right: 45px;"> Qty: <span id="qty-' + jQuery('#items option:selected').val() + '">' + jQuery('#qty').val() + '</span></td>'
-                        item += '<td style="float:right;margin-top: -44px;"> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button></td></tr>'
-                        item += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span></td>';
-                        jQuery('#table-summary').append(item);
+                        var itemHtml = '';
+                        itemHtml += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
+                        itemHtml += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt="" style="max-width:48px!important;"></td>'
+                        itemHtml += '<td style="text-align: left;">' + jQuery('#items option:selected').text() + '</td>'
+                        itemHtml += '<td style="float:right;margin-top: -44px; padding-right: 45px;"> Qty: <span id="qty-' + jQuery('#items option:selected').val() + '">' + jQuery('#qty').val() + '</span></td>'
+                        itemHtml += '<td style="float:right;margin-top: -44px;"> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button></td></tr>'
+                        itemHtml += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span></td>';
+                        jQuery('#table-summary').append(itemHtml);
                     }
 
                     if (arrayItems) {
