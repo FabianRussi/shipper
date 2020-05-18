@@ -89,8 +89,7 @@ define(
                             qty: qty,
                             amount: jQuery('#amount').val(),
                             tax: jQuery('#taxcode option:selected').text(),
-                            locations: jQuery('#locations option:selected').val(),
-
+                            locations: jQuery('#locations option:selected').val()
                         });
                         sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
                     } else {
@@ -99,8 +98,7 @@ define(
                             qty: jQuery('#qty').val(),
                             amount: jQuery('#amount').val(),
                             tax: jQuery('#taxcode option:selected').text(),
-                            locations: jQuery('#locations option:selected').val(),
-
+                            locations: jQuery('#locations option:selected').val()
                         }];
                         var customerId = this.customerId;
                         sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
