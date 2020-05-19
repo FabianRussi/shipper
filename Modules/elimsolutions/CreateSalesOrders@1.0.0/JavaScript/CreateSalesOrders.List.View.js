@@ -63,8 +63,10 @@ define(
 
                 if (qty <= 0) {
                     return alert('Quantity cannot be 0 or less than 0.');
+                }else if(jQuery('#items').val() === ''){
+                    return alert('You need select an item to add.');
                 }
-                // $("#items").val($("#target option:first").val());
+                 
                 var addItem = this.getQuantityAvailable(qty, itemId, location);
 
                 if (addItem.available) {
@@ -80,8 +82,9 @@ define(
                         itemHtml += '<td style="float:right;margin-top: -44px;"> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button></td></tr>'
                         itemHtml += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span></td>';
                         jQuery('#table-summary').append(itemHtml);
+                        jQuery('#items option:first').prop('selected',true)
                     }
-
+                   
                     if (arrayItems) {
                         arrayItems = JSON.parse(arrayItems);
                         arrayItems.push({
