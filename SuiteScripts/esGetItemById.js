@@ -64,7 +64,7 @@ function getItemById(params) {
         if(ss){
             for(var ii=0;ii<ss.length;ii++){
                 var columns = ss[ii].getAllColumns();
-      
+         
                     json.serials.push({
                         serial : ss[ii].getText(columns[0]), 
                         expirationdate: ss[ii].getValue(columns[5]), 
@@ -72,7 +72,8 @@ function getItemById(params) {
                         location:ss[ii].getText(columns[6]),
                         qtyOnOrder: ss[ii].getValue(columns[7]),
                         qtyIndividual: ss[ii].getValue(columns[3]),
-                        qtySum: ss[ii].getValue(columns[8])
+                        qtySum: ss[ii].getValue(columns[8]),
+                        qtyAvailable: ss[ii].getValue(columns[9])
                       })
             
                 
