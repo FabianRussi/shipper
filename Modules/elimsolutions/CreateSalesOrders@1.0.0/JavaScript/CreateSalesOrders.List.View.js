@@ -24,7 +24,7 @@ define(
             page_header: _('Create sale order').translate(),
             searchFilterValue: '',
             filteredResults: [],
-            
+
             initialize: function (options) {
                 this.options = options;
                 this.application = options.application;
@@ -1210,30 +1210,29 @@ define(
                 var addr2 = jQuery('#addr2').val();
                 var city = jQuery('#city').val();
                 var countrie = jQuery('#country').val();
-                var flag=false
-               if(postal||addr1||addr2||city||countrie)flag=true
+                var flag = false
+                if (postal || addr1 || addr2 || city || countrie) flag = true
 
-                if (addresses&&flag){
+                if (addresses && flag) {
                     alert("You added more than one shipping address, please select only one");
                     return;
                 }
-                    if (addresses) {
-                        arrData.push({ addresses: addresses });
+                if (addresses) {
+                    arrData.push({ addresses: addresses });
 
-                    } else if (addresses == '' && jQuery('#postalCode').val() == '') {
-                        // 
-                        this.completeField();
-                        alert('If I do not select an address, you must complete the fields for shipping address');
-                        return;
-                    } else {
-                        arrData.push({
-                            postalCode: jQuery('#postalCode').val(),
-                            addr1: jQuery('#addr1').val(),
-                            addr2: jQuery('#addr2').val(),
-                            city: jQuery('#city').val(),
-                            country: jQuery('#country option:selected').val()
-                        })
-                    }
+                } else if (addresses == '' && jQuery('#postalCode').val() == '') {
+                    this.completeField();
+                    alert('Please enter Shipping Address to save the order');
+                    return;
+                } else {
+                    arrData.push({
+                        postalCode: jQuery('#postalCode').val(),
+                        addr1: jQuery('#addr1').val(),
+                        addr2: jQuery('#addr2').val(),
+                        city: jQuery('#city').val(),
+                        country: jQuery('#country option:selected').val()
+                    })
+                }
                 arrData.push({
                     orderNumber: jQuery('#orderNumber').val(),
                     memo: jQuery('#memo').val(),
@@ -1269,7 +1268,7 @@ define(
                             sessionStorage.removeItem('jsonItem');
                             alert('Your order number is Number ' + response.soNumber);
                         } else {
-                           // alert('The order is purchased has not been created, check the entered data');
+                            // alert('The order is purchased has not been created, check the entered data');
                         }
                     })
             },
