@@ -46,7 +46,7 @@
 
 		{{else}}
 			<div class="overview-home-orders-empty-section">
-				<h5>{{translate 'No purchases were found'}}</h5>
+				<h5>{{translate 'No orders were found'}}</h5>
 			</div>
 		{{/if}}
 		</div>

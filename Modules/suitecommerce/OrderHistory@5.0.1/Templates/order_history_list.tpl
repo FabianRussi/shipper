@@ -83,7 +83,7 @@
 			<p class="order-history-list-empty">{{translate 'Loading...'}}</p>
 		{{else}}
 			<div class="order-history-list-empty-section">
-				<h5>{{translate 'No purchases were found'}}</h5>
+				<h5>{{translate 'No orders were found'}}</h5>
 				
 				{{#unless allIsActive}}
 					<p>{{translate 'To see a list of all your past purchases, you can go to the tab <a href="/purchases" class="">All</a>.'}}</p>

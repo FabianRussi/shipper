@@ -37,7 +37,33 @@ define(
 		Handlebars.registerHelper('getThemeAssetsPath', function (default_img_path) {
 			return Handlebars.helpers.getThemeAssetsPathWithDefault.apply(this, [null, default_img_path]);
 		});
+		Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 
+			switch (operator) {
+				case '==':
+					return (v1 == v2) ? options.fn(this) : options.inverse(this);
+				case '===':
+					return (v1 === v2) ? options.fn(this) : options.inverse(this);
+				case '!=':
+					return (v1 != v2) ? options.fn(this) : options.inverse(this);
+				case '!==':
+					return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+				case '<':
+					return (v1 < v2) ? options.fn(this) : options.inverse(this);
+				case '<=':
+					return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+				case '>':
+					return (v1 > v2) ? options.fn(this) : options.inverse(this);
+				case '>=':
+					return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+				case '&&':
+					return (v1 && v2) ? options.fn(this) : options.inverse(this);
+				case '||':
+					return (v1 || v2) ? options.fn(this) : options.inverse(this);
+				default:
+					return options.inverse(this);
+			}
+		});
 		Handlebars.registerHelper('getExtensionAssetsPathWithDefault', function (img_path, default_img_path) {
 			if (img_path && img_path !== Utils.getAbsoluteUrl()) {
 				return img_path;
