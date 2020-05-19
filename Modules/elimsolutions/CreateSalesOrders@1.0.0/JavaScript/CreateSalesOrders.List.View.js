@@ -56,7 +56,7 @@ define(
 
                 e.preventDefault();
 
-                var item = jQuery('#items option:selected').val();
+                var itemId = jQuery('#items option:selected').val();
                 var qty = jQuery('#qty').val();
                 var location = jQuery('#locations option:selected').text();
                 var arrayItems = sessionStorage.getItem('jsonItem');
@@ -64,14 +64,14 @@ define(
                 if (qty <= 0) {
                     return alert('Quantity cannot be 0 or less than 0.');
                 }
-                $("#items").val($("#target option:first").val());
-                var addItem = this.getQuantityAvailable(qty, item, location);
+                // $("#items").val($("#target option:first").val());
+                var addItem = this.getQuantityAvailable(qty, itemId, location);
 
                 if (addItem.available) {
-                    if ($('#itemid-' + item).length > 0 && addItem.qtyAvailable >= (parseInt($('#qty-' + item).text()) + parseInt($('#qty').val()))) {
-                        qty = parseInt(qty) + parseInt($('#qty-' + item).text());
-                        $('#qty-' + item).text(qty);
-                    } else if ($('#itemid-' + item).length == 0) {
+                    if ($('#itemid-' + itemId).length > 0 && addItem.qtyAvailable >= (parseInt($('#qty-' + itemId).text()) + parseInt($('#qty').val()))) {
+                        qty = parseInt(qty) + parseInt($('#qty-' + itemId).text());
+                        $('#qty-' + itemId).text(qty);
+                    } else if ($('#itemid-' + itemId).length == 0) {
                         var itemHtml = '';
                         itemHtml += '<tr data-attr="' + jQuery('#items option:selected').val() + ";" + jQuery('#taxcode option:selected').text() + ";" + jQuery('#locations option:selected').val() + '" id="itemid-' + jQuery('#items option:selected').val() + '" class="trclass">'
                         itemHtml += '<td><img src="https://5445214.app.netsuite.com/c.5445214/SSP Applications/eShipper+_5445214/uat/img/eshipper_logo.jpg" alt="" style="max-width:48px!important;"></td>'
