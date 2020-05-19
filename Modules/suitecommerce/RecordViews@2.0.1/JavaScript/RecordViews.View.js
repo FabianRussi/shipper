@@ -8,102 +8,103 @@
 //@module RecordViews
 define(
 	'RecordViews.View'
-,	[	'recordviews.tpl'
-	,	'Backbone.CompositeView'
+	, ['recordviews.tpl'
+		, 'Backbone.CompositeView'
 
-	,	'Backbone'
-	,	'underscore'
+		, 'Backbone'
+		, 'underscore'
 	]
-,	function (
+	, function (
 		record_views_tpl
 
-	,	BackboneCompositeView
+		, BackboneCompositeView
 
-	,	Backbone
-	,	_
-	)
-{
-	'use strict';
+		, Backbone
+		, _
+	) {
+		'use strict';
 
-	//@class RecordViews.View @extend Backbone.View
-	return Backbone.View.extend({
+		//@class RecordViews.View @extend Backbone.View
+		return Backbone.View.extend({
 
-		//@property {Function} template
-		template: record_views_tpl
+			//@property {Function} template
+			template: record_views_tpl
 
-		//@method initialize
-		//@param {RecordViews.View.Initialize} options
-		//@return {Void}
-	,	initialize: function ()
-		{
-			this.extendChildViews();
+			//@method initialize
+			//@param {RecordViews.View.Initialize} options
+			//@return {Void}
+			, initialize: function () {
+				this.extendChildViews();
 
-			BackboneCompositeView.add(this);
-		}
+				BackboneCompositeView.add(this);
+			}
 
-		//@property {Object} childViews
-	,	childViews: {
-		}
+			//@property {Object} childViews
+			, childViews: {
+			}
 
-		//@method extendChildViews Internal method that based on the list of columns that the current model has, extend the childViews property object by adding
-		//each of the composite views specified in the columns. Notice here that each column is of type RecordViews.View.Column
-		//@return {Void}
-	,	extendChildViews: function ()
-		{
-			var self = this;
+			//@method extendChildViews Internal method that based on the list of columns that the current model has, extend the childViews property object by adding
+			//each of the composite views specified in the columns. Notice here that each column is of type RecordViews.View.Column
+			//@return {Void}
+			, extendChildViews: function () {
+				var self = this;
 
-			_.each(self.model.get('columns'), function (column)
-			{
-				if (column.compositeKey)
-				{
-					var childView = {};
-					childView[''+column.compositeKey] = function ()
-					{
-						return column.composite;
-					};
-					self.addChildViewInstances(childView);
+				_.each(self.model.get('columns'), function (column) {
+					if (column.compositeKey) {
+						var childView = {};
+						childView['' + column.compositeKey] = function () {
+							return column.composite;
+						};
+						self.addChildViewInstances(childView);
+					}
+				});
+			}
+
+			//@method normalizeColumns Add the properties showLabel and isComposite to each of the RecordViews.View.Column of the current model.
+			//@return {Array<RecordViews.View.Column>}
+			, normalizeColumns: function () {
+
+				return _.map(this.model.get('columns'), function (column) {
+					column.showLabel = !!column.label;
+					column.isComposite = !!column.compositeKey;
+
+					return column;
+				});
+			}
+
+			, urlparams: function () {
+				var url = window.location.href
+				var flag = true;
+				if (url.indexOf("returns") != -1) {
+					flag = false;
 				}
-			});
-		}
-
-		//@method normalizeColumns Add the properties showLabel and isComposite to each of the RecordViews.View.Column of the current model.
-		//@return {Array<RecordViews.View.Column>}
-	,	normalizeColumns: function ()
-		{
-			return _.map(this.model.get('columns'), function (column)
-			{
-				column.showLabel = !!column.label;
-				column.isComposite = !!column.compositeKey;
-
-				return column;
-			});
-		}
-
-		//@method getContext @return {RecordViews.View.Context}
-	,	getContext: function ()
-		{
-			//@class RecordViews.View.Context
-			return {
-				//@property {Backbone.Model} model
-				model: this.model
-				//@property {String} id
-			,	id: this.model.id
-				//@property {Boolean} isNavigable
-			,	isNavigable: _.isBoolean(this.model.get('isNavigable')) ? this.model.get('isNavigable') : true
-				//@property {Boolean} showInModal
-			,	showInModal: _.isBoolean(this.model.get('showInModal')) ? this.model.get('showInModal') : false
-				//@property {String} touchpoint
-			,	touchpoint: this.model.get('touchpoint') || 'customercenter'
-				//@property {String} detailsURL
-			,	detailsURL: this.options.referrer ? this.model.get('detailsURL') + '/' + this.options.referrer : this.model.get('detailsURL')
-				//@property {String} title
-			,	title: this.model.get('title')
-				//@property {Array<RecordViews.View.Column>} columns
-			,	columns: this.normalizeColumns()
-			};
-		}
+				return flag;
+			}
+			//@method getContext @return {RecordViews.View.Context}
+			, getContext: function () {
+				//@class RecordViews.View.Context
+				return {
+					//@property {Backbone.Model} model
+					model: this.model
+					, url: this.urlparams()
+					//@property {String} id
+					, id: this.model.id
+					//@property {Boolean} isNavigable
+					, isNavigable: _.isBoolean(this.model.get('isNavigable')) ? this.model.get('isNavigable') : true
+					//@property {Boolean} showInModal
+					, showInModal: _.isBoolean(this.model.get('showInModal')) ? this.model.get('showInModal') : false
+					//@property {String} touchpoint
+					, touchpoint: this.model.get('touchpoint') || 'customercenter'
+					//@property {String} detailsURL
+					, detailsURL: this.options.referrer ? this.model.get('detailsURL') + '/' + this.options.referrer : this.model.get('detailsURL')
+					//@property {String} title
+					, title: this.model.get('title')
+					//@property {Array<RecordViews.View.Column>} columns
+					, columns: this.normalizeColumns()
+				};
+			}
+		});
 	});
-});
 
 //@class RecordViews.View.Initialize
 //@property {RecordViews.View.Initialize.Model} model

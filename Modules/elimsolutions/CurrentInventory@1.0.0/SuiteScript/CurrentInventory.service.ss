@@ -1,16 +1,17 @@
-function service (request, response){
+function service(request, response) {
     // gain access to methods on Application object
     var Application = require('Application');
-    try{
+    try {
 
-        console.log("session" , session);
+        console.log("session", session);
 
-            var CurrentInventory = require('CurrentInventory.Model');
-            if (request.getMethod() === 'GET') {
-                Application.sendContent(CurrentInventory.listAll());
-            }
+        var CurrentInventory = require('CurrentInventory.Model');
+        if (request.getMethod() === 'GET') {
+            Application.sendContent(CurrentInventory.listAll());
+        }
 
-    }catch(es){
+
+    } catch (es) {
         Application.sendError(es);
     }
 }

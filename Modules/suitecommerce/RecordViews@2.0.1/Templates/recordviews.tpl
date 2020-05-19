@@ -6,10 +6,11 @@
 }}
 
 <tr class="recordviews-row" data-item-id="{{id}}" data-navigation-hashtag="{{detailsURL}}" data-action="navigate">
-	<td class="recordviews-title" data-name="title">
+	<a href=""><td class="recordviews-title" data-name="title">
 		<span class="recordviews-title-value">
+		
 			{{#if isNavigable}}
-			<a class="recordviews-title-anchor" href="#" data-touchpoint="{{touchpoint}}" data-id="{{id}}" data-hashtag="{{detailsURL}}" {{#if showInModal}}data-toggle="show-in-modal"{{/if}}>
+			{{#if url}}	<a class="recordviews-title-anchor" href="#/item-details?id={{id}}"data-touchpoint="{{touchpoint}}" data-id="{{id}}"  {{#if showInModal}}data-toggle="show-in-modal"{{/if}}> {{/if}}
 			{{/if}}
 				{{title}}
 			{{#if isNavigable}}
@@ -17,8 +18,9 @@
 			{{/if}}
 		</span>
 	</td>
-
+	</a>
 {{#each columns}}
+
 	<td class="recordviews-{{type}}" data-name="{{name}}">
 		{{#if showLabel}}
 			<span class="recordviews-label">{{label}}</span>
@@ -29,6 +31,7 @@
 			<span class="recordviews-value">{{value}}</span>
 		{{/if}}
 	</td>
+
 {{/each}}
 </tr>
 

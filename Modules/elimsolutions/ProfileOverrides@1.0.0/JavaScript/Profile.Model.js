@@ -139,7 +139,7 @@ define(
                         if (_.isNumber(model.get('creditlimit')) && _.isNumber(model.get('balance')))
                         {
                             var balance_available;
-
+                            this.set('currentinventory',new Backbone.Collection( JSON.parse(model.get('currentinventory')[2].value )));
                             if (typeof BigNumber !== 'undefined')
                             {
                                 balance_available = BigNumber(model.get('creditlimit')).minus(model.get('balance'));
@@ -153,10 +153,9 @@ define(
                             model.set('balance_available_formatted', Utils.formatCurrency(balance_available));
                         }
                     });
-
+     
                     this.set('addresses', attributes && attributes.addresses || new AddressCollection());
                     this.set('creditcards', attributes && attributes.creditcards || new CreditCardsCollection());
-                    this.set('currentinventory', attributes && attributes.currentinventory || new CurrentInventoryCollection());
 
                 }
 

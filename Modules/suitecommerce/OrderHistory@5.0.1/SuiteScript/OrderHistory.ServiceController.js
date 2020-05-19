@@ -56,12 +56,14 @@ define(
 				}
 				else
 				{
+					nlapiLogExecution("DEBUG","this.request.getParameter('otherrefnum')---:",this.request.getParameter('otherrefnum'));
 					return OrderHistoryModel.list({
 						filter: this.request.getParameter('filter')
 					,	order: this.request.getParameter('order')
 					,	sort: this.request.getParameter('sort')
 					,	from: this.request.getParameter('from')
 					,	to: this.request.getParameter('to')
+					,	otherrefnum: this.request.getParameter('otherrefnum')
 					,	origin: this.request.getParameter('origin')
 					,	page: this.request.getParameter('page') || 1
 					,	results_per_page: this.request.getParameter('results_per_page')

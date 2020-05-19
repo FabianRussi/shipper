@@ -35,7 +35,6 @@
 
 						<div class="list-header-view-datepicker-to">
 							<label class="list-header-view-to" for="to">{{translate 'to'}}</label>
-
 							<div class="list-header-view-datepicker-container-input">
 								<input class="list-header-view-accordion-body-input" id="to" name="to" type="date" autocomplete="off" data-format="yyyy-mm-dd" data-start-date="{{rangeFilterToMin}}" data-end-date="{{rangeFilterToMax}}" value="{{selectedRangeTo}}" data-action="range-filter" data-todayhighlight="true"/>
 
@@ -45,8 +44,9 @@
 								</a>
 							</div>
 						</div>
+						<input class="list-header-view-accordion-body-input" placeholder="Search by Order #" type="text" id="po" data-action="po-filter" style="height: 43px;">
 					{{/if}}
-
+						
 					{{#if sorts}}
 						<span class="list-header-view-sorts">
 							<label class="list-header-view-filters">

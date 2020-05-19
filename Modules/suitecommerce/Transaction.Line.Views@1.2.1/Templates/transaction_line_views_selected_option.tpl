@@ -5,12 +5,12 @@
 	may use this code subject to the terms that govern your access and use.
 }}
 
-<div class="transaction-line-views-selected-option" name="{{label}}">
-	<p>
-		<span class="transaction-line-views-selected-option-label">{{label}}: </span>
-		<span class="transaction-line-views-selected-option-value">{{selectedValue.label}}</span>
-	</p>
-</div>
+<!--<div class="transaction-line-views-selected-option" name="{{label}}">-->
+	<!--<p>-->
+		<!--<span class="transaction-line-views-selected-option-label">{{label}}: </span>-->
+		<!--<span class="transaction-line-views-selected-option-value">{{selectedValue.label}}</span>-->
+	<!--</p>-->
+<!--</div>-->
 
 
 

@@ -6,7 +6,7 @@
 }}
 
 {{#if currentPageLowerThanTotalPagesAndCurrentPageGreaterThan0AndPagesCountGreaterThan1}}
-<nav class="global-views-pagination">
+<nav class="global-views-pagination" id="global-pagination">
 	{{#if showPageIndicator}}
 	<p class="global-views-pagination-count">{{translate '$(0) of $(1)' currentPage totalPages}}</p>
 	{{/if}}
