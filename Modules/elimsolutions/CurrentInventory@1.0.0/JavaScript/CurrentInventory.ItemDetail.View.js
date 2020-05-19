@@ -100,10 +100,11 @@ define(
                 if (Object.keys(withDatesGroupedByLocation).length !== 0) {
                     for (var key in withDatesGroupedByLocation) {
                         var obj = withDatesGroupedByLocation[key][0];
+                        obj.serial = obj.serial.toUpperCase();
                         for (var i = 0; i < withDatesGroupedByLocation[key].length; i++) {
-                            if (obj.serial.indexOf(withDatesGroupedByLocation[key][i].serial) < 0) {
+                            obj.qtySum = parseInt(withDatesGroupedByLocation[key][i].qtySum); //parseInt(obj.qtySum) + parseInt(withDatesGroupedByLocation[key][i].qtySum);
+                            if (obj.serial.indexOf(withDatesGroupedByLocation[key][i].serial.toUpperCase()) < 0) {
                                 obj.serial += ', ' + withDatesGroupedByLocation[key][i].serial;
-                                obj.qtySum = parseInt(obj.qtySum) + parseInt(withDatesGroupedByLocation[key][i].qtySum);
                             }
                         }
                         obj.qtyAvailable = this.getQuantityAvailable(model.locations, key);
