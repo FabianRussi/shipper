@@ -81,7 +81,7 @@ define(
 			,	collection: this.collection
 			,	sorts: this.sortOptions
 			,	rangeFilter: 'date'
-			,	rangeFilterLabel: _('Requested from').translate()
+			,	rangeFilterLabel: _('From').translate()
 			,	listHeaderId: 'returns'
 			,	hidePagination: true
 			,   allowEmptyBoundaries: true
