@@ -221,7 +221,7 @@ define(
             }
 
             , filterLocations: function () {
-                debugger;
+          
                 var locations = [];
                 for (var i = 0; i < this.options.collection.models.length; i++) {
                     for (var o = 0; o < this.options.collection.models[i].attributes.records.length; o++) {

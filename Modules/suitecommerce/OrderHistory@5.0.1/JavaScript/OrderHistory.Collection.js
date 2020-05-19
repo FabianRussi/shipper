@@ -58,6 +58,7 @@ define('OrderHistory.Collection'
 				,	from: range.from
 				,	to: range.to
 				,	page: options.page
+				,   otherrefnum:options.otherrefnum
 				};
 
 			this.fetch({

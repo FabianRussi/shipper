@@ -37,7 +37,7 @@ define('OrderHistory.Model'
 		,	'order_number': ''
 			//@property {String} status This value is present when retrieving a list of this model
 		,	'status': ''
-
+		,	'otherrefnum': ''
 			//@property {OrderHistory.Model.Summary} summary This value is present when retrieving a list of this model
 		,	'summary': {}
 			//@class OrderHistory.Model.Summary

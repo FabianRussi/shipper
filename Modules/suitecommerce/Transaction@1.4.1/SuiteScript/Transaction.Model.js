@@ -76,14 +76,16 @@ define(
 			var self = this;
 
 			this.data = data;
+			nlapiLogExecution("DEBUG","MYDATA---:",JSON.stringify(data));
 
 			this.amountField = this.isMultiCurrency ? 'fxamount' : 'amount';
-
+			
 			this.filters = {
 					'entity': ['entity', 'is', nlapiGetUser()]
 				,	'mainline_operator': 'and'
 				,	'mainline': ['mainline','is', 'T']
 			};
+			
 
 			this.columns = {
 					'trandate': new nlobjSearchColumn('trandate')
@@ -152,6 +154,12 @@ define(
 					)
 				];
 			}
+			nlapiLogExecution("debug","filters ANTES ", _.values(this.filters))
+			if(this.data.otherrefnum){
+				this.filters.otherrefnum_operator = 'and';
+				this.filters['otherrefnum'] =  ['formulatext: {otherrefnum}','contains', this.data.otherrefnum]
+			}
+			nlapiLogExecution("debug","filters despues ", _.values(this.filters))
 
 			if (this.data.internalid)
 			{
@@ -282,11 +290,7 @@ define(
 					,	name: record.getText('currency')
 					} : null
 				};
-				try{
-					nlapiLogExecution("DEBUG","OTHER AFTTER======::::---",JSON.stringify(result));
-				}catch(e){
-					nlapiLogExecution("DEBUG","ERROR ERROR======::::---",e);
-				}
+			
 				
 				return self.mapListResult(result, record);
 

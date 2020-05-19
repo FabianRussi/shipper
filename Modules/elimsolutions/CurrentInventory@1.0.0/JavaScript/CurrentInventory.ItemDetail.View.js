@@ -72,7 +72,7 @@ define(
             }
 
             , render: function () {
-                debugger;
+    
                 var serials = this.groupByDateAndSerial(this.model.attributes);
                 for (var i = 0; i < this.model.get("locations").length; i++) {
                     var currentLoc = this.model.get("locations")[i];

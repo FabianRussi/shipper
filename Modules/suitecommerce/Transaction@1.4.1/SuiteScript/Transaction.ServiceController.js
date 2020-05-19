@@ -59,6 +59,7 @@ define(
 					,	to: this.request.getParameter('to')
 					,	page: this.request.getParameter('page') || 1
 					,	types: this.request.getParameter('types')
+					,	otherrefnum: this.request.getParameter('otherrefnum')
 					,	createdfrom: this.request.getParameter('createdfrom')
 					});
 				}
