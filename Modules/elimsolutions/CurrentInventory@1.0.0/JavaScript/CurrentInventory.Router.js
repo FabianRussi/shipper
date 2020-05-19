@@ -13,8 +13,7 @@ define('CurrentInventory.Router', ['CurrentInventory.List.View', 'CurrentInvento
         ,
         initialize: function (application) {
 
-            this.application = application;
-            debugger
+            this.application = application;    
             this.collection = new Backbone.Collection( JSON.parse(ProfileModel.getInstance().get('currentinventory')[2].value ));// ProfileModel.getInstance().get('currentinventory');
             var r = 0;
         }

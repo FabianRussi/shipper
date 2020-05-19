@@ -56,6 +56,7 @@ define(
 				}
 				else
 				{
+					nlapiLogExecution("DEBUG","this.request.getParameter('otherrefnum') override---:",this.request.getParameter('otherrefnum'));
 					return OrderHistoryModel.list({
 						filter: this.request.getParameter('filter')
 					,	order: this.request.getParameter('order')
@@ -64,6 +65,7 @@ define(
 					,	to: this.request.getParameter('to')
 					,	origin: this.request.getParameter('origin')
 					,	page: this.request.getParameter('page') || 1
+					,	otherrefnum: this.request.getParameter('otherrefnum')
 					,	results_per_page: this.request.getParameter('results_per_page')
 					});
 				}

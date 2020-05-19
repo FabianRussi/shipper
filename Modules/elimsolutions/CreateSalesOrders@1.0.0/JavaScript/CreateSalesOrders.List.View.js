@@ -64,7 +64,7 @@ define(
                 if (qty <= 0) {
                     return alert('Quantity cannot be 0 or less than 0.');
                 }
-
+                $("#items").val($("#target option:first").val());
                 var addItem = this.getQuantityAvailable(qty, item, location);
 
                 if (addItem.available) {
