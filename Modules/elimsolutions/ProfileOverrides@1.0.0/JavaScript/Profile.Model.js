@@ -139,7 +139,6 @@ define(
                         if (_.isNumber(model.get('creditlimit')) && _.isNumber(model.get('balance')))
                         {
                             var balance_available;
-                            debugger;
                             this.set('currentinventory',new Backbone.Collection( JSON.parse(model.get('currentinventory')[2].value )));
                             if (typeof BigNumber !== 'undefined')
                             {

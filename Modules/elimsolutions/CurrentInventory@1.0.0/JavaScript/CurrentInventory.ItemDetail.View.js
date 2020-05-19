@@ -101,13 +101,14 @@ define(
                     for (var key in withDatesGroupedByLocation) {
                         var obj = withDatesGroupedByLocation[key][0];
                         obj.serial = obj.serial.toUpperCase();
+                        obj.qtyOnHand = this.getQuantityOnHandByDate(withDatesGroupedByLocation[key]);
+                        obj.qtyAvailable = this.getQuantityAvailable(withDatesGroupedByLocation[key]); //this.getQuantityAvailable(model.locations, key);
+
                         for (var i = 0; i < withDatesGroupedByLocation[key].length; i++) {
-                            obj.qtySum = parseInt(withDatesGroupedByLocation[key][i].qtySum); //parseInt(obj.qtySum) + parseInt(withDatesGroupedByLocation[key][i].qtySum);
-                            if (obj.serial.indexOf(withDatesGroupedByLocation[key][i].serial.toUpperCase()) < 0) {
+                            if (obj.serial.toUpperCase().indexOf(withDatesGroupedByLocation[key][i].serial.toUpperCase()) < 0) {
                                 obj.serial += ', ' + withDatesGroupedByLocation[key][i].serial;
                             }
                         }
-                        obj.qtyAvailable = this.getQuantityAvailable(model.locations, key);
                         ret[ret.length] = obj;
                     }
                     var withoutDates = _.filter(model.serials, function (loc) {
@@ -118,7 +119,7 @@ define(
                     for (var i = 0; i < withoutDates.length; i++) {
                         var obj = withoutDates[i];
                         obj.qtyAvailable = this.getQuantityAvailableNoDate(model.locations, obj.location);
-                        obj.qtySum = this.getQuantityOnHand(model.locations, obj.location);
+                        obj.qtyOnHand = this.getQuantityOnHand(model.locations, obj.location);
                         ret[ret.length] = withoutDates[i];
                     }
                 }
@@ -128,13 +129,13 @@ define(
                             var obj = JSON.parse(JSON.stringify(model.serials[0]));
                             obj.location = model.locations[i].locationName;
                             obj.qtyAvailable = model.locations[i].quantityAvailable;
-                            obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
+                            obj.qtyOnHand = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
                             ret[ret.length] = obj;
                         } else {
                             var obj = {};
                             obj.location = model.locations[i].locationName;
                             obj.qtyAvailable = model.locations[i].quantityAvailable;
-                            obj.qtySum = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
+                            obj.qtyOnHand = model.locations[i].quantityOnHand != null ? model.locations[i].quantityOnHand : 0;
                             ret[ret.length] = obj;
                         }
                     }
@@ -142,23 +143,19 @@ define(
                 return ret;
             }
 
-            , getQuantityAvailable: function (locations, key) {
-                var keyStr = key.split('|')[0];
-
-                if (keyStr != "") {
-                    var location = _.filter(locations, function (loc) { return loc.locationName == keyStr });
-
-                    if (location[0] != undefined) {
-                        return location[0].quantityAvailable;
+            , getQuantityAvailable: function (locations) {
+                var availableGroup = _.groupBy(locations, 'qtyAvailable');
+                var qtyOnAvailable = 0;
+                for (var key in availableGroup) {
+                    var howMany = _.groupBy(availableGroup[key], 'serial');
+                    if (Object.keys(howMany).length > 1) {
+                        var aux = parseInt(key) * Object.keys(howMany).length;
+                        qtyOnAvailable += aux;
+                    } else {
+                        qtyOnAvailable += parseInt(key)
                     }
                 }
-
-                var qtyAvailable = 0;
-
-                for (var i = 0; i < locations.length; i++) {
-                    qtyAvailable += locations[i].quantityAvailable != null ? parseInt(locations[i].quantityAvailable) : 0;
-                }
-                return qtyAvailable;
+                return qtyOnAvailable;
             }
 
             , getQuantityAvailableNoDate: function (locations, key) {
@@ -180,6 +177,22 @@ define(
                     for (var i = 0; i < location.length; i++) {
                         qtyOnHand += location[i].quantityOnHand != null ? parseInt(location[i].quantityOnHand) : 0;
                     }
+                }
+                return qtyOnHand;
+            }
+
+            , getQuantityOnHandByDate: function (withDatesGroupedByLocation) {
+                var onHandGroup = _.groupBy(withDatesGroupedByLocation, 'qtySum');
+                var qtyOnHand = 0;
+                for (var key in onHandGroup) {
+                    var howMany = _.groupBy(onHandGroup[key], 'serial');
+                    if (Object.keys(howMany).length > 1) {
+                        var aux = parseInt(key) * Object.keys(howMany).length;
+                        qtyOnHand += aux;
+                    } else {
+                        qtyOnHand += parseInt(key)
+                    }
+
                 }
                 return qtyOnHand;
             }
