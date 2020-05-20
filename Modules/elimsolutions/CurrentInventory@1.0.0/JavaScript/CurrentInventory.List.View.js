@@ -256,14 +256,14 @@ define(
                         ret = selected[i].locationsDetails.filter(function (item) {
                             return item.locationName === jQuery('#location option:selected').text();
                         });
-                        currentonHand = ret[0].quantityOnHand;
-                        currentAvailable = ret[0].quantityAvailable;
-                        quantityCommited = ret[0].quantityCommited;
+                        currentonHand = ret[0].quantityOnHand != undefined ? ret[0].quantityOnHand : 0;
+                        currentAvailable = ret[0].quantityAvailable != undefined ? ret[0].quantityAvailable : 0;
+                        quantityCommited = ret[0].quantityCommited != undefined ? ret[0].quantityCommited : 0;
                     }
                     else {
-                        currentonHand = selected[i]['On Hand'];
-                        currentAvailable = selected[i].Available;
-                        quantityCommited = selected[i].Committed;
+                        currentonHand = selected[i]['On Hand'] != undefined ? selected[i]['On Hand'] : 0;
+                        currentAvailable = selected[i].Available != undefined ? selected[i].Available : 0;
+                        quantityCommited = selected[i].Committed != undefined ? selected[i].Committed : 0;
                     }
 
                     $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
