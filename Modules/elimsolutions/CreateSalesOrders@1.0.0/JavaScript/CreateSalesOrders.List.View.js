@@ -83,12 +83,13 @@ define(
                         itemHtml += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span></td>';
                         jQuery('#table-summary').append(itemHtml);
                         jQuery('#items option:first').prop('selected',true)
+                        
                     }
                    
                     if (arrayItems) {
                         arrayItems = JSON.parse(arrayItems);
                         arrayItems.push({
-                            itemid: item,
+                            itemid: itemId,
                             qty: qty,
                             amount: jQuery('#amount').val(),
                             tax: jQuery('#taxcode option:selected').text(),
@@ -110,6 +111,8 @@ define(
                     alert(addItem.message);
                 }
                 sessionStorage.setItem('addItems', 'true')
+                jQuery('#items option:first').prop('selected',true)
+                jQuery('#qty').val('');
             },
 
             removeItem: function(e) {
