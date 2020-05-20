@@ -85,6 +85,7 @@ define('Transaction.Collection'
 				,	from: range.from
 				,	to: range.to
 					//@property {String?} page
+				,   otherrefnum:options.otherrefnum
 				,	page: options.page
 				}
 			,	reset: true
