@@ -50,6 +50,7 @@ define(
 				}
 				else
 				{
+					nlapiLogExecution("DEBUG","this.request.getParameter('otherrefnum') override--- TRANSACTION:",this.request.getParameter('otherrefnum'));
 					return TransactionModel.list(
 					{
 						filter: this.request.getParameter('filter')
