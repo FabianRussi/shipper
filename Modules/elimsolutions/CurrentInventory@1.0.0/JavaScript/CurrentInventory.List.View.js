@@ -221,7 +221,7 @@ define(
             }
 
             , filterLocations: function () {
-          
+
                 var locations = [];
                 for (var i = 0; i < this.options.collection.models.length; i++) {
                     for (var o = 0; o < this.options.collection.models[i].attributes.records.length; o++) {
@@ -256,14 +256,14 @@ define(
                         ret = selected[i].locationsDetails.filter(function (item) {
                             return item.locationName === jQuery('#location option:selected').text();
                         });
-                        currentAvailable = ret[0].quantityAvailable;
                         currentonHand = ret[0].quantityOnHand;
+                        currentAvailable = ret[0].quantityAvailable;
                         quantityCommited = ret[0].quantityCommited;
                     }
                     else {
                         currentonHand = selected[i]['On Hand'];
                         currentAvailable = selected[i].Available;
-                        currentAvailable = selected[i].quantityCommited;
+                        quantityCommited = selected[i].Committed;
                     }
 
                     $('#curInv').append('<tr class="recordviews-row" data-item-id="" data-navigation-hashtag="" data-action="navigate">' +
