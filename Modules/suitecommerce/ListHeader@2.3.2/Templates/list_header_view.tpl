@@ -34,7 +34,7 @@
 						</div>
 
 						<div class="list-header-view-datepicker-to">
-							<label class="list-header-view-to" for="to">{{translate 'to'}}</label>
+							<label class="list-header-view-to" for="To">{{translate 'To'}}</label>
 							<div class="list-header-view-datepicker-container-input">
 								<input class="list-header-view-accordion-body-input" id="to" name="to" type="date" autocomplete="off" data-format="yyyy-mm-dd" data-start-date="{{rangeFilterToMin}}" data-end-date="{{rangeFilterToMax}}" value="{{selectedRangeTo}}" data-action="range-filter" data-todayhighlight="true"/>
 

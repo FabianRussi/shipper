@@ -121,7 +121,7 @@
                 <th>Location</th>
                 <th>Lot Number</th>
                 <th>Expiry Date</th>
-                <th>Quantity Available</th>
+                <!-- <th>Quantity Available</th> -->
                 <th>Quantity on Hand</th>
                 <th>Reorder Point</th>
                 <th>Status</th>
@@ -133,7 +133,7 @@
                 <td>{{location}}</td>
                 <td>{{serial}}</td>
                 <td>{{expirationdate}}</td>
-                <td>{{qtyAvailable}}</td>
+                <!-- <td>{{qtyAvailable}}</td> -->
                 <td>{{qtyOnHand}}</td>
                 <td>{{reorderPoint}}</td>
                 <td>{{inventorystatus}}</td>
