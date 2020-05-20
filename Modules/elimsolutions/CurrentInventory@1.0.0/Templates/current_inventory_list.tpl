@@ -32,14 +32,14 @@
         <h2>{{Title}}</h2>
     </header>
 
-     <select id="location" name="location" class="locationDropdown">
+     <!-- <select id="location" name="location" class="locationDropdown">
         <option value="allLocations">All Locations</option>
         {{#if locations}}
         {{#each locations}}
         <option value={{id}}>{{name}}</option>
         {{/each}}
         {{/if}}
-    </select>  
+    </select>   -->
 
     <input type="text" placeholder="Search for an item" class="form-control curr-inv-srch" data-type="curr-inv-srch"
         id="currInv" value="{{searchFilterValue}}" autofocus />
