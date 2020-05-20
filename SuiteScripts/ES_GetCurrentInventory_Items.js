@@ -5,7 +5,9 @@ function getItems(objRequest, objResponse) {
             type: 'item',
             search: 'customsearch_es_curr_inv_srch', // [ES] CurrentInventory Search
             filterExp: [
-                ["custitem_es_customer", "anyof", stId], "AND", ["isinactive", "is", "F"], "AND", ["inventorydetail.status", "anyof", "1"], "AND", ["type", "anyof", "InvtPart"]
+                ["custitem_es_customer", "anyof", stId], "AND", ["isinactive", "is", "F"], "AND",
+                // ["inventorydetail.status", "anyof", "1"], "AND",
+                ["type", "anyof", "InvtPart"]
             ],
             getAll: true
         });
@@ -22,6 +24,7 @@ function getItems(objRequest, objResponse) {
         var arrItemsCols = [];
         for (var i = 0; i < arrSearchResults.length; i++) {
             var objCurResult = arrSearchResults[i];
+            nlapiLogExecution('DEBUG', ' items', JSON.stringify(objCurResult));
             if (i == 0) {
                 arrItemsCols = objCurResult.getAllColumns();
             }
@@ -85,7 +88,8 @@ function getItems(objRequest, objResponse) {
 function getLocations() {
     var columns = new Array();
     columns[0] = new nlobjSearchColumn('name');
-    var location = nlapiSearchRecord('location', null, null, columns);
+
+    var location = nlapiSearchRecord('location', null, ['isinactive', 'is', 'F'], columns);
     var allLocations = []
     if (location) {
         for (var i = 0; i < location.length; i++) {
@@ -96,10 +100,13 @@ function getLocations() {
         }
         nlapiLogExecution('DEBUG', 'allLocations', JSON.stringify(allLocations));
     }
+
+
     return allLocations;
 }
 
 function getTaxGruops() {
+
     var columns = new Array();
     columns[0] = new nlobjSearchColumn('itemid');
     var taxs = nlapiSearchRecord('taxgroup', null, null, columns);
@@ -112,5 +119,6 @@ function getTaxGruops() {
             })
         }
     }
+
     return allTaxs;
 }

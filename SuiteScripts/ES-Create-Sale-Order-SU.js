@@ -6,7 +6,7 @@ function saleOrderCreation(param) {
         var json = param.getParameter("jsonInfoForm");
         nlapiLogExecution('DEBUG', 'json', json);
 
-        var data = datOrder(json);
+        var data = dataOrder(json);
         var items = data.items;
         nlapiLogExecution('DEBUG', 'data', JSON.stringify(data));
         var order = nlapiCreateRecord('salesorder' /*, { recordmode: "dynamic" }*/ );
@@ -19,8 +19,11 @@ function saleOrderCreation(param) {
         order.setFieldValue('initialamount', "0.0");
         order.setFieldValue("orderstatus", "A");
 
+
         if (items && items.length > 0) {
+
             for (var i = 0; i < items.length; i++) {
+
                 nlapiLogExecution('DEBUG', 'items[i]', JSON.stringify(items[i]));
                 order.selectNewLineItem("item");
                 order.setCurrentLineItemValue("item", "item", items[i].itemid);
@@ -34,7 +37,7 @@ function saleOrderCreation(param) {
         if (!data.addresses.addresses) {
             nlapiLogExecution('DEBUG', 'zip', JSON.stringify(data.addresses.postalCode));
             var subrecord = order.createSubrecord('shippingaddress');
-            subrecord.setFieldValue("country", data.addresses.country); //Country must be set before setting the other address fields
+            subrecord.setFieldValue("country", data.addresses.country);
             subrecord.setFieldValue("addressee", data.dataOrder.customer);
             subrecord.setFieldValue("addrphone", "");
             subrecord.setFieldValue("addr1", data.addresses.addr1);
@@ -50,6 +53,8 @@ function saleOrderCreation(param) {
         } else if (data.addresses.addresses) {
             order.setFieldValue("shipaddresslist", data.addresses.addresses);
         }
+        order.setFieldValue("custbodyes_so_order_portal", "T");
+
 
         var neewResponse = {}
             // nlapiLogExecution('DEBUG', 'orderId', JSON.stringify(order));
@@ -67,7 +72,7 @@ function saleOrderCreation(param) {
     response.write(neewResponse);
 }
 
-function datOrder(jsonInfo) {
+function dataOrder(jsonInfo) {
     var jsonInfo = JSON.parse(jsonInfo);
     var obj = {};
     var items = [];
@@ -82,6 +87,6 @@ function datOrder(jsonInfo) {
         }
         obj.items = items;
     }
-    nlapiLogExecution('DEBUG', 'obj= ', JSON.stringify(obj));
+    nlapiLogExecution('DEBUG', 'obj====', JSON.stringify(obj));
     return obj;
 }

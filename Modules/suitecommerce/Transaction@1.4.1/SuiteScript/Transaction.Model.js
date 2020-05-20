@@ -70,7 +70,6 @@ define(
 		//@return {Transaction.Model.List.Result}
 	,	list: function (data)
 		{
-
 			this.preList();
 
 			var self = this;
@@ -86,7 +85,6 @@ define(
 				,	'mainline': ['mainline','is', 'T']
 			};
 			
-
 			this.columns = {
 					'trandate': new nlobjSearchColumn('trandate')
 				,	'internalid': new nlobjSearchColumn('internalid')
@@ -154,8 +152,9 @@ define(
 					)
 				];
 			}
-			nlapiLogExecution("debug","filters ANTES ", _.values(this.filters))
+			nlapiLogExecution("debug","filters ANTEsss", _.values(this.filters))
 			if(this.data.otherrefnum){
+				nlapiLogExecution("debug","filters en el medio", _.values(this.filters))
 				this.filters.otherrefnum_operator = 'and';
 				this.filters['otherrefnum'] =  ['formulatext: {otherrefnum}','contains', this.data.otherrefnum]
 			}

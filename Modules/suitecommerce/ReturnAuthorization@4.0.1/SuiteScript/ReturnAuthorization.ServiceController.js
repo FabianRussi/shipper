@@ -64,6 +64,7 @@ define(
 				,	from: this.request.getParameter('from')
 				,	to: this.request.getParameter('to')
 				,	page: this.request.getParameter('page')
+				,	otherrefnum: this.request.getParameter('otherrefnum')
 				});
 			}
 
