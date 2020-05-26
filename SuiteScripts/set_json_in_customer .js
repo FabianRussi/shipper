@@ -3,13 +3,16 @@ function getItems(objRequest, objResponse) {
 
         var customerid = nlapiGetContext().getSetting('SCRIPT', "custscript_customerid");
         nlapiLogExecution('DEBUG', 'customerid', customerid);
-        var ss = nlapiSearchRecord('customer', null, [
+        // Jesus que pasa si esta scheduleado y no tiene customer id cuando corra?
+        if (customerid) {
+            var ss = nlapiSearchRecord('customer', null, [
                 ['giveaccess', 'is', 'T'], 'and', ['internalid', 'is', customerid]
             ], null)
-            // var ss = nlapiSearchRecord('customer', null, null, null);
+        } else {
+            var ss = nlapiSearchRecord('customer', null, ['giveaccess', 'is', 'T'], null)
+        }
 
         if (!ss) return;
-        nlapiLogExecution('DEBUG', ' ss length', ss.length);
         for (var t = 0; t < ss.length; t++) {
             var stId = ss[t].getId();
             if (nlapiGetContext().getRemainingUsage() <= 300) {
@@ -21,8 +24,8 @@ function getItems(objRequest, objResponse) {
                 type: 'item',
                 search: 'customsearch_es_curr_inv_srch', // [ES] CurrentInventory Search
                 filterExp: [
-                    ["custitem_es_customer", "anyof", stId], "AND", ["isinactive", "is", "F"], "AND",
-                    // ["inventorydetail.status", "anyof", "1"], "AND",
+                    ["custitem_es_customer", "anyof", stId], "AND",
+                    ["isinactive", "is", "F"], "AND",
                     ["type", "anyof", "InvtPart"]
                 ],
                 getAll: true
@@ -47,8 +50,8 @@ function getItems(objRequest, objResponse) {
                 var objCurResult = arrSearchResults[i];
                 var myObject = JSON.stringify(objCurResult)
                 myObject = JSON.parse(myObject);
-                nlapiLogExecution('DEBUG', ' items', JSON.stringify(objCurResult));
-                nlapiLogExecution('DEBUG', ' items -id', myObject.columns.internalid.internalid);
+                //    nlapiLogExecution('DEBUG', ' items', JSON.stringify(objCurResult));
+                //  nlapiLogExecution('DEBUG', ' items -id', myObject.columns.internalid.internalid);
                 if (i == 0) {
                     arrItemsCols = objCurResult.getAllColumns();
                 }
@@ -70,6 +73,9 @@ function getItems(objRequest, objResponse) {
                     })
                 }
 
+                if (myObject.columns.internalid.internalid == 7879) {
+                    nlapiLogExecution('AUDIT', 'objLine.locationsDetails : ----- ', JSON.stringify(objLine.locationsDetails));
+                }
 
                 for (var iF = 0; iF < arrItemsCols.length; iF++) {
                     var stKey = arrItemsCols[iF].getLabel();
@@ -80,7 +86,7 @@ function getItems(objRequest, objResponse) {
                     if (stKey == "Base Price") {
                         if (isNaN(parseInt(objCurResult.getValue(arrItemsCols[iF]))) || parseInt(objCurResult.getValue(arrItemsCols[iF])) == 0) {
                             objLine[stKey] = "1.00";
-                        } //parseFloat(objCurResult.getValue(arrItemsCols[iF])) > 0 ? parseFloat(objCurResult.getValue(arrItemsCols[iF])) : 1;
+                        }  //parseFloat(objCurResult.getValue(arrItemsCols[iF])) > 0 ? parseFloat(objCurResult.getValue(arrItemsCols[iF])) : 1;
                     }
 
                     if (stKey == "On Hand") {
@@ -121,7 +127,8 @@ function getItems(objRequest, objResponse) {
             obj.totalRecordsFound = obj.records.length;
             nlapiSubmitField("customer", stId, 'custentity_json_store', JSON.stringify(obj))
         }
-    } catch (grg) {
+    }
+    catch (grg) {
         E$.logDebug('ERR', 'ERR : ' + grg);
     }
 
@@ -143,7 +150,7 @@ function getLocations() {
                 name: location[i].getValue(columns[0])
             })
         }
-        nlapiLogExecution('DEBUG', 'allLocations', JSON.stringify(allLocations));
+        // nlapiLogExecution('DEBUG', 'allLocations', JSON.stringify(allLocations));
     }
 
 
@@ -170,12 +177,13 @@ function getTaxGruops() {
 
 function setRecoveryPoint() {
     var state = nlapiSetRecoveryPoint(); //100 point governance
-    if (state.status == 'SUCCESS') return; //we successfully create a new recovery point
+    if (state.status == 'SUCCESS') return;  //we successfully create a new recovery point
     if (state.status == 'RESUME') //a recovery point was previously set, we are resuming due to some unforeseen error
     {
         nlapiLogExecution("ERROR", "Resuming script because of " + state.reason + ".  Size = " + state.size);
         handleScriptRecovery();
-    } else if (state.status == 'FAILURE') //we failed to create a new recovery point
+    }
+    else if (state.status == 'FAILURE')  //we failed to create a new recovery point
     {
         nlapiLogExecution("ERROR", "Failed to create recovery point. Reason = " + state.reason + " / Size = " + state.size);
         handleRecoveryFailure(state);
@@ -189,7 +197,8 @@ function checkGovernance() {
     if (state.status == 'FAILURE') {
         nlapiLogExecution("ERROR", "Failed to yield script, exiting: Reason = " + state.reason + " / Size = " + state.size);
         throw "Failed to yield script";
-    } else if (state.status == 'RESUME') {
+    }
+    else if (state.status == 'RESUME') {
         nlapiLogExecution("AUDIT", "Resuming script because of " + state.reason + ".  Size = " + state.size);
     }
     // state.status will never be SUCCESS because a success would imply a yield has occurred.  The equivalent response would be yield
@@ -199,7 +208,6 @@ function checkGovernance() {
 function handleRecoverFailure(failure) {
     if (failure.reason == 'SS_MAJOR_RELEASE') throw "Major Update of NetSuite in progress, shutting down all processes";
     if (failure.reason == 'SS_CANCELLED') throw "Script Cancelled due to UI interaction";
-    if (failure.reason == 'SS_EXCESSIVE_MEMORY_FOOTPRINT') { cleanUpMemory();
-        setRecoveryPoint(); } //avoid infinite loop
+    if (failure.reason == 'SS_EXCESSIVE_MEMORY_FOOTPRINT') { cleanUpMemory(); setRecoveryPoint(); }//avoid infinite loop
     if (failure.reason == 'SS_DISALLOWED_OBJECT_REFERENCE') throw "Could not set recovery point because of a reference to a non-recoverable object: " + failure.information;
 }

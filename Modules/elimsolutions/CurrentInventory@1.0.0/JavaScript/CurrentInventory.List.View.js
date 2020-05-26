@@ -234,7 +234,10 @@ define(
 
                 if (selectedOption != "allLocations") {
                     selected = _.filter(locations, function (item) {
-                        return item.Location.id == selectedOption;
+                        var rec = item.locationsDetails.filter(function(item){
+                            return item.locationName === selectedOptionName && parseInt(item.quantityOnHand) > 0
+                        })
+                        return rec.length>0
                     });
                 } else {
                     selected = locations;
@@ -286,12 +289,17 @@ define(
             }
 
             , locationIsInRecords: function (records, name) {
+                var exists = true;
                 for (var i = 0; i < records.length; i++) {
-                    if (records[i].Location.name == name) {
-                        return false;
+                    
+                    var rec = records[i].locationsDetails.filter(function(item){
+                        return item.locationName === name && parseInt(item.quantityOnHand) > 0
+                    })
+                    if (rec.length>0) {
+                        exists = false;
                     }
                 }
-                return true;
+                return exists;
             }
 
             , getContext: function () {
