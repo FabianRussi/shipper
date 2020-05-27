@@ -9,8 +9,8 @@
 	<div data-view="Overview.Messages"></div>
 	<div class="overview-home-orders" data-permissions="{{purchasesPermissions}}">
 		<div class="overview-home-orders-title">
-			<h3>{{translate 'Recent Purchases'}}</h3>
-			<a href="/purchases" class="overview-home-orders-title-link">{{translate 'View Purchase History'}}</a>
+			<h3>{{translate 'Recent Orders'}}</h3>
+			<a href="/purchases" class="overview-home-orders-title-link">{{translate 'View Orders History'}}</a>
 		</div>
 		<div class="overview-home-order-history-results-container">
 		{{#if collectionLengthGreaterThan0}}
