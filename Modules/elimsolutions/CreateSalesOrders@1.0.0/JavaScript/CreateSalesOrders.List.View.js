@@ -55,7 +55,6 @@ define(
             addItemRow: function(e) {
 
                 e.preventDefault();
-                debugger;
 
                 var itemId = jQuery('#items option:selected').val();
                 var qty = jQuery('#qty').val();
