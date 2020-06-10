@@ -55,6 +55,7 @@ define(
             addItemRow: function(e) {
 
                 e.preventDefault();
+                debugger;
 
                 var itemId = jQuery('#items option:selected').val();
                 var qty = jQuery('#qty').val();
@@ -63,10 +64,10 @@ define(
 
                 if (qty <= 0) {
                     return alert('Quantity cannot be 0 or less than 0.');
-                }else if(jQuery('#items').val() === ''){
+                } else if (jQuery('#items').val() === '') {
                     return alert('You need select an item to add.');
                 }
-                 
+
                 var addItem = this.getQuantityAvailable(qty, itemId, location);
 
                 if (addItem.available) {
@@ -82,10 +83,10 @@ define(
                         itemHtml += '<td style="float:right;margin-top: -44px;"> <button type="button" id="itemremove-' + jQuery('#items option:selected').val() + '" class="delete-item">×</button></td></tr>'
                         itemHtml += '<td style="display:none"> amount: <span> ' + jQuery('#amount').val() + '</span></td>';
                         jQuery('#table-summary').append(itemHtml);
-                        jQuery('#items option:first').prop('selected',true)
-                        
+                        jQuery('#items option:first').prop('selected', true)
+
                     }
-                   
+
                     if (arrayItems) {
                         arrayItems = JSON.parse(arrayItems);
                         arrayItems.push({
@@ -98,7 +99,7 @@ define(
                         sessionStorage.setItem('jsonItem', JSON.stringify(arrayItems));
                     } else {
                         arrayItems = [{
-                            itemid: jQuery('#items option:selected').val(),
+                            itemid: itemId,
                             qty: jQuery('#qty').val(),
                             amount: jQuery('#amount').val(),
                             tax: jQuery('#taxcode option:selected').text(),
@@ -111,7 +112,7 @@ define(
                     alert(addItem.message);
                 }
                 sessionStorage.setItem('addItems', 'true')
-                jQuery('#items option:first').prop('selected',true)
+                jQuery('#items option:first').prop('selected', true)
                 jQuery('#qty').val('');
             },
 
